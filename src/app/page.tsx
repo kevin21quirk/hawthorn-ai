@@ -218,10 +218,10 @@ export default function Home() {
       </section>
 
       {/* Menu Section - Feature Cards */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 text-white" style={{backgroundColor: '#222222'}}>
         <div className="px-4 sm:px-6 lg:px-8 text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Menus</h2>
-          <p className="text-xl text-black">Seasonal dishes crafted with passion</p>
+          <h2 className="text-4xl font-bold text-white mb-4">Our Menus</h2>
+          <p className="text-xl text-white">Seasonal dishes crafted with passion</p>
         </div>
         <div className="px-4 sm:px-6 lg:px-8 mb-12">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4 lg:gap-6">
@@ -368,15 +368,15 @@ export default function Home() {
       </section>
 
       {/* Reviews Section - Testimonial Style */}
-      <section className="py-20 bg-white">
+      <section className="py-20 text-white" style={{backgroundColor: '#222222'}}>
         <div className="px-4 sm:px-6 lg:px-8 text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">What Our Guests Say</h2>
-          <p className="text-xl text-black">Real experiences from our valued customers</p>
+          <h2 className="text-4xl font-bold text-white mb-4">What Our Guests Say</h2>
+          <p className="text-xl text-white lg:text-[18px] md:text-[16px]">Real experiences from our valued customers</p>
         </div>
         <div className="relative w-full mb-12 px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
             {/* Previous Review */}
-            <div className="bg-gray-50 rounded-lg p-6 text-center transition-opacity duration-1600 ease-in-out flex flex-col justify-between" style={{ opacity: isTransitioning ? 0.1 : 0.5, minHeight: '280px' }}>
+            <div className="bg-gray-800 rounded-lg p-6 text-center transition-opacity duration-1600 ease-in-out flex flex-col justify-between" style={{ opacity: isTransitioning ? 0.1 : 0.5, minHeight: '280px' }}>
               <div>
                 <div className="flex justify-center mb-4">
                   {[...Array(reviews[(currentReview - 1 + reviews.length) % reviews.length].rating)].map((_, i) => (
@@ -385,16 +385,16 @@ export default function Home() {
                     </svg>
                   ))}
                 </div>
-                <p className="text-gray-700 mb-4 italic leading-relaxed flex-grow">"{reviews[(currentReview - 1 + reviews.length) % reviews.length].text}"</p>
+                <p className="text-gray-300 mb-4 italic leading-relaxed flex-grow lg:text-[18px] md:text-[16px]">"{reviews[(currentReview - 1 + reviews.length) % reviews.length].text}"</p>
               </div>
               <div className="border-t border-gray-200 pt-4">
-                <p className="font-semibold text-black mb-1">{reviews[(currentReview - 1 + reviews.length) % reviews.length].name}</p>
-                <p className="text-gray-600 text-sm">{reviews[(currentReview - 1 + reviews.length) % reviews.length].occasion}</p>
+                <p className="font-semibold text-white mb-1 lg:text-[18px] md:text-[16px]">{reviews[(currentReview - 1 + reviews.length) % reviews.length].name}</p>
+                <p className="text-gray-400 text-sm lg:text-[14px] md:text-[12px]">{reviews[(currentReview - 1 + reviews.length) % reviews.length].occasion}</p>
               </div>
             </div>
 
             {/* Current Review */}
-            <div className="bg-gray-50 rounded-lg p-6 text-center transition-opacity duration-1600 ease-in-out flex flex-col justify-between" style={{ opacity: isTransitioning ? 0 : 1, minHeight: '280px' }}>
+            <div className="bg-gray-800 rounded-lg p-6 text-center transition-opacity duration-1600 ease-in-out flex flex-col justify-between" style={{ opacity: isTransitioning ? 0 : 1, minHeight: '280px' }}>
               <div>
                 <div className="flex justify-center mb-4">
                   {[...Array(reviews[currentReview].rating)].map((_, i) => (
@@ -403,16 +403,16 @@ export default function Home() {
                     </svg>
                   ))}
                 </div>
-                <p className="text-gray-700 mb-4 italic leading-relaxed flex-grow">"{reviews[currentReview].text}"</p>
+                <p className="text-gray-300 mb-4 italic leading-relaxed flex-grow lg:text-[18px] md:text-[16px]">"{reviews[currentReview].text}"</p>
               </div>
               <div className="border-t border-gray-200 pt-4">
-                <p className="font-semibold text-black mb-1">{reviews[currentReview].name}</p>
-                <p className="text-gray-600 text-sm">{reviews[currentReview].occasion}</p>
+                <p className="font-semibold text-white mb-1 lg:text-[18px] md:text-[16px]">{reviews[currentReview].name}</p>
+                <p className="text-gray-400 text-sm lg:text-[14px] md:text-[12px]">{reviews[currentReview].occasion}</p>
               </div>
             </div>
 
             {/* Next Review */}
-            <div className="bg-gray-50 rounded-lg p-6 text-center transition-opacity duration-1600 ease-in-out flex flex-col justify-between" style={{ opacity: isTransitioning ? 0.1 : 0.75, minHeight: '280px' }}>
+            <div className="bg-gray-800 rounded-lg p-6 text-center transition-opacity duration-1600 ease-in-out flex flex-col justify-between" style={{ opacity: isTransitioning ? 0.1 : 0.75, minHeight: '280px' }}>
               <div>
                 <div className="flex justify-center mb-4">
                   {[...Array(reviews[(currentReview + 1) % reviews.length].rating)].map((_, i) => (
@@ -421,11 +421,11 @@ export default function Home() {
                     </svg>
                   ))}
                 </div>
-                <p className="text-gray-700 mb-4 italic leading-relaxed flex-grow">"{reviews[(currentReview + 1) % reviews.length].text}"</p>
+                <p className="text-gray-300 mb-4 italic leading-relaxed flex-grow lg:text-[18px] md:text-[16px]">"{reviews[(currentReview + 1) % reviews.length].text}"</p>
               </div>
               <div className="border-t border-gray-200 pt-4">
-                <p className="font-semibold text-black mb-1">{reviews[(currentReview + 1) % reviews.length].name}</p>
-                <p className="text-gray-600 text-sm">{reviews[(currentReview + 1) % reviews.length].occasion}</p>
+                <p className="font-semibold text-white mb-1 lg:text-[18px] md:text-[16px]">{reviews[(currentReview + 1) % reviews.length].name}</p>
+                <p className="text-gray-400 text-sm lg:text-[14px] md:text-[12px]">{reviews[(currentReview + 1) % reviews.length].occasion}</p>
               </div>
             </div>
           </div>
@@ -478,26 +478,26 @@ export default function Home() {
       <section className="py-20 bg-white">
         <div className="px-4 sm:px-6 lg:px-8 text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Join Our Team</h2>
-          <p className="text-xl text-black">Become part of our culinary family</p>
+          <p className="text-xl text-black lg:text-[18px] md:text-[16px]">Become part of our culinary family</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="text-4xl font-bold text-orange-600 mb-2">12+</div>
-            <p className="text-black">Years of Excellence</p>
+            <p className="text-black lg:text-[18px] md:text-[16px]">Years of Excellence</p>
           </div>
           <div className="text-center">
             <div className="text-4xl font-bold text-orange-600 mb-2">25+</div>
-            <p className="text-black">Team Members</p>
+            <p className="text-black lg:text-[18px] md:text-[16px]">Team Members</p>
           </div>
           <div className="text-center">
             <div className="text-4xl font-bold text-orange-600 mb-2">4</div>
-            <p className="text-black">Award Categories</p>
+            <p className="text-black lg:text-[18px] md:text-[16px]">Award Categories</p>
           </div>
         </div>
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="bg-gray-50 rounded-lg p-8 text-center">
             <h3 className="text-2xl font-semibold mb-4 text-black">Why Work With Us?</h3>
-            <p className="text-black mb-6 max-w-2xl mx-auto">
+            <p className="text-black mb-6 max-w-2xl mx-auto lg:text-[18px] md:text-[16px]">
               We offer competitive compensation, professional development opportunities, and a supportive team environment where your passion for hospitality can flourish.
             </p>
             <Link 
@@ -510,62 +510,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FAQ Section - Accordion Style */}
-      <section className="py-20 bg-gray-50">
-        <div className="px-4 sm:px-6 lg:px-8 text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
-          <p className="text-xl text-black">Quick answers to common questions</p>
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12 px-4 sm:px-6 lg:px-8">
-          <div className="lg:col-span-2 space-y-4">
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <div className="flex justify-between items-center">
-                <h3 className="text-lg font-semibold">How far in advance should I make a reservation?</h3>
-                <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-              </div>
-              <p className="text-black mt-2">We recommend 1-2 weeks for weekends, 3-4 days for weekdays.</p>
-            </div>
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <div className="flex justify-between items-center">
-                <h3 className="text-lg font-semibold">Do you accommodate dietary restrictions?</h3>
-                <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-              </div>
-              <p className="text-black mt-2">Yes! We can accommodate most dietary restrictions with advance notice.</p>
-            </div>
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <div className="flex justify-between items-center">
-                <h3 className="text-lg font-semibold">What is the average price per person?</h3>
-                <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-              </div>
-              <p className="text-black mt-2">Average £48-64 for a three-course dinner, excluding beverages.</p>
-            </div>
-          </div>
-          <div className="bg-orange-50 rounded-lg p-6">
-            <h3 className="text-xl font-semibold mb-4 text-orange-800">Have More Questions?</h3>
-            <p className="text-black mb-6">Can't find the answer you're looking for? Our team is here to help!</p>
-            <Link 
-              href="/contact"
-              className="inline-block bg-orange-600 text-white px-6 py-2 rounded-none font-normal hover:bg-orange-700 transition-colors w-full text-center"
-            >
-              Contact Us
-            </Link>
-          </div>
-        </div>
-        <div className="text-center px-4 sm:px-6 lg:px-8">
-          <Link 
-            href="/faq"
-            className="inline-block bg-orange-600 text-white px-8 py-3 rounded-none font-normal hover:bg-orange-700 transition-colors"
-          >
-            View All FAQs
-          </Link>
-        </div>
-      </section>
-    </div>
+      </div>
   );
 }

@@ -13,12 +13,12 @@ const Navigation = () => {
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About Us' },
     { href: '/menu', label: 'Our Menus' },
-    { href: '/contact', label: 'Contact Us' },
     { href: '/gallery', label: 'Gallery' },
     { href: '/gift-vouchers', label: 'Gift Vouchers' },
     { href: '/reviews', label: 'Reviews' },
     { href: '/faq', label: 'FAQ' },
     { href: '/careers', label: 'Careers' },
+    { href: '/reservations', label: 'Book a Table' },
   ];
 
   const handleCloseMenu = () => {
@@ -42,7 +42,7 @@ const Navigation = () => {
               <svg className="h-6 w-6" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
                 <path d="M4 6h16M4 12h16M4 18h16"></path>
               </svg>
-              <span className="text-lg font-medium">View Menu</span>
+              <span className="text-lg lg:text-[18px] md:text-[16px] font-medium">View Menu</span>
             </button>
           </div>
 
@@ -55,7 +55,7 @@ const Navigation = () => {
           {/* Right side - Reservations Button */}
           <Link
             href="/reservations"
-            className="bg-white text-orange-600 px-4 py-2 rounded-none font-normal hover:bg-gray-100 transition-colors text-sm md:text-base lg:text-lg"
+            className="bg-white text-orange-600 px-4 py-2 rounded-none font-normal hover:bg-gray-100 transition-colors text-lg lg:text-[18px] md:text-[16px]"
           >
             Book a Table
           </Link>

@@ -12,7 +12,7 @@ export default function AboutPage() {
         <div className="relative px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">About The Hawthorn</h1>
-            <p className="text-xl text-white">Our Story, Our Passion</p>
+            <p className="text-xl text-white lg:text-[18px] md:text-[16px]">Our Story, Our Passion</p>
           </div>
         </div>
       </section>
@@ -23,10 +23,10 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Story</h2>
-              <p className="text-gray-600 mb-4 text-sm md:text-base lg:text-lg">
+              <p className="text-gray-600 mb-4 lg:text-[18px] md:text-[16px]">
                 Founded in 2010, The Hawthorn has been serving exceptional cuisine for over a decade. What started as a small family restaurant has grown into one of the most beloved dining destinations in the region.
               </p>
-              <p className="text-gray-600 text-sm md:text-base lg:text-lg">
+              <p className="text-gray-600 lg:text-[18px] md:text-[16px]">
                 Our commitment to quality, innovation, and hospitality has earned us numerous awards and a loyal following of discerning diners.
               </p>
             </div>
@@ -42,7 +42,7 @@ export default function AboutPage() {
         <div className="px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Philosophy</h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600 lg:text-[18px] md:text-[16px]">
               At The Hawthorn, we believe that great dining is about more than just food – it's about creating memories.
             </p>
           </div>
@@ -54,7 +54,7 @@ export default function AboutPage() {
                 </svg>
               </div>
               <h3 className="text-xl font-semibold mb-2">Quality Ingredients</h3>
-              <p className="text-gray-600 text-sm md:text-base lg:text-lg">We source the finest local ingredients from trusted farmers and suppliers.</p>
+              <p className="text-gray-600 lg:text-[18px] md:text-[16px]">We source the finest local ingredients from trusted farmers and suppliers.</p>
             </div>
             <div className="text-center">
               <div className="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -63,7 +63,7 @@ export default function AboutPage() {
                 </svg>
               </div>
               <h3 className="text-xl font-semibold mb-2">Sustainability</h3>
-              <p className="text-gray-600 text-sm md:text-base lg:text-lg">We support sustainable practices and environmentally responsible sourcing.</p>
+              <p className="text-gray-600 lg:text-[18px] md:text-[16px]">We support sustainable practices and environmentally responsible sourcing.</p>
             </div>
             <div className="text-center">
               <div className="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -72,7 +72,7 @@ export default function AboutPage() {
                 </svg>
               </div>
               <h3 className="text-xl font-semibold mb-2">Family Service</h3>
-              <p className="text-gray-600 text-sm md:text-base lg:text-lg">We treat every guest like family and create memorable experiences.</p>
+              <p className="text-gray-600 lg:text-[18px] md:text-[16px]">We treat every guest like family and create memorable experiences.</p>
             </div>
           </div>
         </div>

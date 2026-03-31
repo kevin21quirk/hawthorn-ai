@@ -14,7 +14,7 @@ export default function MenuPage() {
         <div className="relative px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">Our Menus</h1>
-            <p className="text-xl text-white">Seasonal dishes crafted with passion</p>
+            <p className="text-xl text-white lg:text-[18px] md:text-[16px]">Seasonal dishes crafted with passion</p>
           </div>
         </div>
       </section>
@@ -23,7 +23,7 @@ export default function MenuPage() {
       <section className="py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">Discover Our Culinary Creations</h2>
-          <p className="text-lg text-black">
+          <p className="text-lg text-black lg:text-[18px] md:text-[16px]">
             Our menus change seasonally to showcase the finest local ingredients and innovative culinary techniques.
             Browse our complete menu collection below or download PDF versions for offline viewing.
           </p>
@@ -34,7 +34,7 @@ export default function MenuPage() {
       <section className="py-20 bg-gray-50">
         <div className="px-4 sm:px-6 lg:px-8 text-center mb-12">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Complete Menu Collection</h2>
-          <p className="text-xl text-black">Explore all our dining options</p>
+          <p className="text-xl text-black lg:text-[18px] md:text-[16px]">Explore all our dining options</p>
         </div>
         <div className="px-4 sm:px-6 lg:px-8 mb-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
@@ -45,8 +45,8 @@ export default function MenuPage() {
               </div>
               <div className="border-t border-gray-200 p-6 flex flex-col flex-grow">
                 <h3 className="text-xl font-semibold mb-2 text-black text-center">Main Menu</h3>
-                <p className="text-base text-black text-center mb-4">Signature dishes and chef's specialties</p>
-                <div className="text-black text-center mb-6">
+                <p className="text-base text-black text-center mb-4 lg:text-[18px] md:text-[16px]">Signature dishes and chef's specialties</p>
+                <div className="text-black text-center mb-6 lg:text-[18px] md:text-[16px]">
                   <p className="mb-2">• Appetizers & Starters</p>
                   <p className="mb-2">• Main Courses</p>
                   <p className="mb-2">• Chef's Specialties</p>
@@ -72,8 +72,8 @@ export default function MenuPage() {
               </div>
               <div className="border-t border-gray-200 p-6 flex flex-col flex-grow">
                 <h3 className="text-xl font-semibold mb-2 text-black text-center">Daytime Menu</h3>
-                <p className="text-base text-black text-center mb-4">Light options perfect for lunch and early dining</p>
-                <div className="text-black text-center mb-6">
+                <p className="text-base text-black text-center mb-4 lg:text-[18px] md:text-[16px]">Light options perfect for lunch and early dining</p>
+                <div className="text-black text-center mb-6 lg:text-[18px] md:text-[16px]">
                   <p className="mb-2">• Lunch Specials</p>
                   <p className="mb-2">• Light Bites</p>
                   <p className="mb-2">• Soups & Salads</p>
@@ -99,8 +99,8 @@ export default function MenuPage() {
               </div>
               <div className="border-t border-gray-200 p-6 flex flex-col flex-grow">
                 <h3 className="text-xl font-semibold mb-2 text-black text-center">Children's Menu</h3>
-                <p className="text-base text-black text-center mb-4">Kid-friendly meals with healthy options</p>
-                <div className="text-black text-center mb-6">
+                <p className="text-base text-black text-center mb-4 lg:text-[18px] md:text-[16px]">Kid-friendly meals with healthy options</p>
+                <div className="text-black text-center mb-6 lg:text-[18px] md:text-[16px]">
                   <p className="mb-2">• Kids' Favorites</p>
                   <p className="mb-2">• Healthy Options</p>
                   <p className="mb-2">• Fun Desserts</p>
@@ -126,8 +126,8 @@ export default function MenuPage() {
               </div>
               <div className="border-t border-gray-200 p-6 flex flex-col flex-grow">
                 <h3 className="text-xl font-semibold mb-2 text-black text-center">Sunday Specials</h3>
-                <p className="text-base text-black text-center mb-4">Weekend favorites and family-style dining</p>
-                <div className="text-black text-center mb-6">
+                <p className="text-base text-black text-center mb-4 lg:text-[18px] md:text-[16px]">Weekend favorites and family-style dining</p>
+                <div className="text-black text-center mb-6 lg:text-[18px] md:text-[16px]">
                   <p className="mb-2">• Sunday Roast</p>
                   <p className="mb-2">• Family Deals</p>
                   <p className="mb-2">• Weekend Specials</p>
@@ -153,8 +153,8 @@ export default function MenuPage() {
               </div>
               <div className="border-t border-gray-200 p-6 flex flex-col flex-grow">
                 <h3 className="text-xl font-semibold mb-2 text-black text-center">Dessert Menu</h3>
-                <p className="text-base text-black text-center mb-4">Sweet endings and seasonal treats</p>
-                <div className="text-black text-center mb-6">
+                <p className="text-base text-black text-center mb-4 lg:text-[18px] md:text-[16px]">Sweet endings and seasonal treats</p>
+                <div className="text-black text-center mb-6 lg:text-[18px] md:text-[16px]">
                   <p className="mb-2">• Classic Desserts</p>
                   <p className="mb-2">• Seasonal Specials</p>
                   <p className="mb-2">• Cheese Board</p>
@@ -183,8 +183,8 @@ export default function MenuPage() {
               </div>
               <div className="border-t border-gray-200 p-6 flex flex-col flex-grow">
                 <h3 className="text-xl font-semibold mb-2 text-black text-center">Wine Menu</h3>
-                <p className="text-base text-black text-center mb-4">Extensive wine list featuring local and international selections</p>
-                <div className="text-black text-center mb-6">
+                <p className="text-base text-black text-center mb-4 lg:text-[18px] md:text-[16px]">Extensive wine list featuring local and international selections</p>
+                <div className="text-black text-center mb-6 lg:text-[18px] md:text-[16px]">
                   <p className="mb-2">• Red Wines</p>
                   <p className="mb-2">• White Wines</p>
                   <p className="mb-2">• Sparkling & Champagne</p>
@@ -203,25 +203,25 @@ export default function MenuPage() {
 
       {/* Additional Information */}
       <section className="py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="px-4 sm:px-6 lg:px-8">
           <div className="bg-orange-50 rounded-lg p-8 text-center">
             <h3 className="text-2xl font-semibold mb-4 text-orange-800">Dietary Requirements & Allergies</h3>
-            <p className="text-black mb-6">
+            <p className="text-black mb-6 lg:text-[18px] md:text-[16px]">
               Please inform your server of any dietary restrictions, allergies, or special requirements. 
               Our chefs are happy to accommodate modifications where possible and provide detailed ingredient information.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-black">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-black lg:text-[18px] md:text-[16px]">
               <div>
                 <h4 className="font-semibold mb-2">Vegetarian Options</h4>
-                <p className="text-sm">Extensive vegetarian choices available</p>
+                <p>Extensive vegetarian choices available</p>
               </div>
               <div>
                 <h4 className="font-semibold mb-2">Gluten-Free</h4>
-                <p className="text-sm">Gluten-free alternatives offered</p>
+                <p>Gluten-free alternatives offered</p>
               </div>
               <div>
                 <h4 className="font-semibold mb-2">Allergen Information</h4>
-                <p className="text-sm">Detailed allergen guides provided</p>
+                <p>Detailed allergen guides provided</p>
               </div>
             </div>
           </div>
@@ -232,7 +232,7 @@ export default function MenuPage() {
       <section className="py-16 bg-orange-600 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to Dine With Us?</h2>
-          <p className="text-xl mb-8">
+          <p className="text-xl mb-8 lg:text-[18px] md:text-[16px]">
             Experience our culinary creations in the warm atmosphere of The Hawthorn.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

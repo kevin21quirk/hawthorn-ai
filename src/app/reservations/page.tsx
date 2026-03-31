@@ -41,7 +41,7 @@ export default function ReservationsPage() {
         <div className="relative px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">Booking With The Hawthorn</h1>
-            <p className="text-xl text-white">General Booking</p>
+            <p className="text-xl text-white lg:text-[18px] md:text-[16px]">General Booking</p>
           </div>
         </div>
       </section>
@@ -63,7 +63,7 @@ export default function ReservationsPage() {
               <svg className="w-5 h-5 text-orange-600 mt-0.5 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
               </svg>
-              <div className="text-sm text-orange-800">
+              <div className="lg:text-[18px] md:text-[16px] text-orange-800">
                 <p className="font-semibold mb-1">Important Booking Information:</p>
                 <p className="mb-2">WE WILL CONTACT YOU WITH A CONFIRMATION. Our site is not monitored 24/7 – an immediate response is not always possible.</p>
                 <p>Please call 801268 during opening hours for immediate confirmation.</p>
@@ -73,7 +73,7 @@ export default function ReservationsPage() {
 
           <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-8">
             <div className="mb-6">
-              <label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-2">What Date?</label>
+              <label htmlFor="date" className="block lg:text-[18px] md:text-[16px] font-medium text-gray-700 mb-2">What Date?</label>
               <input
                 type="date"
                 id="date"
@@ -81,20 +81,20 @@ export default function ReservationsPage() {
                 value={formData.date}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500 lg:text-[18px] md:text-[16px] text-black"
               />
-              <p className="text-xs text-orange-600 mt-1">FOR TODAY PLEASE CALL US ON 801268</p>
+              <p className="lg:text-[14px] md:text-[12px] text-orange-600 mt-1">FOR TODAY PLEASE CALL US ON 801268</p>
             </div>
 
             <div className="mb-6">
-              <label htmlFor="time" className="block text-sm font-medium text-gray-700 mb-2">Preferred Sitting Time?</label>
+              <label htmlFor="time" className="block lg:text-[18px] md:text-[16px] font-medium text-gray-700 mb-2">Preferred Sitting Time?</label>
               <select
                 id="time"
                 name="time"
                 value={formData.time}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500 lg:text-[18px] md:text-[16px] text-black"
               >
                 <option value="">Select a time</option>
                 <option value="17:00">5:00 PM</option>
@@ -110,14 +110,14 @@ export default function ReservationsPage() {
             </div>
             
             <div className="mb-6">
-              <label htmlFor="guests" className="block text-sm font-medium text-gray-700 mb-2">How Many People? (11 or more please call)</label>
+              <label htmlFor="guests" className="block lg:text-[18px] md:text-[16px] font-medium text-gray-700 mb-2">How Many People? (11 or more please call)</label>
               <select
                 id="guests"
                 name="guests"
                 value={formData.guests}
                 onChange={handleChange}
                 required
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500 lg:text-[18px] md:text-[16px] text-black"
               >
                 <option value="">Select guests</option>
                 <option value="1">1 Guest</option>
@@ -134,13 +134,13 @@ export default function ReservationsPage() {
             </div>
 
             <div className="mb-6">
-              <label htmlFor="occasion" className="block text-sm font-medium text-gray-700 mb-2">Is this a flexible booking? (If preferred time is unavailable)</label>
+              <label htmlFor="occasion" className="block lg:text-[18px] md:text-[16px] font-medium text-gray-700 mb-2">Is this a flexible booking? (If preferred time is unavailable)</label>
               <select
                 id="occasion"
                 name="occasion"
                 value={formData.occasion}
                 onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500 lg:text-[18px] md:text-[16px] text-black"
               >
                 <option value="earlier">Earlier</option>
                 <option value="later">Later</option>
@@ -149,7 +149,7 @@ export default function ReservationsPage() {
             </div>
             
             <div className="mb-6">
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">Name For The Table?</label>
+              <label htmlFor="name" className="block lg:text-[18px] md:text-[16px] font-medium text-gray-700 mb-2">Name For The Table?</label>
               <input
                 type="text"
                 id="name"
@@ -158,12 +158,12 @@ export default function ReservationsPage() {
                 onChange={handleChange}
                 placeholder="Joe Smith"
                 required
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500 lg:text-[18px] md:text-[16px] text-black"
               />
             </div>
             
             <div className="mb-6">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">Whats Your Email?</label>
+              <label htmlFor="email" className="block lg:text-[18px] md:text-[16px] font-medium text-gray-700 mb-2">Whats Your Email?</label>
               <input
                 type="email"
                 id="email"
@@ -172,12 +172,12 @@ export default function ReservationsPage() {
                 onChange={handleChange}
                 placeholder="joesmith@gmail.com"
                 required
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500 lg:text-[18px] md:text-[16px] text-black"
               />
             </div>
 
             <div className="mb-6">
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">Whats Your Number?</label>
+              <label htmlFor="phone" className="block lg:text-[18px] md:text-[16px] font-medium text-gray-700 mb-2">Whats Your Number?</label>
               <input
                 type="tel"
                 id="phone"
@@ -186,12 +186,12 @@ export default function ReservationsPage() {
                 onChange={handleChange}
                 placeholder="07624 300000"
                 required
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500 lg:text-[18px] md:text-[16px] text-black"
               />
             </div>
             
             <div className="mb-6">
-              <label htmlFor="requests" className="block text-sm font-medium text-gray-700 mb-2">Extra Details?</label>
+              <label htmlFor="requests" className="block lg:text-[18px] md:text-[16px] font-medium text-gray-700 mb-2">Extra Details?</label>
               <textarea
                 id="requests"
                 name="requests"
@@ -199,7 +199,7 @@ export default function ReservationsPage() {
                 onChange={handleChange}
                 rows={3}
                 placeholder="Let us know if you require any high chairs, have any disabilities or have any special dietary requirements."
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500 lg:text-[18px] md:text-[16px] text-black"
               ></textarea>
             </div>
             
@@ -218,22 +218,22 @@ export default function ReservationsPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-orange-50 rounded-lg p-8">
             <h3 className="text-2xl font-semibold mb-4 text-orange-800">Important Booking Information</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-black">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-black lg:text-[18px] md:text-[16px]">
               <div>
                 <h4 className="font-semibold mb-2">Opening Hours</h4>
-                <p className="text-sm mb-2">Tuesday - Saturday: 12:00 - 22:00</p>
-                <p className="text-sm mb-2">Sunday: 12:00 - 21:00</p>
-                <p className="text-sm">Monday: Closed</p>
+                <p className="mb-2">Tuesday - Saturday: 12:00 - 22:00</p>
+                <p className="mb-2">Sunday: 12:00 - 21:00</p>
+                <p>Monday: Closed</p>
               </div>
               <div>
                 <h4 className="font-semibold mb-2">Contact Information</h4>
-                <p className="text-sm mb-2">Phone: 801268</p>
-                <p className="text-sm mb-2">Email: bookings@hawthorn.com</p>
-                <p className="text-sm">Address: 123 Restaurant Street, City</p>
+                <p className="mb-2">Phone: 801268</p>
+                <p className="mb-2">Email: bookings@hawthorn.com</p>
+                <p>Address: 123 Restaurant Street, City</p>
               </div>
             </div>
             <div className="mt-6 pt-6 border-t border-orange-200">
-              <p className="text-black text-sm">
+              <p className="text-black lg:text-[18px] md:text-[16px]">
                 <strong>Cancellation Policy:</strong> Please provide at least 24 hours notice for cancellations. 
                 Late cancellations or no-shows may incur a charge.
               </p>

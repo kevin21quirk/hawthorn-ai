@@ -51,7 +51,7 @@ export default function GalleryPage() {
         <div className="relative px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Gallery</h1>
-            <p className="text-xl">Experience Hawthorn through images</p>
+            <p className="text-xl lg:text-[18px] md:text-[16px]">Experience Hawthorn through images</p>
           </div>
         </div>
       </section>
@@ -60,7 +60,7 @@ export default function GalleryPage() {
       <section className="py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">A Visual Journey</h2>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-gray-600 lg:text-[18px] md:text-[16px]">
             Take a look at our beautiful restaurant, exquisite dishes, and memorable moments.
           </p>
         </div>
@@ -81,7 +81,7 @@ export default function GalleryPage() {
                     <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-opacity duration-300"></div>
                   </div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-1">{item.title}</h3>
-                  <p className="text-gray-600 text-sm">{item.description}</p>
+                  <p className="text-gray-600 lg:text-[18px] md:text-[16px]">{item.description}</p>
                 </div>
               ))}
             </div>
@@ -93,7 +93,7 @@ export default function GalleryPage() {
       <section className="py-16 bg-orange-600 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-4">Experience It Yourself</h2>
-          <p className="text-xl mb-8">
+          <p className="text-xl mb-8 lg:text-[18px] md:text-[16px]">
             The photos are beautiful, but the real experience is even better. Visit us to taste, see, and feel the Hawthorn difference.
           </p>
           <div className="space-x-4">
