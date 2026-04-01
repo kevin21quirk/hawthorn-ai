@@ -514,8 +514,23 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
             }
           }
 
+          @keyframes slideToLeft {
+            0% {
+              opacity: 1;
+              transform: translateX(0);
+            }
+            100% {
+              opacity: 0;
+              transform: translateX(-100%);
+            }
+          }
+
           .animate-swooshFromRight {
-            animation: slideFromRight 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: slideFromRight 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          }
+
+          .animate-slideOut {
+            animation: slideToLeft 0.4s cubic-bezier(0.55, 0.085, 0.68, 0.53);
           }
         `}</style>
       </div>
