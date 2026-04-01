@@ -13,7 +13,7 @@ export default function Home() {
   const slides = [
     {
       title: "Welcome to The Hawthorn",
-      subtitle: "Experience fine dining at its best",
+      subtitle: "Experience exceptional fine dining with Chef Jonny",
       buttonText: "Make a Reservation",
       image: "/homepage-slider/slide-01.jpg"
     },
