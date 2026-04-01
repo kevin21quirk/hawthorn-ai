@@ -131,24 +131,24 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
                 </div>
               </div>
 
-              <div className="p-8">
-                <div className="bg-orange-50 border-2 border-orange-300 rounded-2xl p-6 mb-6">
+              <div className="p-6">
+                <div className="bg-orange-50 border-2 border-orange-300 rounded-2xl p-4 mb-4">
                   <p className="text-gray-900 text-lg leading-relaxed">
                     <span className="font-bold text-xl">Welcome!</span> We're excited that you're interested in joining the Hawthorn family. 
                     This quick application will only take a few minutes.
                   </p>
                 </div>
 
-                <ul className="space-y-3 mb-8">
-                  <li className="flex items-center gap-4 bg-white rounded-xl p-4 border-2 border-slate-200 shadow-sm">
+                <ul className="space-y-2 mb-6">
+                  <li className="flex items-center gap-3 bg-white rounded-xl p-3 border-2 border-slate-200 shadow-sm">
                     <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
                     <span className="text-slate-800 text-base font-medium">Position and contact details</span>
                   </li>
-                  <li className="flex items-center gap-4 bg-white rounded-xl p-4 border-2 border-slate-200 shadow-sm">
+                  <li className="flex items-center gap-3 bg-white rounded-xl p-3 border-2 border-slate-200 shadow-sm">
                     <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
                     <span className="text-slate-800 text-base font-medium">Your experience and availability</span>
                   </li>
-                  <li className="flex items-center gap-4 bg-white rounded-xl p-4 border-2 border-slate-200 shadow-sm">
+                  <li className="flex items-center gap-3 bg-white rounded-xl p-3 border-2 border-slate-200 shadow-sm">
                     <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
                     <span className="text-slate-800 text-base font-medium">A brief cover letter</span>
                   </li>
