@@ -107,10 +107,10 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
         <X className="w-6 h-6" />
       </button>
 
-      <div className="relative w-full max-w-2xl h-[600px] flex items-center justify-center">
+      <div className="relative w-full max-w-2xl h-auto flex items-center justify-center">
         {/* Welcome - Step 0 */}
         {shouldRender(0) && (
-          <div className={`absolute inset-0 transition-all duration-700 ease-out ${getStepTransform(0)}`}>
+          <div className={`absolute top-1/2 left-0 right-0 -translate-y-1/2 transition-all duration-700 ease-out ${getStepTransform(0)}`}>
             <div className="bg-white rounded-3xl shadow-2xl transform transition-all border border-gray-100 overflow-hidden max-h-[85vh]">
               <div className="relative bg-gradient-to-br from-orange-50 to-orange-100 p-8 border-b border-orange-200">
                 <div className="flex items-start gap-6">
@@ -167,7 +167,7 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
 
         {/* Position - Step 1 */}
         {shouldRender(1) && (
-          <div className={`absolute inset-0 transition-all duration-700 ease-out ${getStepTransform(1)}`}>
+          <div className={`absolute top-1/2 left-0 right-0 -translate-y-1/2 transition-all duration-700 ease-out ${getStepTransform(1)}`}>
             <div className="bg-white rounded-3xl shadow-2xl p-10 transform transition-all border border-gray-100 h-full flex flex-col">
               <div className="flex items-center gap-3 mb-6 flex-shrink-0">
                 <div className="w-14 h-14 bg-gradient-to-br from-orange-600 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg">
@@ -209,7 +209,7 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
 
         {/* Name - Step 2 */}
         {shouldRender(2) && (
-          <div className={`absolute inset-0 transition-all duration-700 ease-out ${getStepTransform(2)}`}>
+          <div className={`absolute top-1/2 left-0 right-0 -translate-y-1/2 transition-all duration-700 ease-out ${getStepTransform(2)}`}>
             <div className="bg-white rounded-3xl shadow-2xl p-10 transform transition-all border border-gray-100 h-full flex flex-col">
               <div className="flex items-center gap-3 mb-6 flex-shrink-0">
                 <div className="w-14 h-14 bg-gradient-to-br from-orange-600 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg">
@@ -325,7 +325,7 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
 
         {/* Experience - Step 5 */}
         {shouldRender(5) && (
-          <div className={`absolute inset-0 transition-all duration-700 ease-out ${getStepTransform(5)}`}>
+          <div className={`absolute top-1/2 left-0 right-0 -translate-y-1/2 transition-all duration-700 ease-out ${getStepTransform(5)}`}>
             <div className="bg-white rounded-3xl shadow-2xl p-10 transform transition-all border border-gray-100 h-full flex flex-col">
               <div className="flex items-center gap-3 mb-6 flex-shrink-0">
                 <div className="w-14 h-14 bg-gradient-to-br from-orange-600 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg">
@@ -367,7 +367,7 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
 
         {/* Availability - Step 6 */}
         {shouldRender(6) && (
-          <div className={`absolute inset-0 transition-all duration-700 ease-out ${getStepTransform(6)}`}>
+          <div className={`absolute top-1/2 left-0 right-0 -translate-y-1/2 transition-all duration-700 ease-out ${getStepTransform(6)}`}>
             <div className="bg-white rounded-3xl shadow-2xl p-10 transform transition-all border border-gray-100 h-full flex flex-col">
               <div className="flex items-center gap-3 mb-6 flex-shrink-0">
                 <div className="w-14 h-14 bg-gradient-to-br from-orange-600 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg">
@@ -485,7 +485,7 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
 
         {/* CV Upload - Step 9 */}
         {shouldRender(9) && (
-          <div className={`absolute inset-0 transition-all duration-700 ease-out ${getStepTransform(9)}`}>
+          <div className={`absolute top-1/2 left-0 right-0 -translate-y-1/2 transition-all duration-700 ease-out ${getStepTransform(9)}`}>
             <div className="bg-white rounded-3xl shadow-2xl p-10 transform transition-all border border-gray-100">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-14 h-14 bg-gradient-to-br from-orange-600 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg">
