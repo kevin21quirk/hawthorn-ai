@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/db';
 import { vouchers, customers, emails } from '@/db/schema';
 import { eq } from 'drizzle-orm';
-import { ChatGroq } from '@langchain/groq';
+import { ChatOpenAI } from '@langchain/groq';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 
 function generateVoucherCode(): string {
@@ -56,10 +56,10 @@ export async function POST(req: NextRequest) {
 
     let personalizedMessage = message;
     if (!message && occasion) {
-      const model = new ChatGroq({
-        model: 'llama-3.1-70b-versatile',
+      const model = new ChatOpenAI({
+        modelName: 'llama-3.1-70b-versatile',
         temperature: 0.9,
-        apiKey: process.env.GROQ_API_KEY,
+        openAIApiKey: process.env.OPENAI_API_KEY,
         callbacks: process.env.LANGCHAIN_TRACING_V2 === 'true' ? undefined : [],
       });
 

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { ChatGroq } from '@langchain/groq';
+import { ChatOpenAI } from '@langchain/groq';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 import { db } from '@/db';
 import { menuItems, customers } from '@/db/schema';
@@ -40,10 +40,10 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const model = new ChatGroq({
-      model: 'llama-3.1-70b-versatile',
+    const model = new ChatOpenAI({
+      modelName: 'llama-3.1-70b-versatile',
       temperature: 0.8,
-      apiKey: process.env.GROQ_API_KEY,
+      openAIApiKey: process.env.OPENAI_API_KEY,
       callbacks: process.env.LANGCHAIN_TRACING_V2 === 'true' ? undefined : [],
     });
 
