@@ -13,14 +13,14 @@ interface MenuModalProps {
 
 export default function MenuModal({ isOpen, onClose, menuTitle, menuDescription, images }: MenuModalProps) {
   const [currentPage, setCurrentPage] = useState(0);
-  const [zoom, setZoom] = useState(1);
+  const [zoom, setZoom] = useState(1.5);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
       setCurrentPage(0);
-      setZoom(1);
+      setZoom(1.5);
     } else {
       document.body.style.overflow = 'unset';
     }
@@ -46,28 +46,28 @@ export default function MenuModal({ isOpen, onClose, menuTitle, menuDescription,
   const handlePrevPage = () => {
     if (currentPage > 0) {
       setCurrentPage(currentPage - 1);
-      setZoom(1);
+      setZoom(1.5);
     }
   };
 
   const handleNextPage = () => {
     if (currentPage < images.length - 1) {
       setCurrentPage(currentPage + 1);
-      setZoom(1);
+      setZoom(1.5);
     }
   };
 
   const handleZoomIn = () => {
-    setZoom(Math.min(zoom + 0.25, 3));
+    setZoom(Math.min(zoom + 0.25, 4));
   };
 
   const handleZoomOut = () => {
-    setZoom(Math.max(zoom - 0.25, 0.5));
+    setZoom(Math.max(zoom - 0.25, 0.75));
   };
 
   const toggleFullscreen = () => {
     setIsFullscreen(!isFullscreen);
-    setZoom(1);
+    setZoom(1.5);
   };
 
   if (!isOpen) return null;
@@ -144,7 +144,7 @@ export default function MenuModal({ isOpen, onClose, menuTitle, menuDescription,
                 key={index}
                 onClick={() => {
                   setCurrentPage(index);
-                  setZoom(1);
+                  setZoom(1.5);
                 }}
                 className={`flex-shrink-0 transition-all ${
                   index === currentPage
@@ -171,7 +171,7 @@ export default function MenuModal({ isOpen, onClose, menuTitle, menuDescription,
             <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full p-2">
               <button
                 onClick={handleZoomOut}
-                disabled={zoom <= 0.5}
+                disabled={zoom <= 0.75}
                 className="text-white hover:text-orange-500 disabled:opacity-30 disabled:cursor-not-allowed p-2 hover:bg-white/10 rounded-full transition-colors"
                 aria-label="Zoom out"
               >
@@ -184,7 +184,7 @@ export default function MenuModal({ isOpen, onClose, menuTitle, menuDescription,
               
               <button
                 onClick={handleZoomIn}
-                disabled={zoom >= 3}
+                disabled={zoom >= 4}
                 className="text-white hover:text-orange-500 disabled:opacity-30 disabled:cursor-not-allowed p-2 hover:bg-white/10 rounded-full transition-colors"
                 aria-label="Zoom in"
               >
