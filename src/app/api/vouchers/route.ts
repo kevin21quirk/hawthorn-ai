@@ -60,6 +60,7 @@ export async function POST(req: NextRequest) {
         modelName: 'gpt-4o-mini',
         temperature: 0.9,
         openAIApiKey: process.env.OPENAI_API_KEY,
+        callbacks: process.env.LANGCHAIN_TRACING_V2 === 'true' ? undefined : [],
       });
 
       const prompt = ChatPromptTemplate.fromMessages([

@@ -7,6 +7,7 @@ export async function createCustomerAssistantAgent() {
     modelName: 'gpt-4o-mini',
     temperature: 0.7,
     openAIApiKey: process.env.OPENAI_API_KEY,
+    callbacks: process.env.LANGCHAIN_TRACING_V2 === 'true' ? undefined : [],
   });
 
   return {

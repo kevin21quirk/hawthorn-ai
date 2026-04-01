@@ -1,12 +1,21 @@
 import { ChatOpenAI } from '@langchain/openai';
 
 export const createChatModel = (temperature = 0.7) => {
-  return new ChatOpenAI({
+  const model = new ChatOpenAI({
     modelName: 'gpt-4o-mini',
     temperature,
     openAIApiKey: process.env.OPENAI_API_KEY,
+    callbacks: process.env.LANGCHAIN_TRACING_V2 === 'true' ? undefined : [],
   });
+
+  return model;
 };
+
+// LangSmith configuration is handled via environment variables:
+// LANGCHAIN_TRACING_V2=true
+// LANGCHAIN_API_KEY=your_langsmith_api_key
+// LANGCHAIN_PROJECT=your_project_name (optional, defaults to "default")
+// LANGCHAIN_ENDPOINT=https://api.smith.langchain.com (optional)
 
 export const RESTAURANT_CONTEXT = `
 You are an AI assistant for The Hawthorn, a fine dining restaurant established in 2010.
