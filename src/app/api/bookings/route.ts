@@ -75,17 +75,19 @@ export async function GET(req: NextRequest) {
     const email = searchParams.get('email');
     const upcoming = searchParams.get('upcoming') === 'true';
 
-    let query = db.select().from(bookings);
-
+    const conditions = [];
+    
     if (email) {
-      query = query.where(eq(bookings.guestEmail, email));
+      conditions.push(eq(bookings.guestEmail, email));
     }
 
     if (upcoming) {
-      query = query.where(gte(bookings.date, new Date()));
+      conditions.push(gte(bookings.date, new Date()));
     }
 
-    const results = await query;
+    const results = conditions.length > 0
+      ? await db.select().from(bookings).where(and(...conditions))
+      : await db.select().from(bookings);
 
     return NextResponse.json({ bookings: results });
   } catch (error) {
