@@ -111,7 +111,7 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
         {/* Welcome - Step 0 */}
         {shouldRender(0) && (
           <div className={`absolute top-1/2 left-0 right-0 -translate-y-1/2 transition-all duration-700 ease-out ${getStepTransform(0)}`}>
-            <div className="bg-white rounded-3xl shadow-2xl transform transition-all border border-gray-100 overflow-hidden max-h-[85vh]">
+            <div className="bg-white rounded-3xl shadow-2xl transform transition-all border border-gray-100 overflow-hidden max-h-[75vh] overflow-y-auto mx-auto">
               <div className="relative bg-gradient-to-br from-orange-50 to-orange-100 p-8 border-b border-orange-200">
                 <div className="flex items-start gap-6">
                   <div className="w-32 h-32 rounded-2xl flex items-center justify-center shadow-2xl flex-shrink-0 border-4 border-white overflow-hidden">
@@ -168,7 +168,7 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
         {/* Position - Step 1 */}
         {shouldRender(1) && (
           <div className={`absolute top-1/2 left-0 right-0 -translate-y-1/2 transition-all duration-700 ease-out ${getStepTransform(1)}`}>
-            <div className="bg-white rounded-3xl shadow-2xl p-10 transform transition-all border border-gray-100 h-full flex flex-col">
+            <div className="bg-white rounded-3xl shadow-2xl p-10 transform transition-all border border-gray-100 max-h-[75vh] overflow-y-auto mx-auto">
               <div className="flex items-center gap-3 mb-6 flex-shrink-0">
                 <div className="w-14 h-14 bg-gradient-to-br from-orange-600 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg">
                   <Briefcase className="w-7 h-7 text-white" />
@@ -326,7 +326,7 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
         {/* Experience - Step 5 */}
         {shouldRender(5) && (
           <div className={`absolute top-1/2 left-0 right-0 -translate-y-1/2 transition-all duration-700 ease-out ${getStepTransform(5)}`}>
-            <div className="bg-white rounded-3xl shadow-2xl p-10 transform transition-all border border-gray-100 h-full flex flex-col">
+            <div className="bg-white rounded-3xl shadow-2xl p-10 transform transition-all border border-gray-100 max-h-[75vh] overflow-y-auto mx-auto">
               <div className="flex items-center gap-3 mb-6 flex-shrink-0">
                 <div className="w-14 h-14 bg-gradient-to-br from-orange-600 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg">
                   <Award className="w-7 h-7 text-white" />
@@ -368,7 +368,7 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
         {/* Availability - Step 6 */}
         {shouldRender(6) && (
           <div className={`absolute top-1/2 left-0 right-0 -translate-y-1/2 transition-all duration-700 ease-out ${getStepTransform(6)}`}>
-            <div className="bg-white rounded-3xl shadow-2xl p-10 transform transition-all border border-gray-100 h-full flex flex-col">
+            <div className="bg-white rounded-3xl shadow-2xl p-10 transform transition-all border border-gray-100 max-h-[75vh] overflow-y-auto mx-auto">
               <div className="flex items-center gap-3 mb-6 flex-shrink-0">
                 <div className="w-14 h-14 bg-gradient-to-br from-orange-600 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg">
                   <Calendar className="w-7 h-7 text-white" />
@@ -409,8 +409,8 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
 
         {/* Cover Letter - Step 7 */}
         {shouldRender(7) && (
-          <div className={`absolute inset-0 transition-all duration-700 ease-out ${getStepTransform(7)}`}>
-            <div className="bg-white rounded-3xl shadow-2xl p-10 transform transition-all border border-gray-100 h-full flex flex-col">
+          <div className={`absolute top-1/2 left-0 right-0 -translate-y-1/2 transition-all duration-700 ease-out ${getStepTransform(7)}`}>
+            <div className="bg-white rounded-3xl shadow-2xl p-10 transform transition-all border border-gray-100 max-h-[75vh] overflow-y-auto mx-auto">
               <div className="flex items-center gap-3 mb-6 flex-shrink-0">
                 <div className="w-14 h-14 bg-gradient-to-br from-orange-600 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg">
                   <FileText className="w-7 h-7 text-white" />
@@ -485,7 +485,7 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
 
         {/* CV Upload - Step 9 */}
         {shouldRender(9) && (
-          <div className={`absolute top-1/2 left-0 right-0 -translate-y-1/2 transition-all duration-700 ease-out ${getStepTransform(9)}`}>
+          <div className={`absolute inset-0 transition-all duration-700 ease-out ${getStepTransform(9)}`}>
             <div className="bg-white rounded-3xl shadow-2xl p-10 transform transition-all border border-gray-100">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-14 h-14 bg-gradient-to-br from-orange-600 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg">
@@ -547,7 +547,7 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
 
         {/* Success - Step 10 */}
         {shouldRender(10) && (
-          <div className={`absolute inset-0 transition-all duration-700 ease-out ${getStepTransform(10)}`}>
+          <div className={`absolute top-1/2 left-0 right-0 -translate-y-1/2 transition-all duration-700 ease-out ${getStepTransform(10)}`}>
             <div className="bg-white rounded-3xl shadow-2xl transform transition-all border border-gray-100 overflow-hidden max-h-[80vh] overflow-y-auto">
               <div className="relative bg-gradient-to-br from-emerald-50 to-teal-50 p-8 border-b border-emerald-100">
                 <div className="flex flex-col items-center text-center">
