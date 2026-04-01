@@ -59,67 +59,58 @@ export async function POST(request: NextRequest) {
       status: 'pending',
     }).returning();
 
+    // Send confirmation email to applicant
+    try {
+      await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/email/send`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          to: email,
+          subject: 'Application Received - The Hawthorn',
+          html: `
+            <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+              <h2 style="color: #ea580c;">Thank You for Your Application!</h2>
+              <p>Dear ${firstName} ${lastName},</p>
+              <p>We've successfully received your application for the <strong>${position}</strong> position at The Hawthorn.</p>
+              
+              <div style="background: #fff7ed; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                <h3 style="color: #ea580c; margin-top: 0;">Application Summary:</h3>
+                <ul style="line-height: 1.8;">
+                  <li><strong>Position:</strong> ${position}</li>
+                  <li><strong>Email:</strong> ${email}</li>
+                  <li><strong>Phone:</strong> ${phone}</li>
+                  <li><strong>Experience:</strong> ${experience} years</li>
+                  <li><strong>Availability:</strong> ${availability}</li>
+                </ul>
+              </div>
+              
+              <h3 style="color: #ea580c;">What Happens Next?</h3>
+              <ol style="line-height: 1.8;">
+                <li>We'll review your application within 3-5 business days</li>
+                <li>If you're a good fit, we'll reach out to schedule an interview</li>
+                <li>Check your email regularly for updates</li>
+              </ol>
+              
+              <p style="margin-top: 30px;">Thank you for your interest in joining The Hawthorn family!</p>
+              
+              <p style="color: #666; font-size: 14px; margin-top: 40px; border-top: 1px solid #ddd; padding-top: 20px;">
+                Best regards,<br>
+                <strong>The Hawthorn Team</strong>
+              </p>
+            </div>
+          `,
+        }),
+      });
+    } catch (emailError) {
+      console.error('Failed to send confirmation email:', emailError);
+      // Don't fail the application if email fails
+    }
+
+    console.log('Application submitted successfully');
     return NextResponse.json({
       success: true,
-      // Send confirmation email to applicant
-      try {
-        await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/email/send`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            to: email,
-            subject: 'Application Received - The Hawthorn',
-            html: `
-              <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-                <h2 style="color: #ea580c;">Thank You for Your Application!</h2>
-                <p>Dear ${firstName} ${lastName},</p>
-                <p>We've successfully received your application for the <strong>${position}</strong> position at The Hawthorn.</p>
-                
-                <div style="background: #fff7ed; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                  <h3 style="color: #ea580c; margin-top: 0;">Application Summary:</h3>
-                  <ul style="line-height: 1.8;">
-                    <li><strong>Position:</strong> ${position}</li>
-                    <li><strong>Email:</strong> ${email}</li>
-                    <li><strong>Phone:</strong> ${phone}</li>
-                    <li><strong>Experience:</strong> ${experience} years</li>
-                    <li><strong>Availability:</strong> ${availability}</li>
-                  </ul>
-                </div>
-                
-                <h3 style="color: #ea580c;">What Happens Next?</h3>
-                <ol style="line-height: 1.8;">
-                  <li>We'll review your application within 3-5 business days</li>
-                  <li>If you're a good fit, we'll reach out to schedule an interview</li>
-                  <li>Check your email regularly for updates</li>
-                </ol>
-                
-                <p style="margin-top: 30px;">Thank you for your interest in joining The Hawthorn family!</p>
-                
-                <p style="color: #666; font-size: 14px; margin-top: 40px; border-top: 1px solid #ddd; padding-top: 20px;">
-                  Best regards,<br>
-                  <strong>The Hawthorn Team</strong>
-                </p>
-              </div>
-            `,
-          }),
-        });
-      } catch (emailError) {
-        console.error('Failed to send confirmation email:', emailError);
-        // Don't fail the application if email fails
-      }
-
-      console.log('Application submitted successfully');
-      return NextResponse.json({
-        success: true,
-        applicationId: application.id,
-      });
-    } catch (error) {
-      console.error('Error submitting application:', error);
-      return NextResponse.json(
-        { error: 'Failed to submit application' },
-        { status: 500 }
-      );
-    }
+      applicationId: application.id,
+    });
   } catch (error) {
     console.error('Error submitting application:', error);
     return NextResponse.json(
