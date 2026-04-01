@@ -111,8 +111,8 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
         {/* Welcome - Step 0 */}
         {shouldRender(0) && (
           <div className={`absolute inset-0 transition-all duration-700 ease-out ${getStepTransform(0)}`}>
-            <div className="bg-white rounded-3xl shadow-2xl transform transition-all border border-gray-100 overflow-hidden h-full flex flex-col">
-              <div className="relative bg-gradient-to-br from-orange-50 to-orange-100 p-8 border-b border-orange-200 flex-shrink-0">
+            <div className="bg-white rounded-3xl shadow-2xl transform transition-all border border-gray-100 overflow-hidden max-h-[85vh]">
+              <div className="relative bg-gradient-to-br from-orange-50 to-orange-100 p-8 border-b border-orange-200">
                 <div className="flex items-start gap-6">
                   <div className="w-32 h-32 rounded-2xl flex items-center justify-center shadow-2xl flex-shrink-0 border-4 border-white overflow-hidden">
                     <img 
@@ -131,7 +131,7 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
                 </div>
               </div>
 
-              <div className="p-8 overflow-y-auto flex-1">
+              <div className="p-8">
                 <div className="bg-orange-50 border-2 border-orange-300 rounded-2xl p-6 mb-6">
                   <p className="text-gray-900 text-lg leading-relaxed">
                     <span className="font-bold text-xl">Welcome!</span> We're excited that you're interested in joining the Hawthorn family. 
@@ -548,8 +548,8 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
         {/* Success - Step 10 */}
         {shouldRender(10) && (
           <div className={`absolute inset-0 transition-all duration-700 ease-out ${getStepTransform(10)}`}>
-            <div className="bg-white rounded-3xl shadow-2xl transform transition-all border border-gray-100 overflow-hidden h-full flex flex-col">
-              <div className="relative bg-gradient-to-br from-emerald-50 to-teal-50 p-8 border-b border-emerald-100 flex-shrink-0">
+            <div className="bg-white rounded-3xl shadow-2xl transform transition-all border border-gray-100 overflow-hidden max-h-[85vh]">
+              <div className="relative bg-gradient-to-br from-emerald-50 to-teal-50 p-8 border-b border-emerald-100">
                 <div className="flex flex-col items-center text-center">
                   <div className="w-32 h-32 bg-white rounded-2xl flex items-center justify-center shadow-xl mb-4 border-4 border-emerald-100">
                     <Check className="w-16 h-16 text-emerald-600" />
@@ -560,7 +560,7 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
                 </div>
               </div>
 
-              <div className="p-8 text-center overflow-y-auto flex-1">
+              <div className="p-8 text-center">
                 <div className="bg-slate-50 rounded-2xl p-6 mb-6 border border-slate-200">
                   <h3 className="text-xl font-bold text-gray-900 mb-4">What Happens Next?</h3>
                   <div className="space-y-3 text-left">
