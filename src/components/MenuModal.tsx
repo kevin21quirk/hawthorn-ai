@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { X, ChevronLeft, ChevronRight, ZoomIn, ZoomOut, Maximize2 } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, ZoomIn, ZoomOut, Maximize2, Download } from 'lucide-react';
 
 interface MenuModalProps {
   isOpen: boolean;
@@ -13,14 +13,14 @@ interface MenuModalProps {
 
 export default function MenuModal({ isOpen, onClose, menuTitle, menuDescription, images }: MenuModalProps) {
   const [currentPage, setCurrentPage] = useState(0);
-  const [zoom, setZoom] = useState(1.5);
+  const [zoom, setZoom] = useState(1.25);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
       setCurrentPage(0);
-      setZoom(1.5);
+      setZoom(1.25);
     } else {
       document.body.style.overflow = 'unset';
     }
@@ -46,14 +46,14 @@ export default function MenuModal({ isOpen, onClose, menuTitle, menuDescription,
   const handlePrevPage = () => {
     if (currentPage > 0) {
       setCurrentPage(currentPage - 1);
-      setZoom(1.5);
+      setZoom(1.25);
     }
   };
 
   const handleNextPage = () => {
     if (currentPage < images.length - 1) {
       setCurrentPage(currentPage + 1);
-      setZoom(1.5);
+      setZoom(1.25);
     }
   };
 
@@ -67,7 +67,16 @@ export default function MenuModal({ isOpen, onClose, menuTitle, menuDescription,
 
   const toggleFullscreen = () => {
     setIsFullscreen(!isFullscreen);
-    setZoom(1.5);
+    setZoom(1.25);
+  };
+
+  const handleDownload = () => {
+    const link = document.createElement('a');
+    link.href = images[currentPage];
+    link.download = `${menuTitle.replace(/[^a-z0-9]/gi, '_')}_page_${currentPage + 1}.jpg`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   if (!isOpen) return null;
@@ -92,22 +101,21 @@ export default function MenuModal({ isOpen, onClose, menuTitle, menuDescription,
       </div>
 
       {/* Main Content */}
-      <div className="relative w-full h-full flex items-center justify-center px-4 md:px-20 py-24">
+      <div className="relative w-full h-full flex items-center justify-center px-4 md:px-20 py-24 overflow-auto">
         {/* Menu Image */}
         <div className="relative max-w-5xl w-full h-full flex items-center justify-center">
           <div 
             className="relative transition-all duration-300 ease-out"
             style={{ 
               transform: `scale(${zoom})`,
-              maxHeight: isFullscreen ? '100vh' : '85vh',
-              maxWidth: '100%'
+              transformOrigin: 'center center'
             }}
           >
             <img
               src={images[currentPage]}
               alt={`${menuTitle} - Page ${currentPage + 1}`}
-              className="w-full h-full object-contain rounded-lg shadow-2xl"
-              style={{ maxHeight: isFullscreen ? '100vh' : '85vh' }}
+              className="w-full h-auto object-contain rounded-lg shadow-2xl"
+              style={{ maxHeight: '80vh', maxWidth: '100%' }}
             />
           </div>
         </div>
@@ -144,7 +152,7 @@ export default function MenuModal({ isOpen, onClose, menuTitle, menuDescription,
                 key={index}
                 onClick={() => {
                   setCurrentPage(index);
-                  setZoom(1.5);
+                  setZoom(1.25);
                 }}
                 className={`flex-shrink-0 transition-all ${
                   index === currentPage
@@ -199,6 +207,14 @@ export default function MenuModal({ isOpen, onClose, menuTitle, menuDescription,
                 aria-label="Toggle fullscreen"
               >
                 <Maximize2 className="w-5 h-5" />
+              </button>
+              
+              <button
+                onClick={handleDownload}
+                className="text-white hover:text-orange-500 p-2 hover:bg-white/10 rounded-full transition-colors"
+                aria-label="Download menu page"
+              >
+                <Download className="w-5 h-5" />
               </button>
             </div>
 
