@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/db';
 import { bookings, orders, customers, aiInsights, analytics } from '@/db/schema';
 import { gte, sql } from 'drizzle-orm';
-import { ChatOpenAI } from '@langchain/groq';
+import { ChatOpenAI } from '@langchain/openai';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 
 export async function GET(req: NextRequest) {
@@ -47,7 +47,7 @@ async function generateAIInsights() {
   const totalCustomers = await db.select().from(customers);
 
   const model = new ChatOpenAI({
-    modelName: 'llama-3.1-70b-versatile',
+    modelName: 'gpt-4o-mini',
     temperature: 0.7,
     openAIApiKey: process.env.OPENAI_API_KEY,
     callbacks: process.env.LANGCHAIN_TRACING_V2 === 'true' ? undefined : [],
