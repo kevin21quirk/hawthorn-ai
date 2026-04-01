@@ -82,7 +82,7 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
         <X className="w-6 h-6" />
       </button>
 
-      <div className="relative w-full max-w-2xl h-[90vh] max-h-[700px]">
+      <div className="relative w-full max-w-2xl">
         {/* Welcome - Step 0 */}
         {shouldRender(0) && (
           <div className={`absolute inset-0 transition-all duration-700 ease-out ${getStepTransform(0)}`}>
@@ -229,8 +229,8 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
         {/* Email - Step 3 */}
         {shouldRender(3) && (
           <div className={`absolute inset-0 transition-all duration-700 ease-out ${getStepTransform(3)}`}>
-            <div className="bg-white rounded-3xl shadow-2xl p-10 transform transition-all border border-gray-100 h-full flex flex-col">
-              <div className="flex items-center gap-3 mb-6 flex-shrink-0">
+            <div className="bg-white rounded-3xl shadow-2xl p-10 transform transition-all border border-gray-100">
+              <div className="flex items-center gap-3 mb-6">
                 <div className="w-14 h-14 bg-gradient-to-br from-orange-600 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg">
                   <Mail className="w-7 h-7 text-white" />
                 </div>
@@ -245,7 +245,7 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
                 value={applicationData.email}
                 onChange={(e) => updateData('email', e.target.value)}
                 placeholder="your.email@example.com"
-                className="w-full px-6 py-5 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-orange-100 focus:border-orange-500 text-gray-900 text-xl transition-all shadow-sm hover:border-gray-300 bg-gray-50 focus:bg-white flex-1"
+                className="w-full px-6 py-5 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-orange-100 focus:border-orange-500 text-gray-900 text-xl transition-all shadow-sm hover:border-gray-300 bg-gray-50 focus:bg-white mb-6"
                 autoFocus
                 onKeyPress={(e) => e.key === 'Enter' && applicationData.email && nextStep()}
               />
@@ -253,7 +253,7 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
               <button
                 onClick={nextStep}
                 disabled={!applicationData.email}
-                className="w-full mt-8 bg-gradient-to-r from-orange-600 to-orange-500 text-white px-8 py-5 rounded-2xl hover:from-orange-700 hover:to-orange-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-bold text-xl flex items-center justify-center gap-3 shadow-xl hover:shadow-2xl transform hover:scale-[1.02] flex-shrink-0"
+                className="w-full mt-2 bg-gradient-to-r from-orange-600 to-orange-500 text-white px-8 py-5 rounded-2xl hover:from-orange-700 hover:to-orange-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-bold text-xl flex items-center justify-center gap-3 shadow-xl hover:shadow-2xl transform hover:scale-[1.02]"
               >
                 Continue
                 <ArrowRight className="w-5 h-5" />
@@ -265,8 +265,8 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
         {/* Phone - Step 4 */}
         {shouldRender(4) && (
           <div className={`absolute inset-0 transition-all duration-700 ease-out ${getStepTransform(4)}`}>
-            <div className="bg-white rounded-3xl shadow-2xl p-10 transform transition-all border border-gray-100 h-full flex flex-col">
-              <div className="flex items-center gap-3 mb-6 flex-shrink-0">
+            <div className="bg-white rounded-3xl shadow-2xl p-10 transform transition-all border border-gray-100">
+              <div className="flex items-center gap-3 mb-6">
                 <div className="w-14 h-14 bg-gradient-to-br from-orange-600 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg">
                   <Phone className="w-7 h-7 text-white" />
                 </div>
@@ -281,7 +281,7 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
                 value={applicationData.phone}
                 onChange={(e) => updateData('phone', e.target.value)}
                 placeholder="+44 1234 567890"
-                className="w-full px-6 py-5 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-orange-100 focus:border-orange-500 text-gray-900 text-xl transition-all shadow-sm hover:border-gray-300 bg-gray-50 focus:bg-white flex-1"
+                className="w-full px-6 py-5 border-2 border-gray-200 rounded-2xl focus:ring-4 focus:ring-orange-100 focus:border-orange-500 text-gray-900 text-xl transition-all shadow-sm hover:border-gray-300 bg-gray-50 focus:bg-white mb-6"
                 autoFocus
                 onKeyPress={(e) => e.key === 'Enter' && applicationData.phone && nextStep()}
               />
@@ -289,7 +289,7 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
               <button
                 onClick={nextStep}
                 disabled={!applicationData.phone}
-                className="w-full mt-8 bg-gradient-to-r from-orange-600 to-orange-500 text-white px-8 py-5 rounded-2xl hover:from-orange-700 hover:to-orange-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-bold text-xl flex items-center justify-center gap-3 shadow-xl hover:shadow-2xl transform hover:scale-[1.02] flex-shrink-0"
+                className="w-full mt-2 bg-gradient-to-r from-orange-600 to-orange-500 text-white px-8 py-5 rounded-2xl hover:from-orange-700 hover:to-orange-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-bold text-xl flex items-center justify-center gap-3 shadow-xl hover:shadow-2xl transform hover:scale-[1.02]"
               >
                 Continue
                 <ArrowRight className="w-5 h-5" />
