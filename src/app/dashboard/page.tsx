@@ -70,6 +70,8 @@ export default function Dashboard() {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedEmail, setSelectedEmail] = useState<EmailActivity | null>(null);
+  const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
+  const [calendarFilterDate, setCalendarFilterDate] = useState<string | null>(null);
 
   useEffect(() => {
     fetchDashboardData();
@@ -154,10 +156,16 @@ export default function Dashboard() {
     return bookings.filter(b => b.date.startsWith(dateStr)).length;
   };
 
-  const filteredBookings = bookings.filter(b => 
-    b.guestName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    b.guestEmail.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredBookings = bookings.filter(b => {
+    const matchesSearch = b.guestName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      b.guestEmail.toLowerCase().includes(searchQuery.toLowerCase());
+    
+    if (calendarFilterDate) {
+      return matchesSearch && b.date.startsWith(calendarFilterDate);
+    }
+    
+    return matchesSearch;
+  });
 
   if (loading) {
     return (
@@ -420,10 +428,25 @@ export default function Dashboard() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               <div className="lg:col-span-2 bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-xl border border-slate-700 p-6">
                 <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-xl font-semibold text-white flex items-center gap-2">
-                    <Calendar className="w-6 h-6 text-blue-500" />
-                    Upcoming Bookings
-                  </h3>
+                  <div>
+                    <h3 className="text-xl font-semibold text-white flex items-center gap-2">
+                      <Calendar className="w-6 h-6 text-blue-500" />
+                      Upcoming Bookings
+                    </h3>
+                    {calendarFilterDate && (
+                      <div className="flex items-center gap-2 mt-2">
+                        <span className="text-sm text-slate-400">
+                          Showing bookings for {new Date(calendarFilterDate).toLocaleDateString()}
+                        </span>
+                        <button
+                          onClick={() => setCalendarFilterDate(null)}
+                          className="text-xs px-2 py-1 bg-blue-500/20 text-blue-400 rounded hover:bg-blue-500/30 transition-colors"
+                        >
+                          Clear Filter
+                        </button>
+                      </div>
+                    )}
+                  </div>
                   <div className="relative">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-blue-500" />
                     <input
@@ -446,20 +469,24 @@ export default function Dashboard() {
                     filteredBookings.map((booking) => (
                       <div
                         key={booking.id}
-                        className="bg-slate-700/50 border border-slate-700 rounded-lg p-4 hover:border-slate-600 transition-all"
+                        onClick={() => setSelectedBooking(booking)}
+                        className="bg-slate-700/50 border border-slate-700 rounded-lg p-4 hover:border-blue-500 hover:bg-slate-700 transition-all cursor-pointer"
                       >
                         <div className="flex items-start justify-between mb-2">
                           <div>
                             <h4 className="font-semibold text-white">{booking.guestName}</h4>
                             <p className="text-sm text-slate-500">{booking.guestEmail}</p>
                           </div>
-                          <span className={`px-3 py-1 rounded-full text-xs font-bold ${
-                            booking.status === 'confirmed' ? 'bg-green-500/20 text-green-400' :
-                            booking.status === 'pending' ? 'bg-yellow-500/20 text-yellow-400' :
-                            'bg-red-500/20 text-red-400'
-                          }`}>
-                            {booking.status.toUpperCase()}
-                          </span>
+                          <div className="flex items-center gap-2">
+                            <span className={`px-3 py-1 rounded-full text-xs font-bold ${
+                              booking.status === 'confirmed' ? 'bg-green-500/20 text-green-400' :
+                              booking.status === 'pending' ? 'bg-yellow-500/20 text-yellow-400' :
+                              'bg-red-500/20 text-red-400'
+                            }`}>
+                              {booking.status.toUpperCase()}
+                            </span>
+                            <ChevronRight className="w-5 h-5 text-slate-400" />
+                          </div>
                         </div>
                         <div className="grid grid-cols-3 gap-4 mt-3 text-sm">
                           <div className="flex items-center gap-2 text-slate-400">
@@ -517,13 +544,23 @@ export default function Dashboard() {
                 <div className="grid grid-cols-7 gap-1">
                   {getCalendarDays().map((day, idx) => {
                     const bookingCount = getBookingsForDate(day);
+                    const dateStr = day ? `${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}` : null;
+                    const isSelected = dateStr === calendarFilterDate;
+                    
                     return (
                       <div
                         key={idx}
+                        onClick={() => {
+                          if (day && bookingCount > 0) {
+                            setCalendarFilterDate(dateStr);
+                          }
+                        }}
                         className={`aspect-square flex flex-col items-center justify-center text-sm rounded-lg ${
                           day
                             ? bookingCount > 0
-                              ? 'bg-blue-600 text-white font-bold cursor-pointer hover:bg-blue-500'
+                              ? isSelected
+                                ? 'bg-blue-700 text-white font-bold cursor-pointer ring-2 ring-blue-400'
+                                : 'bg-blue-600 text-white font-bold cursor-pointer hover:bg-blue-500'
                               : 'bg-slate-700/50 text-slate-400 hover:bg-slate-700'
                             : ''
                         }`}
@@ -532,7 +569,7 @@ export default function Dashboard() {
                           <>
                             <span>{day}</span>
                             {bookingCount > 0 && (
-                              <span className="text-[10px] text-slate-400">{bookingCount}</span>
+                              <span className="text-[10px] text-slate-200">{bookingCount}</span>
                             )}
                           </>
                         )}
@@ -730,6 +767,90 @@ export default function Dashboard() {
                     )}
                   </div>
                 )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {selectedBooking && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={() => setSelectedBooking(null)}>
+            <div className="bg-slate-900 rounded-xl shadow-2xl border border-slate-700 max-w-2xl w-full max-h-[80vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+              <div className="p-6 border-b border-slate-700 flex items-center justify-between sticky top-0 bg-slate-900">
+                <h3 className="text-xl font-semibold text-white flex items-center gap-2">
+                  <Calendar className="w-6 h-6 text-blue-400" />
+                  Booking Details
+                </h3>
+                <button
+                  onClick={() => setSelectedBooking(null)}
+                  className="text-slate-400 hover:text-white transition-colors"
+                >
+                  <XCircle className="w-6 h-6" />
+                </button>
+              </div>
+
+              <div className="p-6 space-y-4">
+                <div>
+                  <label className="text-sm font-medium text-slate-400">Status</label>
+                  <p className="text-white mt-1">
+                    <span className={`px-3 py-1 rounded-full text-sm font-bold ${
+                      selectedBooking.status === 'confirmed' ? 'bg-green-500/20 text-green-400' :
+                      selectedBooking.status === 'pending' ? 'bg-yellow-500/20 text-yellow-400' :
+                      'bg-red-500/20 text-red-400'
+                    }`}>
+                      {selectedBooking.status.toUpperCase()}
+                    </span>
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-sm font-medium text-slate-400">Guest Name</label>
+                    <p className="text-white mt-1 text-lg font-semibold">{selectedBooking.guestName}</p>
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium text-slate-400">Party Size</label>
+                    <p className="text-white mt-1 text-lg font-semibold">{selectedBooking.partySize} guests</p>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-sm font-medium text-slate-400">Email</label>
+                  <p className="text-white mt-1">{selectedBooking.guestEmail}</p>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="text-sm font-medium text-slate-400">Date</label>
+                    <p className="text-white mt-1 text-lg">{new Date(selectedBooking.date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium text-slate-400">Time</label>
+                    <p className="text-white mt-1 text-lg">{selectedBooking.time}</p>
+                  </div>
+                </div>
+
+                {selectedBooking.specialRequests && (
+                  <div>
+                    <label className="text-sm font-medium text-slate-400">Special Requests</label>
+                    <div className="mt-1 bg-slate-800/50 rounded-lg p-4 border border-slate-700">
+                      <p className="text-white">{selectedBooking.specialRequests}</p>
+                    </div>
+                  </div>
+                )}
+
+                <div className="border-t border-slate-700 pt-4 mt-4">
+                  <h4 className="text-lg font-semibold text-white mb-3">Booking Information</h4>
+                  <div className="bg-slate-800/50 rounded-lg p-4 space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-slate-400">Booking ID</span>
+                      <span className="text-white font-mono">#{selectedBooking.id}</span>
+                    </div>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-slate-400">Created</span>
+                      <span className="text-white">{new Date(selectedBooking.date).toLocaleDateString()}</span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
