@@ -1,12 +1,12 @@
-import { ChatOpenAI } from '@langchain/openai';
+import { ChatGroq } from '@langchain/groq';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 import { RESTAURANT_CONTEXT } from '../config';
 
 export async function createCustomerAssistantAgent() {
-  const model = new ChatOpenAI({
-    modelName: 'gpt-4o-mini',
+  const model = new ChatGroq({
+    model: 'llama-3.1-70b-versatile',
     temperature: 0.7,
-    openAIApiKey: process.env.OPENAI_API_KEY,
+    apiKey: process.env.GROQ_API_KEY,
     callbacks: process.env.LANGCHAIN_TRACING_V2 === 'true' ? undefined : [],
   });
 

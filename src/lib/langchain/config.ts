@@ -1,10 +1,10 @@
-import { ChatOpenAI } from '@langchain/openai';
+import { ChatGroq } from '@langchain/groq';
 
 export const createChatModel = (temperature = 0.7) => {
-  const model = new ChatOpenAI({
-    modelName: 'gpt-4o-mini',
+  const model = new ChatGroq({
+    model: 'llama-3.1-70b-versatile', // Fast, high-quality free model
     temperature,
-    openAIApiKey: process.env.OPENAI_API_KEY,
+    apiKey: process.env.GROQ_API_KEY,
     callbacks: process.env.LANGCHAIN_TRACING_V2 === 'true' ? undefined : [],
   });
 
@@ -16,6 +16,9 @@ export const createChatModel = (temperature = 0.7) => {
 // LANGCHAIN_API_KEY=your_langsmith_api_key
 // LANGCHAIN_PROJECT=your_project_name (optional, defaults to "default")
 // LANGCHAIN_ENDPOINT=https://api.smith.langchain.com (optional)
+
+// Groq API Key (Free tier: 14,400 requests/day)
+// GROQ_API_KEY=your_groq_api_key
 
 export const RESTAURANT_CONTEXT = `
 You are an AI assistant for The Hawthorn, a fine dining restaurant established in 2010.

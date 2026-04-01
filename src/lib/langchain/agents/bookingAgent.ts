@@ -1,4 +1,4 @@
-import { ChatOpenAI } from '@langchain/openai';
+import { ChatGroq } from '@langchain/groq';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 import { z } from 'zod';
 import { db } from '@/db';
@@ -20,10 +20,10 @@ const bookingSchema = z.object({
 export type BookingData = z.infer<typeof bookingSchema>;
 
 export async function processBookingWithAI(conversationText: string): Promise<BookingData | null> {
-  const model = new ChatOpenAI({
-    modelName: 'gpt-4o-mini',
+  const model = new ChatGroq({
+    model: 'llama-3.1-70b-versatile',
     temperature: 0,
-    openAIApiKey: process.env.OPENAI_API_KEY,
+    apiKey: process.env.GROQ_API_KEY,
     callbacks: process.env.LANGCHAIN_TRACING_V2 === 'true' ? undefined : [],
   });
 
@@ -142,10 +142,10 @@ export async function createBooking(bookingData: BookingData) {
 }
 
 export async function generateUpsellSuggestions(bookingId: number) {
-  const model = new ChatOpenAI({
-    modelName: 'gpt-4o-mini',
+  const model = new ChatGroq({
+    model: 'llama-3.1-70b-versatile',
     temperature: 0.8,
-    openAIApiKey: process.env.OPENAI_API_KEY,
+    apiKey: process.env.GROQ_API_KEY,
     callbacks: process.env.LANGCHAIN_TRACING_V2 === 'true' ? undefined : [],
   });
 

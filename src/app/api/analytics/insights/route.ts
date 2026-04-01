@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/db';
 import { bookings, orders, customers, aiInsights, analytics } from '@/db/schema';
 import { gte, sql } from 'drizzle-orm';
-import { ChatOpenAI } from '@langchain/openai';
+import { ChatGroq } from '@langchain/groq';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 
 export async function GET(req: NextRequest) {
@@ -46,10 +46,10 @@ async function generateAIInsights() {
 
   const totalCustomers = await db.select().from(customers);
 
-  const model = new ChatOpenAI({
-    modelName: 'gpt-4o-mini',
+  const model = new ChatGroq({
+    model: 'llama-3.1-70b-versatile',
     temperature: 0.7,
-    openAIApiKey: process.env.OPENAI_API_KEY,
+    apiKey: process.env.GROQ_API_KEY,
     callbacks: process.env.LANGCHAIN_TRACING_V2 === 'true' ? undefined : [],
   });
 
