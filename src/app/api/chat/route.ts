@@ -34,11 +34,19 @@ export async function POST(req: NextRequest) {
       chat_history: chatHistory,
     });
 
+    const messageContent = typeof userMessage.content === 'string' 
+      ? userMessage.content 
+      : JSON.stringify(userMessage.content);
+    
+    const responseContent = typeof result.output === 'string'
+      ? result.output
+      : JSON.stringify(result.output);
+
     await db.insert(interactions).values({
       sessionId: currentSessionId,
       type: 'chat',
-      message: userMessage.content,
-      response: result.output,
+      message: messageContent,
+      response: responseContent,
       metadata: {
         intent: 'general_inquiry',
         confidence: 0.9,
