@@ -79,13 +79,7 @@ export default function Dashboard() {
       const statsRes = await fetch('/api/analytics/stats');
       if (statsRes.ok) {
         const statsData = await statsRes.json();
-        setStats({
-          ...statsData,
-          emailsSent: 142,
-          emailReplies: 89,
-          aiInteractions: 456,
-          conversionRate: 87,
-        });
+        setStats(statsData);
       }
 
       const bookingsRes = await fetch('/api/bookings?upcoming=true');
@@ -94,13 +88,11 @@ export default function Dashboard() {
         setBookings(bookingsData.bookings || []);
       }
 
-      setEmailActivity([
-        { id: 1, type: 'sent', subject: 'Booking Confirmation - Table for 4', recipient: 'john@example.com', timestamp: new Date(Date.now() - 1000 * 60 * 5).toISOString(), status: 'delivered' },
-        { id: 2, type: 'reply', subject: 'Re: Special Dietary Requirements', recipient: 'sarah@example.com', timestamp: new Date(Date.now() - 1000 * 60 * 15).toISOString(), status: 'read' },
-        { id: 3, type: 'sent', subject: 'Gift Voucher Purchase Receipt', recipient: 'mike@example.com', timestamp: new Date(Date.now() - 1000 * 60 * 30).toISOString(), status: 'delivered' },
-        { id: 4, type: 'reply', subject: 'Re: Booking Modification Request', recipient: 'emma@example.com', timestamp: new Date(Date.now() - 1000 * 60 * 45).toISOString(), status: 'read' },
-        { id: 5, type: 'sent', subject: 'Event Invitation - Wine Tasting Evening', recipient: 'david@example.com', timestamp: new Date(Date.now() - 1000 * 60 * 60).toISOString(), status: 'delivered' },
-      ]);
+      const interactionsRes = await fetch('/api/analytics/interactions');
+      if (interactionsRes.ok) {
+        const interactionsData = await interactionsRes.json();
+        setEmailActivity(interactionsData.interactions || []);
+      }
     } catch (error) {
       console.error('Error fetching dashboard data:', error);
     } finally {
@@ -164,39 +156,39 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
         <div className="text-center">
           <div className="relative">
-            <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-purple-500 mx-auto"></div>
-            <Sparkles className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 text-purple-400 animate-pulse" />
+            <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500 mx-auto"></div>
+            <Sparkles className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-6 h-6 text-blue-400 animate-pulse" />
           </div>
-          <p className="mt-6 text-purple-200 font-medium">Initializing AI Dashboard...</p>
+          <p className="mt-6 text-slate-300 font-medium">Loading Dashboard...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-slate-950">
       <div className="max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8 flex items-center justify-between">
           <div>
             <div className="flex items-center gap-3 mb-2">
               <div className="relative">
-                <Brain className="w-10 h-10 text-purple-400" />
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                <Brain className="w-10 h-10 text-blue-500" />
+                <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
               </div>
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">AI Command Center</h1>
+              <h1 className="text-4xl font-bold text-white">Owner Dashboard</h1>
             </div>
-            <p className="text-purple-200 ml-14">Real-time intelligence for The Hawthorn</p>
+            <p className="text-slate-400 ml-14">Real-time analytics for The Hawthorn</p>
           </div>
           <div className="flex gap-2">
             <button
               onClick={() => setActiveView('overview')}
               className={`px-4 py-2 rounded-lg font-medium transition-all ${
                 activeView === 'overview'
-                  ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/50'
-                  : 'bg-slate-800 text-purple-300 hover:bg-slate-700'
+                  ? 'bg-blue-600 text-white shadow-lg'
+                  : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
               }`}
             >
               Overview
@@ -205,8 +197,8 @@ export default function Dashboard() {
               onClick={() => setActiveView('bookings')}
               className={`px-4 py-2 rounded-lg font-medium transition-all ${
                 activeView === 'bookings'
-                  ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/50'
-                  : 'bg-slate-800 text-purple-300 hover:bg-slate-700'
+                  ? 'bg-blue-600 text-white shadow-lg'
+                  : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
               }`}
             >
               Bookings
@@ -215,8 +207,8 @@ export default function Dashboard() {
               onClick={() => setActiveView('emails')}
               className={`px-4 py-2 rounded-lg font-medium transition-all ${
                 activeView === 'emails'
-                  ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/50'
-                  : 'bg-slate-800 text-purple-300 hover:bg-slate-700'
+                  ? 'bg-blue-600 text-white shadow-lg'
+                  : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
               }`}
             >
               Email Activity
@@ -225,59 +217,55 @@ export default function Dashboard() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-xl border border-purple-500/20 p-6 hover:border-purple-500/40 transition-all">
+          <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-xl border border-slate-700 p-6 hover:border-slate-600 transition-all">
             <div className="flex items-center justify-between mb-4">
-              <Calendar className="w-8 h-8 text-purple-400" />
-              <div className="px-3 py-1 bg-green-500/20 text-green-400 text-xs font-bold rounded-full">+12%</div>
+              <Calendar className="w-8 h-8 text-blue-500" />
             </div>
-            <p className="text-purple-200 text-sm mb-1">Total Bookings</p>
+            <p className="text-slate-400 text-sm mb-1">Total Bookings</p>
             <p className="text-3xl font-bold text-white">{stats.totalBookings}</p>
-            <p className="text-xs text-purple-300 mt-2">Last 30 days</p>
+            <p className="text-xs text-slate-500 mt-2">Last 30 days</p>
           </div>
 
-          <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-xl border border-purple-500/20 p-6 hover:border-purple-500/40 transition-all">
+          <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-xl border border-slate-700 p-6 hover:border-slate-600 transition-all">
             <div className="flex items-center justify-between mb-4">
               <DollarSign className="w-8 h-8 text-green-400" />
-              <div className="px-3 py-1 bg-green-500/20 text-green-400 text-xs font-bold rounded-full">+18%</div>
             </div>
-            <p className="text-purple-200 text-sm mb-1">Revenue</p>
+            <p className="text-slate-400 text-sm mb-1">Revenue</p>
             <p className="text-3xl font-bold text-white">£{stats.totalRevenue.toLocaleString()}</p>
-            <p className="text-xs text-purple-300 mt-2">Last 30 days</p>
+            <p className="text-xs text-slate-500 mt-2">Last 30 days</p>
           </div>
 
-          <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-xl border border-purple-500/20 p-6 hover:border-purple-500/40 transition-all">
+          <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-xl border border-slate-700 p-6 hover:border-slate-600 transition-all">
             <div className="flex items-center justify-between mb-4">
               <Mail className="w-8 h-8 text-blue-400" />
-              <div className="px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-bold rounded-full">{stats.emailReplies}/{stats.emailsSent}</div>
             </div>
-            <p className="text-purple-200 text-sm mb-1">Email Activity</p>
+            <p className="text-slate-400 text-sm mb-1">Email Activity</p>
             <p className="text-3xl font-bold text-white">{stats.emailsSent}</p>
-            <p className="text-xs text-purple-300 mt-2">{stats.emailReplies} replies received</p>
+            <p className="text-xs text-slate-500 mt-2">{stats.emailReplies} replies received</p>
           </div>
 
-          <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-xl border border-purple-500/20 p-6 hover:border-purple-500/40 transition-all">
+          <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-xl border border-slate-700 p-6 hover:border-slate-600 transition-all">
             <div className="flex items-center justify-between mb-4">
-              <Activity className="w-8 h-8 text-pink-400" />
-              <div className="px-3 py-1 bg-pink-500/20 text-pink-400 text-xs font-bold rounded-full">{stats.conversionRate}%</div>
+              <Activity className="w-8 h-8 text-orange-400" />
             </div>
-            <p className="text-purple-200 text-sm mb-1">AI Interactions</p>
+            <p className="text-slate-400 text-sm mb-1">AI Interactions</p>
             <p className="text-3xl font-bold text-white">{stats.aiInteractions}</p>
-            <p className="text-xs text-purple-300 mt-2">Conversion rate: {stats.conversionRate}%</p>
+            <p className="text-xs text-slate-500 mt-2">Conversion rate: {stats.conversionRate}%</p>
           </div>
         </div>
 
         {activeView === 'overview' && (
           <>
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-xl border border-purple-500/20 mb-8">
-              <div className="p-6 border-b border-purple-500/20 flex justify-between items-center">
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-xl border border-slate-700 mb-8">
+              <div className="p-6 border-b border-slate-700 flex justify-between items-center">
                 <div className="flex items-center gap-3">
-                  <Sparkles className="w-6 h-6 text-purple-400" />
+                  <Sparkles className="w-6 h-6 text-blue-500" />
                   <h2 className="text-xl font-semibold text-white">AI-Powered Insights</h2>
                 </div>
                 <button
                   onClick={generateNewInsights}
                   disabled={generatingInsights}
-                  className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-lg hover:from-purple-700 hover:to-pink-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all text-sm font-medium shadow-lg shadow-purple-500/50"
+                  className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-2 rounded-lg hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all text-sm font-medium shadow-lg shadow-blue-500/30"
                 >
                   {generatingInsights ? (
                     <span className="flex items-center gap-2">
@@ -293,11 +281,11 @@ export default function Dashboard() {
               <div className="p-6">
                 {insights.length === 0 ? (
                   <div className="text-center py-12">
-                    <Brain className="w-16 h-16 text-purple-400 mx-auto mb-4 opacity-50" />
-                    <p className="text-purple-200 mb-4">No insights available yet</p>
+                    <Brain className="w-16 h-16 text-blue-500 mx-auto mb-4 opacity-50" />
+                    <p className="text-slate-400 mb-4">No insights available yet</p>
                     <button
                       onClick={generateNewInsights}
-                      className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all shadow-lg shadow-purple-500/50"
+                      className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-2 rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all shadow-lg shadow-blue-500/30"
                     >
                       Generate AI Insights
                     </button>
@@ -307,7 +295,7 @@ export default function Dashboard() {
                     {insights.map((insight) => (
                       <div
                         key={insight.id}
-                        className="bg-slate-800/50 border border-purple-500/30 rounded-lg p-4 hover:border-purple-500/50 transition-all"
+                        className="bg-slate-800/50 border border-slate-600 rounded-lg p-4 hover:border-slate-500 transition-all"
                       >
                         <div className="flex items-start justify-between mb-2">
                           <h3 className="font-semibold text-lg text-white">{insight.title}</h3>
@@ -319,14 +307,14 @@ export default function Dashboard() {
                             {insight.priority.toUpperCase()}
                           </span>
                         </div>
-                        <p className="text-sm mb-3 text-purple-200">{insight.description}</p>
+                        <p className="text-sm mb-3 text-slate-400">{insight.description}</p>
                         {insight.data?.recommendation && (
-                          <div className="bg-purple-900/30 rounded-lg p-3 mt-2 border border-purple-500/20">
-                            <p className="text-sm font-medium mb-1 text-purple-300">AI Recommendation:</p>
-                            <p className="text-sm text-purple-100">{insight.data.recommendation}</p>
+                          <div className="bg-slate-800/50 rounded-lg p-3 mt-2 border border-slate-700">
+                            <p className="text-sm font-medium mb-1 text-slate-500">AI Recommendation:</p>
+                            <p className="text-sm text-slate-300">{insight.data.recommendation}</p>
                           </div>
                         )}
-                        <p className="text-xs mt-3 text-purple-400">
+                        <p className="text-xs mt-3 text-blue-500">
                           Generated {new Date(insight.createdAt).toLocaleDateString()}
                         </p>
                       </div>
@@ -337,9 +325,9 @@ export default function Dashboard() {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-xl border border-purple-500/20 p-6">
+              <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-xl border border-slate-700 p-6">
                 <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
-                  <Activity className="w-5 h-5 text-purple-400" />
+                  <Activity className="w-5 h-5 text-blue-500" />
                   Live Activity Feed
                 </h3>
                 <div className="space-y-3">
@@ -347,34 +335,34 @@ export default function Dashboard() {
                     <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
                     <div className="flex-1">
                       <p className="text-sm font-medium text-white">New booking received</p>
-                      <p className="text-xs text-purple-300">2 minutes ago</p>
+                      <p className="text-xs text-slate-500">2 minutes ago</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3 p-3 bg-slate-700/50 rounded-lg border border-blue-500/20">
                     <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
                     <div className="flex-1">
                       <p className="text-sm font-medium text-white">Gift voucher purchased</p>
-                      <p className="text-xs text-purple-300">15 minutes ago</p>
+                      <p className="text-xs text-slate-500">15 minutes ago</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3 p-3 bg-slate-700/50 rounded-lg border border-purple-500/20">
-                    <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
+                  <div className="flex items-center gap-3 p-3 bg-slate-700/50 rounded-lg border border-slate-700">
+                    <div className="w-2 h-2 bg-blue-700 rounded-full"></div>
                     <div className="flex-1">
                       <p className="text-sm font-medium text-white">AI chat interaction completed</p>
-                      <p className="text-xs text-purple-300">1 hour ago</p>
+                      <p className="text-xs text-slate-500">1 hour ago</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3 p-3 bg-slate-700/50 rounded-lg border border-pink-500/20">
+                  <div className="flex items-center gap-3 p-3 bg-slate-700/50 rounded-lg border border-orange-500/20">
                     <div className="w-2 h-2 bg-pink-400 rounded-full"></div>
                     <div className="flex-1">
                       <p className="text-sm font-medium text-white">Email confirmation sent</p>
-                      <p className="text-xs text-purple-300">2 hours ago</p>
+                      <p className="text-xs text-slate-500">2 hours ago</p>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-xl border border-purple-500/20 p-6">
+              <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-xl border border-slate-700 p-6">
                 <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
                   <TrendingUp className="w-5 h-5 text-green-400" />
                   AI Performance Metrics
@@ -382,7 +370,7 @@ export default function Dashboard() {
                 <div className="space-y-4">
                   <div>
                     <div className="flex justify-between text-sm mb-2">
-                      <span className="text-purple-200">Chat Resolution Rate</span>
+                      <span className="text-slate-400">Chat Resolution Rate</span>
                       <span className="font-bold text-green-400">94%</span>
                     </div>
                     <div className="w-full bg-slate-700 rounded-full h-2.5">
@@ -391,7 +379,7 @@ export default function Dashboard() {
                   </div>
                   <div>
                     <div className="flex justify-between text-sm mb-2">
-                      <span className="text-purple-200">Booking Conversion</span>
+                      <span className="text-slate-400">Booking Conversion</span>
                       <span className="font-bold text-blue-400">87%</span>
                     </div>
                     <div className="w-full bg-slate-700 rounded-full h-2.5">
@@ -400,16 +388,16 @@ export default function Dashboard() {
                   </div>
                   <div>
                     <div className="flex justify-between text-sm mb-2">
-                      <span className="text-purple-200">Upsell Success Rate</span>
-                      <span className="font-bold text-purple-400">76%</span>
+                      <span className="text-slate-400">Upsell Success Rate</span>
+                      <span className="font-bold text-blue-500">76%</span>
                     </div>
                     <div className="w-full bg-slate-700 rounded-full h-2.5">
-                      <div className="bg-gradient-to-r from-purple-500 to-pink-400 h-2.5 rounded-full shadow-lg shadow-purple-500/50" style={{ width: '76%' }}></div>
+                      <div className="bg-gradient-to-r from-blue-600 to-indigo-500 h-2.5 rounded-full shadow-lg shadow-blue-500/30" style={{ width: '76%' }}></div>
                     </div>
                   </div>
                   <div>
                     <div className="flex justify-between text-sm mb-2">
-                      <span className="text-purple-200">Customer Satisfaction</span>
+                      <span className="text-slate-400">Customer Satisfaction</span>
                       <span className="font-bold text-yellow-400">92%</span>
                     </div>
                     <div className="w-full bg-slate-700 rounded-full h-2.5">
@@ -425,20 +413,20 @@ export default function Dashboard() {
         {activeView === 'bookings' && (
           <div className="space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div className="lg:col-span-2 bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-xl border border-purple-500/20 p-6">
+              <div className="lg:col-span-2 bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-xl border border-slate-700 p-6">
                 <div className="flex items-center justify-between mb-6">
                   <h3 className="text-xl font-semibold text-white flex items-center gap-2">
-                    <Calendar className="w-6 h-6 text-purple-400" />
+                    <Calendar className="w-6 h-6 text-blue-500" />
                     Upcoming Bookings
                   </h3>
                   <div className="relative">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-purple-400" />
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-blue-500" />
                     <input
                       type="text"
                       placeholder="Search bookings..."
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      className="pl-10 pr-4 py-2 bg-slate-700 border border-purple-500/30 rounded-lg text-white placeholder-purple-300 focus:outline-none focus:border-purple-500 text-sm"
+                      className="pl-10 pr-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 text-sm"
                     />
                   </div>
                 </div>
@@ -446,19 +434,19 @@ export default function Dashboard() {
                 <div className="space-y-3 max-h-[600px] overflow-y-auto">
                   {filteredBookings.length === 0 ? (
                     <div className="text-center py-12">
-                      <Calendar className="w-16 h-16 text-purple-400 mx-auto mb-4 opacity-50" />
-                      <p className="text-purple-200">No bookings found</p>
+                      <Calendar className="w-16 h-16 text-blue-500 mx-auto mb-4 opacity-50" />
+                      <p className="text-slate-400">No bookings found</p>
                     </div>
                   ) : (
                     filteredBookings.map((booking) => (
                       <div
                         key={booking.id}
-                        className="bg-slate-700/50 border border-purple-500/20 rounded-lg p-4 hover:border-purple-500/40 transition-all"
+                        className="bg-slate-700/50 border border-slate-700 rounded-lg p-4 hover:border-slate-600 transition-all"
                       >
                         <div className="flex items-start justify-between mb-2">
                           <div>
                             <h4 className="font-semibold text-white">{booking.guestName}</h4>
-                            <p className="text-sm text-purple-300">{booking.guestEmail}</p>
+                            <p className="text-sm text-slate-500">{booking.guestEmail}</p>
                           </div>
                           <span className={`px-3 py-1 rounded-full text-xs font-bold ${
                             booking.status === 'confirmed' ? 'bg-green-500/20 text-green-400' :
@@ -469,22 +457,22 @@ export default function Dashboard() {
                           </span>
                         </div>
                         <div className="grid grid-cols-3 gap-4 mt-3 text-sm">
-                          <div className="flex items-center gap-2 text-purple-200">
-                            <Calendar className="w-4 h-4 text-purple-400" />
+                          <div className="flex items-center gap-2 text-slate-400">
+                            <Calendar className="w-4 h-4 text-blue-500" />
                             {new Date(booking.date).toLocaleDateString()}
                           </div>
-                          <div className="flex items-center gap-2 text-purple-200">
-                            <Clock className="w-4 h-4 text-purple-400" />
+                          <div className="flex items-center gap-2 text-slate-400">
+                            <Clock className="w-4 h-4 text-blue-500" />
                             {booking.time}
                           </div>
-                          <div className="flex items-center gap-2 text-purple-200">
-                            <Users className="w-4 h-4 text-purple-400" />
+                          <div className="flex items-center gap-2 text-slate-400">
+                            <Users className="w-4 h-4 text-blue-500" />
                             {booking.partySize} guests
                           </div>
                         </div>
                         {booking.specialRequests && (
-                          <div className="mt-3 p-2 bg-purple-900/30 rounded border border-purple-500/20">
-                            <p className="text-xs text-purple-300">Special Requests: {booking.specialRequests}</p>
+                          <div className="mt-3 p-2 bg-slate-800/50 rounded border border-slate-700">
+                            <p className="text-xs text-slate-500">Special Requests: {booking.specialRequests}</p>
                           </div>
                         )}
                       </div>
@@ -493,7 +481,7 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-xl border border-purple-500/20 p-6">
+              <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-xl border border-slate-700 p-6">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-lg font-semibold text-white">Calendar</h3>
                   <div className="flex gap-2">
@@ -501,22 +489,22 @@ export default function Dashboard() {
                       onClick={() => setSelectedDate(new Date(selectedDate.getFullYear(), selectedDate.getMonth() - 1))}
                       className="p-1 hover:bg-slate-700 rounded"
                     >
-                      <ChevronLeft className="w-5 h-5 text-purple-400" />
+                      <ChevronLeft className="w-5 h-5 text-blue-500" />
                     </button>
                     <button
                       onClick={() => setSelectedDate(new Date(selectedDate.getFullYear(), selectedDate.getMonth() + 1))}
                       className="p-1 hover:bg-slate-700 rounded"
                     >
-                      <ChevronRight className="w-5 h-5 text-purple-400" />
+                      <ChevronRight className="w-5 h-5 text-blue-500" />
                     </button>
                   </div>
                 </div>
-                <p className="text-center text-purple-200 font-medium mb-4">
+                <p className="text-center text-slate-400 font-medium mb-4">
                   {selectedDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
                 </p>
                 <div className="grid grid-cols-7 gap-1 mb-2">
                   {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map(day => (
-                    <div key={day} className="text-center text-xs font-bold text-purple-400 py-2">
+                    <div key={day} className="text-center text-xs font-bold text-blue-500 py-2">
                       {day}
                     </div>
                   ))}
@@ -530,8 +518,8 @@ export default function Dashboard() {
                         className={`aspect-square flex flex-col items-center justify-center text-sm rounded-lg ${
                           day
                             ? bookingCount > 0
-                              ? 'bg-purple-600 text-white font-bold cursor-pointer hover:bg-purple-500'
-                              : 'bg-slate-700/50 text-purple-200 hover:bg-slate-700'
+                              ? 'bg-blue-600 text-white font-bold cursor-pointer hover:bg-blue-500'
+                              : 'bg-slate-700/50 text-slate-400 hover:bg-slate-700'
                             : ''
                         }`}
                       >
@@ -539,7 +527,7 @@ export default function Dashboard() {
                           <>
                             <span>{day}</span>
                             {bookingCount > 0 && (
-                              <span className="text-[10px] text-purple-200">{bookingCount}</span>
+                              <span className="text-[10px] text-slate-400">{bookingCount}</span>
                             )}
                           </>
                         )}
@@ -553,7 +541,7 @@ export default function Dashboard() {
         )}
 
         {activeView === 'emails' && (
-          <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-xl border border-purple-500/20 p-6">
+          <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-xl border border-slate-700 p-6">
             <h3 className="text-xl font-semibold text-white mb-6 flex items-center gap-2">
               <Mail className="w-6 h-6 text-blue-400" />
               Email Activity Log
@@ -562,7 +550,7 @@ export default function Dashboard() {
               {emailActivity.map((email) => (
                 <div
                   key={email.id}
-                  className="bg-slate-700/50 border border-purple-500/20 rounded-lg p-4 hover:border-purple-500/40 transition-all"
+                  className="bg-slate-700/50 border border-slate-700 rounded-lg p-4 hover:border-slate-600 transition-all"
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex items-start gap-3 flex-1">
@@ -589,8 +577,8 @@ export default function Dashboard() {
                           </span>
                         </div>
                         <h4 className="font-semibold text-white mb-1">{email.subject}</h4>
-                        <p className="text-sm text-purple-300">To: {email.recipient}</p>
-                        <p className="text-xs text-purple-400 mt-2">
+                        <p className="text-sm text-slate-500">To: {email.recipient}</p>
+                        <p className="text-xs text-blue-500 mt-2">
                           {new Date(email.timestamp).toLocaleString()}
                         </p>
                       </div>
