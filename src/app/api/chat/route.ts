@@ -5,8 +5,6 @@ import { db } from '@/db';
 import { interactions } from '@/db/schema';
 import { v4 as uuidv4 } from 'uuid';
 
-export const runtime = 'edge';
-
 export async function POST(req: NextRequest) {
   try {
     const { messages, sessionId } = await req.json();
