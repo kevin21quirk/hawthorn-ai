@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { TrendingUp, Users, Calendar, DollarSign, Brain, AlertCircle, Mail, MailOpen, ChevronLeft, ChevronRight, Filter, Search, Sparkles, Activity, Clock, CheckCircle2, XCircle, Flag } from 'lucide-react';
+import { TrendingUp, Users, Calendar, DollarSign, Brain, AlertCircle, Mail, MailOpen, ChevronLeft, ChevronRight, Filter, Search, Sparkles, Activity, Clock, CheckCircle2, XCircle, Flag, Briefcase, FileText, Download, Phone } from 'lucide-react';
 
 interface Insight {
   id: number;
@@ -66,12 +66,14 @@ export default function Dashboard() {
   const [emailActivity, setEmailActivity] = useState<EmailActivity[]>([]);
   const [loading, setLoading] = useState(true);
   const [generatingInsights, setGeneratingInsights] = useState(false);
-  const [activeView, setActiveView] = useState<'overview' | 'bookings' | 'emails'>('overview');
+  const [activeView, setActiveView] = useState<'overview' | 'bookings' | 'emails' | 'applications'>('overview');
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedEmail, setSelectedEmail] = useState<EmailActivity | null>(null);
   const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null);
   const [calendarFilterDate, setCalendarFilterDate] = useState<string | null>(null);
+  const [applications, setApplications] = useState<any[]>([]);
+  const [selectedApplication, setSelectedApplication] = useState<any | null>(null);
 
   useEffect(() => {
     fetchDashboardData();
@@ -99,6 +101,12 @@ export default function Dashboard() {
       if (interactionsRes.ok) {
         const interactionsData = await interactionsRes.json();
         setEmailActivity(interactionsData.interactions || []);
+      }
+
+      const applicationsRes = await fetch('/api/applications');
+      if (applicationsRes.ok) {
+        const applicationsData = await applicationsRes.json();
+        setApplications(applicationsData.applications || []);
       }
     } catch (error) {
       console.error('Error fetching dashboard data:', error);
@@ -231,6 +239,16 @@ export default function Dashboard() {
               }`}
             >
               Email Activity
+            </button>
+            <button
+              onClick={() => setActiveView('applications')}
+              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                activeView === 'applications'
+                  ? 'bg-blue-600 text-white shadow-lg'
+                  : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+              }`}
+            >
+              Applications
             </button>
           </div>
         </div>
@@ -873,6 +891,163 @@ export default function Dashboard() {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        )}
+
+        {/* Applications View */}
+        {activeView === 'applications' && (
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Applications List */}
+            <div className="lg:col-span-1 space-y-4">
+              {applications.length === 0 ? (
+                <div className="bg-slate-800 rounded-xl shadow-xl border border-slate-700 p-8 text-center">
+                  <Briefcase className="w-12 h-12 text-slate-600 mx-auto mb-3" />
+                  <p className="text-slate-400">No applications yet</p>
+                </div>
+              ) : (
+                applications.map((app) => (
+                  <div
+                    key={app.id}
+                    onClick={() => setSelectedApplication(app)}
+                    className={`bg-slate-800 rounded-xl shadow-xl border p-4 cursor-pointer transition-all hover:border-blue-500 ${
+                      selectedApplication?.id === app.id ? 'border-blue-500 bg-slate-700' : 'border-slate-700'
+                    }`}
+                  >
+                    <div className="flex items-start justify-between mb-2">
+                      <div>
+                        <h3 className="font-bold text-white text-lg">
+                          {app.firstName} {app.lastName}
+                        </h3>
+                        <p className="text-sm text-slate-400">{app.position}</p>
+                      </div>
+                      <div className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                        app.status === 'pending' ? 'bg-yellow-500/20 text-yellow-400' :
+                        app.status === 'reviewed' ? 'bg-blue-500/20 text-blue-400' :
+                        app.status === 'accepted' ? 'bg-green-500/20 text-green-400' :
+                        'bg-red-500/20 text-red-400'
+                      }`}>
+                        {app.status}
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center gap-2 text-sm text-slate-500">
+                      <Calendar className="w-4 h-4" />
+                      {new Date(app.createdAt).toLocaleDateString()}
+                    </div>
+                    
+                    {app.cvPath && (
+                      <div className="mt-2 flex items-center gap-1 text-xs text-green-400 font-medium">
+                        <FileText className="w-3 h-3" />
+                        CV Attached
+                      </div>
+                    )}
+                  </div>
+                ))
+              )}
+            </div>
+
+            {/* Application Details */}
+            <div className="lg:col-span-2">
+              {selectedApplication ? (
+                <div className="bg-slate-800 rounded-xl shadow-xl border border-slate-700 p-8">
+                  <div className="flex items-start justify-between mb-6">
+                    <div>
+                      <h2 className="text-3xl font-bold text-white mb-1">
+                        {selectedApplication.firstName} {selectedApplication.lastName}
+                      </h2>
+                      <p className="text-xl text-blue-400 font-semibold">{selectedApplication.position}</p>
+                    </div>
+                    <div className={`px-4 py-2 rounded-full text-sm font-semibold ${
+                      selectedApplication.status === 'pending' ? 'bg-yellow-500/20 text-yellow-400' :
+                      selectedApplication.status === 'reviewed' ? 'bg-blue-500/20 text-blue-400' :
+                      selectedApplication.status === 'accepted' ? 'bg-green-500/20 text-green-400' :
+                      'bg-red-500/20 text-red-400'
+                    }`}>
+                      {selectedApplication.status}
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div className="flex items-center gap-3 p-4 bg-slate-900 rounded-xl">
+                      <Mail className="w-5 h-5 text-blue-400" />
+                      <div>
+                        <p className="text-xs text-slate-400 font-medium">Email</p>
+                        <p className="text-sm font-semibold text-white">{selectedApplication.email}</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-3 p-4 bg-slate-900 rounded-xl">
+                      <Phone className="w-5 h-5 text-blue-400" />
+                      <div>
+                        <p className="text-xs text-slate-400 font-medium">Phone</p>
+                        <p className="text-sm font-semibold text-white">{selectedApplication.phone}</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-3 p-4 bg-slate-900 rounded-xl">
+                      <Briefcase className="w-5 h-5 text-blue-400" />
+                      <div>
+                        <p className="text-xs text-slate-400 font-medium">Experience</p>
+                        <p className="text-sm font-semibold text-white">{selectedApplication.experience} years</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-3 p-4 bg-slate-900 rounded-xl">
+                      <Clock className="w-5 h-5 text-blue-400" />
+                      <div>
+                        <p className="text-xs text-slate-400 font-medium">Availability</p>
+                        <p className="text-sm font-semibold text-white">{selectedApplication.availability}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {selectedApplication.coverLetter && (
+                    <div className="mb-6">
+                      <h3 className="text-lg font-bold text-white mb-3">Cover Letter</h3>
+                      <div className="bg-slate-900 rounded-xl p-6 border border-slate-700">
+                        <p className="text-slate-300 whitespace-pre-wrap leading-relaxed">
+                          {selectedApplication.coverLetter}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  {selectedApplication.cvPath && (
+                    <div className="mb-6">
+                      <h3 className="text-lg font-bold text-white mb-3">Resume/CV</h3>
+                      <a
+                        href={selectedApplication.cvPath}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition-all font-semibold"
+                      >
+                        <Download className="w-5 h-5" />
+                        Download CV
+                      </a>
+                    </div>
+                  )}
+
+                  <div className="flex gap-3 pt-6 border-t border-slate-700">
+                    <button className="flex-1 bg-green-600 text-white px-6 py-3 rounded-xl hover:bg-green-700 transition-all font-semibold flex items-center justify-center gap-2">
+                      <CheckCircle2 className="w-5 h-5" />
+                      Accept
+                    </button>
+                    <button className="flex-1 bg-red-600 text-white px-6 py-3 rounded-xl hover:bg-red-700 transition-all font-semibold flex items-center justify-center gap-2">
+                      <XCircle className="w-5 h-5" />
+                      Reject
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="bg-slate-800 rounded-xl shadow-xl border border-slate-700 p-12 text-center h-full flex items-center justify-center">
+                  <div>
+                    <Briefcase className="w-16 h-16 text-slate-600 mx-auto mb-4" />
+                    <h3 className="text-xl font-semibold text-white mb-2">Select an Application</h3>
+                    <p className="text-slate-400">Click on an application to view details</p>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         )}
