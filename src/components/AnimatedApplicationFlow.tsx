@@ -87,10 +87,10 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
 
   const getStepTransform = (stepIndex: number) => {
     const diff = stepIndex - currentStepIndex;
-    if (diff < 0) return '-translate-x-full opacity-0'; // Past
-    if (diff === 0) return 'translate-x-0 opacity-100'; // Current
-    if (diff === 1) return 'translate-x-[110%] opacity-50 scale-95'; // Next (visible on right)
-    return 'translate-x-[200%] opacity-0'; // Future
+    if (diff < 0) return '-translate-x-full opacity-0 pointer-events-none'; // Past
+    if (diff === 0) return 'translate-x-0 opacity-100 pointer-events-auto'; // Current
+    if (diff === 1) return 'translate-x-[110%] opacity-50 scale-95 pointer-events-none'; // Next (visible on right)
+    return 'translate-x-[200%] opacity-0 pointer-events-none'; // Future
   };
 
   const shouldRender = (stepIndex: number) => {
@@ -107,7 +107,7 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
         <X className="w-6 h-6" />
       </button>
 
-      <div className="relative w-full max-w-2xl min-h-[500px] flex items-center">
+      <div className="relative w-full max-w-2xl h-[600px] flex items-center justify-center">
         {/* Welcome - Step 0 */}
         {shouldRender(0) && (
           <div className={`absolute inset-0 transition-all duration-700 ease-out ${getStepTransform(0)}`}>
@@ -548,7 +548,7 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
         {/* Success - Step 10 */}
         {shouldRender(10) && (
           <div className={`absolute inset-0 transition-all duration-700 ease-out ${getStepTransform(10)}`}>
-            <div className="bg-white rounded-3xl shadow-2xl transform transition-all border border-gray-100 overflow-hidden max-h-[85vh]">
+            <div className="bg-white rounded-3xl shadow-2xl transform transition-all border border-gray-100 overflow-hidden max-h-[80vh] overflow-y-auto">
               <div className="relative bg-gradient-to-br from-emerald-50 to-teal-50 p-8 border-b border-emerald-100">
                 <div className="flex flex-col items-center text-center">
                   <div className="w-32 h-32 bg-white rounded-2xl flex items-center justify-center shadow-xl mb-4 border-4 border-emerald-100">
