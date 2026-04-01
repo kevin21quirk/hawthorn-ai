@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { TrendingUp, Users, Calendar, DollarSign, Brain, AlertCircle, Mail, MailOpen, ChevronLeft, ChevronRight, Filter, Search, Sparkles, Activity, Clock, CheckCircle2, XCircle } from 'lucide-react';
+import { TrendingUp, Users, Calendar, DollarSign, Brain, AlertCircle, Mail, MailOpen, ChevronLeft, ChevronRight, Filter, Search, Sparkles, Activity, Clock, CheckCircle2, XCircle, Flag } from 'lucide-react';
 
 interface Insight {
   id: number;
@@ -154,6 +154,12 @@ export default function Dashboard() {
     if (!day) return 0;
     const dateStr = `${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
     return bookings.filter(b => b.date.startsWith(dateStr)).length;
+  };
+
+  const hasSpecialRequestsForDate = (day: number | null) => {
+    if (!day) return false;
+    const dateStr = `${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    return bookings.some(b => b.date.startsWith(dateStr) && b.specialRequests && b.specialRequests.trim() !== '');
   };
 
   const filteredBookings = bookings.filter(b => {
@@ -473,9 +479,17 @@ export default function Dashboard() {
                         className="bg-slate-700/50 border border-slate-700 rounded-lg p-4 hover:border-blue-500 hover:bg-slate-700 transition-all cursor-pointer"
                       >
                         <div className="flex items-start justify-between mb-2">
-                          <div>
-                            <h4 className="font-semibold text-white">{booking.guestName}</h4>
-                            <p className="text-sm text-slate-500">{booking.guestEmail}</p>
+                          <div className="flex items-center gap-2">
+                            <div>
+                              <h4 className="font-semibold text-white">{booking.guestName}</h4>
+                              <p className="text-sm text-slate-500">{booking.guestEmail}</p>
+                            </div>
+                            {booking.specialRequests && booking.specialRequests.trim() !== '' && (
+                              <div className="flex items-center gap-1 px-2 py-1 bg-red-500/20 rounded-full">
+                                <Flag className="w-3 h-3 text-red-500 fill-red-500" />
+                                <span className="text-xs font-bold text-red-400">Special Request</span>
+                              </div>
+                            )}
                           </div>
                           <div className="flex items-center gap-2">
                             <span className={`px-3 py-1 rounded-full text-xs font-bold ${
@@ -544,6 +558,7 @@ export default function Dashboard() {
                 <div className="grid grid-cols-7 gap-1">
                   {getCalendarDays().map((day, idx) => {
                     const bookingCount = getBookingsForDate(day);
+                    const hasSpecialRequests = hasSpecialRequestsForDate(day);
                     const dateStr = day ? `${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}` : null;
                     const isSelected = dateStr === calendarFilterDate;
                     
@@ -555,7 +570,7 @@ export default function Dashboard() {
                             setCalendarFilterDate(dateStr);
                           }
                         }}
-                        className={`aspect-square flex flex-col items-center justify-center text-sm rounded-lg ${
+                        className={`aspect-square flex flex-col items-center justify-center text-sm rounded-lg relative ${
                           day
                             ? bookingCount > 0
                               ? isSelected
@@ -567,6 +582,9 @@ export default function Dashboard() {
                       >
                         {day && (
                           <>
+                            {hasSpecialRequests && (
+                              <Flag className="absolute top-0.5 right-0.5 w-3 h-3 text-red-500 fill-red-500" />
+                            )}
                             <span>{day}</span>
                             {bookingCount > 0 && (
                               <span className="text-[10px] text-slate-200">{bookingCount}</span>
@@ -831,9 +849,12 @@ export default function Dashboard() {
 
                 {selectedBooking.specialRequests && (
                   <div>
-                    <label className="text-sm font-medium text-slate-400">Special Requests</label>
-                    <div className="mt-1 bg-slate-800/50 rounded-lg p-4 border border-slate-700">
-                      <p className="text-white">{selectedBooking.specialRequests}</p>
+                    <div className="flex items-center gap-2 mb-2">
+                      <Flag className="w-5 h-5 text-red-500 fill-red-500" />
+                      <label className="text-sm font-medium text-red-400">Special Requests - Attention Required</label>
+                    </div>
+                    <div className="mt-1 bg-red-500/10 rounded-lg p-4 border-2 border-red-500/50">
+                      <p className="text-white font-medium">{selectedBooking.specialRequests}</p>
                     </div>
                   </div>
                 )}
