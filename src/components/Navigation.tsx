@@ -3,11 +3,13 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import AnimatedBookingFlow from './AnimatedBookingFlow';
 
 const Navigation = () => {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
+  const [isBookingFlowOpen, setIsBookingFlowOpen] = useState(false);
 
   const navItems = [
     { href: '/', label: 'Home' },
@@ -53,12 +55,12 @@ const Navigation = () => {
           </Link>
           
           {/* Right side - Reservations Button */}
-          <Link
-            href="/reservations"
+          <button
+            onClick={() => setIsBookingFlowOpen(true)}
             className="bg-white text-orange-600 px-4 py-2 rounded-none font-normal hover:bg-gray-100 transition-colors text-lg lg:text-[18px] md:text-[16px]"
           >
             Book a Table
-          </Link>
+          </button>
         </div>
       </div>
 
@@ -120,6 +122,9 @@ const Navigation = () => {
           </div>
         </div>
       )}
+
+      {/* Booking Flow Popup */}
+      <AnimatedBookingFlow isOpen={isBookingFlowOpen} onClose={() => setIsBookingFlowOpen(false)} />
     </nav>
   );
 };

@@ -2,11 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import AnimatedBookingFlow from '@/components/AnimatedBookingFlow';
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentReview, setCurrentReview] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isBookingFlowOpen, setIsBookingFlowOpen] = useState(false);
 
   const slides = [
     {
@@ -106,6 +108,7 @@ export default function Home() {
   };
 
   return (
+    <>
     <div className="min-h-screen">
       {/* Hero Slider Section - Full Width */}
       <section className="relative h-[70vh] min-h-[500px] overflow-hidden">
@@ -131,12 +134,12 @@ export default function Home() {
                   <p className="text-lg md:text-xl mb-6">
                     {slide.subtitle}
                   </p>
-                  <Link 
-                    href="/reservations"
+                  <button 
+                    onClick={() => setIsBookingFlowOpen(true)}
                     className="bg-orange-600 text-white px-8 py-3 rounded-none font-normal hover:bg-orange-700 transition-colors inline-block text-sm md:text-base lg:text-lg"
                   >
                     {slide.buttonText}
-                  </Link>
+                  </button>
                 </div>
               </div>
             </div>
@@ -511,5 +514,8 @@ export default function Home() {
       </section>
 
       </div>
+
+      <AnimatedBookingFlow isOpen={isBookingFlowOpen} onClose={() => setIsBookingFlowOpen(false)} />
+    </>
   );
 }
