@@ -503,23 +503,19 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
         )}
 
         <style jsx>{`
-          @keyframes swooshFromRight {
+          @keyframes slideFromRight {
             0% {
               opacity: 0;
-              transform: translateX(100vw) scale(0.6);
-            }
-            60% {
-              opacity: 1;
-              transform: translateX(-20px) scale(1.1);
+              transform: translateX(100%);
             }
             100% {
               opacity: 1;
-              transform: translateX(0) scale(1);
+              transform: translateX(0);
             }
           }
 
           .animate-swooshFromRight {
-            animation: swooshFromRight 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            animation: slideFromRight 0.5s cubic-bezier(0.4, 0, 0.2, 1);
           }
         `}</style>
       </div>
