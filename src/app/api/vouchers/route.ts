@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/db';
-import { vouchers, customers } from '@/db/schema';
+import { vouchers, customers, emails } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import { ChatOpenAI } from '@langchain/openai';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
@@ -92,6 +92,20 @@ export async function POST(req: NextRequest) {
         expiresAt,
       })
       .returning();
+
+    await db.insert(emails).values({
+      type: 'voucher_purchase',
+      recipient: purchaserEmail,
+      subject: `Gift Voucher Purchase Confirmation - £${amount} - The Hawthorn`,
+      voucherId: voucher[0].id,
+      emailData: {
+        voucherCode: code,
+        voucherAmount: `£${amount}`,
+        recipientName: recipientName || undefined,
+        message: personalizedMessage || undefined,
+      },
+      status: 'sent',
+    });
 
     return NextResponse.json({
       success: true,

@@ -2,7 +2,7 @@ import { ChatOpenAI } from '@langchain/openai';
 import { ChatPromptTemplate } from '@langchain/core/prompts';
 import { z } from 'zod';
 import { db } from '@/db';
-import { bookings, customers } from '@/db/schema';
+import { bookings, customers, emails } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 import { RESTAURANT_CONTEXT } from '../config';
 
@@ -117,6 +117,21 @@ export async function createBooking(bookingData: BookingData) {
         aiSuggestions,
       })
       .returning();
+
+    await db.insert(emails).values({
+      type: 'booking_confirmation',
+      recipient: bookingData.guestEmail,
+      subject: `Booking Confirmation - The Hawthorn - ${bookingData.date} at ${bookingData.time}`,
+      bookingId: newBooking[0].id,
+      emailData: {
+        guestName: bookingData.guestName,
+        date: bookingData.date,
+        time: bookingData.time,
+        partySize: bookingData.partySize,
+        specialRequests: bookingData.specialRequests || undefined,
+      },
+      status: 'sent',
+    });
 
     return newBooking[0];
   } catch (error) {

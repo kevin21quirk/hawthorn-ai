@@ -168,3 +168,25 @@ export const aiInsights = pgTable('ai_insights', {
   status: varchar('status', { length: 50 }).default('new'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 });
+
+export const emails = pgTable('emails', {
+  id: serial('id').primaryKey(),
+  type: varchar('type', { length: 50 }).notNull(), // 'booking_confirmation', 'voucher_purchase', etc.
+  recipient: varchar('recipient', { length: 255 }).notNull(),
+  subject: varchar('subject', { length: 500 }).notNull(),
+  bookingId: integer('booking_id').references(() => bookings.id),
+  voucherId: integer('voucher_id').references(() => vouchers.id),
+  emailData: jsonb('email_data').$type<{
+    guestName?: string;
+    date?: string;
+    time?: string;
+    partySize?: number;
+    specialRequests?: string;
+    voucherCode?: string;
+    voucherAmount?: string;
+    recipientName?: string;
+    message?: string;
+  }>(),
+  status: varchar('status', { length: 50 }).default('sent').notNull(),
+  sentAt: timestamp('sent_at').defaultNow().notNull(),
+});

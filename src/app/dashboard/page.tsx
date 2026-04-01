@@ -44,6 +44,10 @@ interface EmailActivity {
   recipient: string;
   timestamp: string;
   status: string;
+  emailType?: string;
+  emailData?: any;
+  bookingId?: number;
+  voucherId?: number;
 }
 
 export default function Dashboard() {
@@ -65,6 +69,7 @@ export default function Dashboard() {
   const [activeView, setActiveView] = useState<'overview' | 'bookings' | 'emails'>('overview');
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedEmail, setSelectedEmail] = useState<EmailActivity | null>(null);
 
   useEffect(() => {
     fetchDashboardData();
@@ -547,50 +552,185 @@ export default function Dashboard() {
               Email Activity Log
             </h3>
             <div className="space-y-3">
-              {emailActivity.map((email) => (
-                <div
-                  key={email.id}
-                  className="bg-slate-700/50 border border-slate-700 rounded-lg p-4 hover:border-slate-600 transition-all"
-                >
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-start gap-3 flex-1">
-                      <div className={`p-2 rounded-lg ${
-                        email.type === 'sent' ? 'bg-blue-500/20' : 'bg-green-500/20'
-                      }`}>
-                        {email.type === 'sent' ? (
-                          <Mail className="w-5 h-5 text-blue-400" />
-                        ) : (
-                          <MailOpen className="w-5 h-5 text-green-400" />
-                        )}
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className={`px-2 py-0.5 rounded text-xs font-bold ${
-                            email.type === 'sent' ? 'bg-blue-500/20 text-blue-400' : 'bg-green-500/20 text-green-400'
-                          }`}>
-                            {email.type.toUpperCase()}
-                          </span>
-                          <span className={`px-2 py-0.5 rounded text-xs font-bold ${
-                            email.status === 'delivered' ? 'bg-green-500/20 text-green-400' : 'bg-blue-500/20 text-blue-400'
-                          }`}>
-                            {email.status.toUpperCase()}
-                          </span>
+              {emailActivity.length === 0 ? (
+                <div className="text-center py-12">
+                  <Mail className="w-16 h-16 text-blue-500 mx-auto mb-4 opacity-50" />
+                  <p className="text-slate-400">No emails sent yet</p>
+                </div>
+              ) : (
+                emailActivity.map((email) => (
+                  <div
+                    key={email.id}
+                    onClick={() => setSelectedEmail(email)}
+                    className="bg-slate-700/50 border border-slate-700 rounded-lg p-4 hover:border-blue-500 hover:bg-slate-700 transition-all cursor-pointer"
+                  >
+                    <div className="flex items-start justify-between">
+                      <div className="flex items-start gap-3 flex-1">
+                        <div className={`p-2 rounded-lg ${
+                          email.emailType === 'booking_confirmation' ? 'bg-blue-500/20' : 'bg-green-500/20'
+                        }`}>
+                          {email.emailType === 'booking_confirmation' ? (
+                            <Calendar className="w-5 h-5 text-blue-400" />
+                          ) : (
+                            <DollarSign className="w-5 h-5 text-green-400" />
+                          )}
                         </div>
-                        <h4 className="font-semibold text-white mb-1">{email.subject}</h4>
-                        <p className="text-sm text-slate-500">To: {email.recipient}</p>
-                        <p className="text-xs text-blue-500 mt-2">
-                          {new Date(email.timestamp).toLocaleString()}
-                        </p>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className={`px-2 py-0.5 rounded text-xs font-bold ${
+                              email.emailType === 'booking_confirmation' ? 'bg-blue-500/20 text-blue-400' : 'bg-green-500/20 text-green-400'
+                            }`}>
+                              {email.emailType === 'booking_confirmation' ? 'BOOKING' : 'VOUCHER'}
+                            </span>
+                            <span className={`px-2 py-0.5 rounded text-xs font-bold ${
+                              email.status === 'sent' ? 'bg-green-500/20 text-green-400' : 'bg-blue-500/20 text-blue-400'
+                            }`}>
+                              {email.status.toUpperCase()}
+                            </span>
+                          </div>
+                          <h4 className="font-semibold text-white mb-1">{email.subject}</h4>
+                          <p className="text-sm text-slate-500">To: {email.recipient}</p>
+                          <p className="text-xs text-blue-500 mt-2">
+                            {new Date(email.timestamp).toLocaleString()}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        {email.status === 'sent' ? (
+                          <CheckCircle2 className="w-5 h-5 text-green-400" />
+                        ) : (
+                          <Clock className="w-5 h-5 text-blue-400" />
+                        )}
+                        <ChevronRight className="w-5 h-5 text-slate-400" />
                       </div>
                     </div>
-                    {email.status === 'delivered' ? (
-                      <CheckCircle2 className="w-5 h-5 text-green-400" />
-                    ) : (
-                      <Clock className="w-5 h-5 text-blue-400" />
+                  </div>
+                ))
+              )}
+            </div>
+          </div>
+        )}
+
+        {selectedEmail && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={() => setSelectedEmail(null)}>
+            <div className="bg-slate-900 rounded-xl shadow-2xl border border-slate-700 max-w-2xl w-full max-h-[80vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+              <div className="p-6 border-b border-slate-700 flex items-center justify-between sticky top-0 bg-slate-900">
+                <h3 className="text-xl font-semibold text-white flex items-center gap-2">
+                  {selectedEmail.emailType === 'booking_confirmation' ? (
+                    <Calendar className="w-6 h-6 text-blue-400" />
+                  ) : (
+                    <DollarSign className="w-6 h-6 text-green-400" />
+                  )}
+                  Email Details
+                </h3>
+                <button
+                  onClick={() => setSelectedEmail(null)}
+                  className="text-slate-400 hover:text-white transition-colors"
+                >
+                  <XCircle className="w-6 h-6" />
+                </button>
+              </div>
+
+              <div className="p-6 space-y-4">
+                <div>
+                  <label className="text-sm font-medium text-slate-400">Type</label>
+                  <p className="text-white mt-1">
+                    <span className={`px-3 py-1 rounded-full text-sm font-bold ${
+                      selectedEmail.emailType === 'booking_confirmation' ? 'bg-blue-500/20 text-blue-400' : 'bg-green-500/20 text-green-400'
+                    }`}>
+                      {selectedEmail.emailType === 'booking_confirmation' ? 'Booking Confirmation' : 'Gift Voucher Purchase'}
+                    </span>
+                  </p>
+                </div>
+
+                <div>
+                  <label className="text-sm font-medium text-slate-400">Subject</label>
+                  <p className="text-white mt-1">{selectedEmail.subject}</p>
+                </div>
+
+                <div>
+                  <label className="text-sm font-medium text-slate-400">Recipient</label>
+                  <p className="text-white mt-1">{selectedEmail.recipient}</p>
+                </div>
+
+                <div>
+                  <label className="text-sm font-medium text-slate-400">Sent At</label>
+                  <p className="text-white mt-1">{new Date(selectedEmail.timestamp).toLocaleString()}</p>
+                </div>
+
+                <div>
+                  <label className="text-sm font-medium text-slate-400">Status</label>
+                  <p className="text-white mt-1">
+                    <span className={`px-3 py-1 rounded-full text-sm font-bold ${
+                      selectedEmail.status === 'sent' ? 'bg-green-500/20 text-green-400' : 'bg-blue-500/20 text-blue-400'
+                    }`}>
+                      {selectedEmail.status.toUpperCase()}
+                    </span>
+                  </p>
+                </div>
+
+                {selectedEmail.emailData && (
+                  <div className="border-t border-slate-700 pt-4 mt-4">
+                    <h4 className="text-lg font-semibold text-white mb-3">Email Content</h4>
+                    
+                    {selectedEmail.emailType === 'booking_confirmation' && (
+                      <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
+                        <div className="grid grid-cols-2 gap-4">
+                          <div>
+                            <label className="text-xs font-medium text-slate-400">Guest Name</label>
+                            <p className="text-white mt-1">{selectedEmail.emailData.guestName}</p>
+                          </div>
+                          <div>
+                            <label className="text-xs font-medium text-slate-400">Party Size</label>
+                            <p className="text-white mt-1">{selectedEmail.emailData.partySize} guests</p>
+                          </div>
+                          <div>
+                            <label className="text-xs font-medium text-slate-400">Date</label>
+                            <p className="text-white mt-1">{selectedEmail.emailData.date}</p>
+                          </div>
+                          <div>
+                            <label className="text-xs font-medium text-slate-400">Time</label>
+                            <p className="text-white mt-1">{selectedEmail.emailData.time}</p>
+                          </div>
+                        </div>
+                        {selectedEmail.emailData.specialRequests && (
+                          <div>
+                            <label className="text-xs font-medium text-slate-400">Special Requests</label>
+                            <p className="text-white mt-1">{selectedEmail.emailData.specialRequests}</p>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {selectedEmail.emailType === 'voucher_purchase' && (
+                      <div className="bg-slate-800/50 rounded-lg p-4 space-y-3">
+                        <div className="grid grid-cols-2 gap-4">
+                          <div>
+                            <label className="text-xs font-medium text-slate-400">Voucher Code</label>
+                            <p className="text-white mt-1 font-mono text-lg">{selectedEmail.emailData.voucherCode}</p>
+                          </div>
+                          <div>
+                            <label className="text-xs font-medium text-slate-400">Amount</label>
+                            <p className="text-white mt-1 text-lg font-bold">{selectedEmail.emailData.voucherAmount}</p>
+                          </div>
+                        </div>
+                        {selectedEmail.emailData.recipientName && (
+                          <div>
+                            <label className="text-xs font-medium text-slate-400">Recipient</label>
+                            <p className="text-white mt-1">{selectedEmail.emailData.recipientName}</p>
+                          </div>
+                        )}
+                        {selectedEmail.emailData.message && (
+                          <div>
+                            <label className="text-xs font-medium text-slate-400">Personal Message</label>
+                            <p className="text-white mt-1 italic">{selectedEmail.emailData.message}</p>
+                          </div>
+                        )}
+                      </div>
                     )}
                   </div>
-                </div>
-              ))}
+                )}
+              </div>
             </div>
           </div>
         )}

@@ -1,30 +1,34 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/db';
-import { interactions } from '@/db/schema';
+import { emails } from '@/db/schema';
 import { desc } from 'drizzle-orm';
 
 export async function GET(req: NextRequest) {
   try {
     const results = await db
       .select()
-      .from(interactions)
-      .orderBy(desc(interactions.createdAt))
-      .limit(50);
+      .from(emails)
+      .orderBy(desc(emails.sentAt))
+      .limit(100);
 
-    const formattedInteractions = results.map(interaction => ({
-      id: interaction.id,
-      type: interaction.type === 'chat' ? 'sent' : 'reply',
-      subject: `${interaction.type === 'chat' ? 'AI Chat' : 'Customer Inquiry'} - ${interaction.message.substring(0, 50)}...`,
-      recipient: (interaction.metadata as any)?.email || 'System',
-      timestamp: interaction.createdAt.toISOString(),
-      status: 'delivered',
+    const formattedEmails = results.map(email => ({
+      id: email.id,
+      type: 'sent',
+      subject: email.subject,
+      recipient: email.recipient,
+      timestamp: email.sentAt.toISOString(),
+      status: email.status,
+      emailType: email.type,
+      emailData: email.emailData,
+      bookingId: email.bookingId,
+      voucherId: email.voucherId,
     }));
 
-    return NextResponse.json({ interactions: formattedInteractions });
+    return NextResponse.json({ interactions: formattedEmails });
   } catch (error) {
-    console.error('Interactions retrieval error:', error);
+    console.error('Email retrieval error:', error);
     return NextResponse.json(
-      { error: 'Failed to retrieve interactions', interactions: [] },
+      { error: 'Failed to retrieve emails', interactions: [] },
       { status: 500 }
     );
   }
