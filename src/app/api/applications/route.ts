@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/db';
 import { applications } from '@/db/schema';
+import { desc } from 'drizzle-orm';
 import { writeFile, mkdir } from 'fs/promises';
 import { join } from 'path';
 import { existsSync } from 'fs';
@@ -122,7 +123,9 @@ export async function POST(request: NextRequest) {
 
 export async function GET() {
   try {
-    const allApplications = await db.select().from(applications).orderBy(applications.createdAt);
+    const allApplications = await db.select().from(applications).orderBy(desc(applications.createdAt));
+    
+    console.log('Fetched applications:', allApplications.length);
     
     return NextResponse.json({
       success: true,
