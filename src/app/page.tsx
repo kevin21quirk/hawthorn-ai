@@ -126,12 +126,22 @@ export default function Home() {
                 index === currentSlide ? 'opacity-100' : 'opacity-0'
               }`}
             >
+              {/* Animated Background with Ken Burns Effect */}
               <div 
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat brightness-50"
+                className={`absolute inset-0 bg-cover bg-center bg-no-repeat brightness-50 ${
+                  index === currentSlide ? 'animate-kenBurns' : ''
+                }`}
                 style={{
                   backgroundImage: `url(${slide.image})`
                 }}
               />
+              
+              {/* Animated Mist Overlay */}
+              <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/10 animate-mistFloat" />
+                <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 via-transparent to-orange-600/10 animate-glowPulse" />
+              </div>
+              
               <div className="relative h-full flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8">
                 <div className="text-center text-white max-w-4xl">
                   <h1 className="text-3xl md:text-5xl font-bold mb-4">
