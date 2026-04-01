@@ -3,12 +3,18 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import AnimatedBookingFlow from '@/components/AnimatedBookingFlow';
+import MenuModal from '@/components/MenuModal';
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentReview, setCurrentReview] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isBookingFlowOpen, setIsBookingFlowOpen] = useState(false);
+  const [selectedMenu, setSelectedMenu] = useState<{
+    title: string;
+    description: string;
+    images: string[];
+  } | null>(null);
 
   const slides = [
     {
@@ -228,101 +234,133 @@ export default function Home() {
         </div>
         <div className="px-4 sm:px-6 lg:px-8 mb-12">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4 lg:gap-6">
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
-              <div className="h-96 overflow-hidden bg-gray-100">
-                <img src="/menus/images/06.02.0206-Main-Menu_page-0001.jpg" alt="Main Menu" className="w-full h-full object-contain" loading="eager" />
+            <button 
+              onClick={() => setSelectedMenu({
+                title: 'Main Menu',
+                description: 'Signature dishes and chef\'s specialties',
+                images: [
+                  '/menus/images/06.02.0206-Main-Menu_page-0001.jpg',
+                  '/menus/images/06.02.0206-Main-Menu_page-0002.jpg',
+                  '/menus/images/06.02.0206-Main-Menu_page-0003.jpg'
+                ]
+              })}
+              className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-all hover:scale-105 cursor-pointer group"
+            >
+              <div className="h-96 overflow-hidden bg-gray-100 relative">
+                <img src="/menus/images/06.02.0206-Main-Menu_page-0001.jpg" alt="Main Menu" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" loading="eager" />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                  <span className="bg-orange-600 text-white px-6 py-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity font-semibold">View Menu</span>
+                </div>
               </div>
               <div className="border-t border-gray-200 p-4 flex flex-col flex-grow">
                 <h3 className="text-lg font-semibold mb-1 text-black text-center">Main</h3>
                 <p className="text-sm text-black text-center mb-3">Signature dishes and chef's specialties</p>
                 <div className="mt-auto">
-                  <Link 
-                    href="/menus/06.02.0206-Main-Menu.pdf"
-                    className="w-full bg-orange-600 text-white px-4 py-2 rounded-none font-normal hover:bg-orange-700 transition-colors text-center inline-block"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    View PDF Menu
-                  </Link>
+                  <span className="w-full bg-orange-600 text-white px-4 py-2 rounded-none font-normal group-hover:bg-orange-700 transition-colors text-center inline-block">
+                    Explore Menu
+                  </span>
                 </div>
               </div>
-            </div>
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
-              <div className="h-96 overflow-hidden bg-gray-100">
-                <img src="/menus/images/06.02.0206-Daytime-Menu_page-0001.jpg" alt="Daytime Menu" className="w-full h-full object-contain" loading="eager" />
+            </button>
+            <button 
+              onClick={() => setSelectedMenu({
+                title: 'Daytime Menu',
+                description: 'Light options perfect for lunch and early dining',
+                images: ['/menus/images/06.02.0206-Daytime-Menu_page-0001.jpg']
+              })}
+              className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-all hover:scale-105 cursor-pointer group"
+            >
+              <div className="h-96 overflow-hidden bg-gray-100 relative">
+                <img src="/menus/images/06.02.0206-Daytime-Menu_page-0001.jpg" alt="Daytime Menu" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" loading="eager" />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                  <span className="bg-orange-600 text-white px-6 py-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity font-semibold">View Menu</span>
+                </div>
               </div>
               <div className="border-t border-gray-200 p-4 flex flex-col flex-grow">
                 <h3 className="text-lg font-semibold mb-1 text-black text-center">Daytime</h3>
                 <p className="text-sm text-black text-center mb-3">Light options perfect for lunch and early dining</p>
                 <div className="mt-auto">
-                  <Link 
-                    href="/menus/06.02.0206-Daytime-Menu.pdf"
-                    className="w-full bg-orange-600 text-white px-4 py-2 rounded-none font-normal hover:bg-orange-700 transition-colors text-center inline-block"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    View PDF Menu
-                  </Link>
+                  <span className="w-full bg-orange-600 text-white px-4 py-2 rounded-none font-normal group-hover:bg-orange-700 transition-colors text-center inline-block">
+                    Explore Menu
+                  </span>
                 </div>
               </div>
-            </div>
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
-              <div className="h-96 overflow-hidden bg-gray-100">
-                <img src="/menus/images/06.02.0206-Children-Menu_page-0001.jpg" alt="Children's Menu" className="w-full h-full object-contain" loading="eager" />
+            </button>
+            <button 
+              onClick={() => setSelectedMenu({
+                title: 'Children\'s Menu',
+                description: 'Kid-friendly meals with healthy options',
+                images: ['/menus/images/06.02.0206-Children-Menu_page-0001.jpg']
+              })}
+              className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-all hover:scale-105 cursor-pointer group"
+            >
+              <div className="h-96 overflow-hidden bg-gray-100 relative">
+                <img src="/menus/images/06.02.0206-Children-Menu_page-0001.jpg" alt="Children's Menu" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" loading="eager" />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                  <span className="bg-orange-600 text-white px-6 py-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity font-semibold">View Menu</span>
+                </div>
               </div>
               <div className="border-t border-gray-200 p-4 flex flex-col flex-grow">
                 <h3 className="text-lg font-semibold mb-1 text-black text-center">Children's</h3>
                 <p className="text-sm text-black text-center mb-3">Kid-friendly meals with healthy options</p>
                 <div className="mt-auto">
-                  <Link 
-                    href="/menus/06.02.0206-Children-Menu.pdf"
-                    className="w-full bg-orange-600 text-white px-4 py-2 rounded-none font-normal hover:bg-orange-700 transition-colors text-center inline-block"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    View PDF Menu
-                  </Link>
+                  <span className="w-full bg-orange-600 text-white px-4 py-2 rounded-none font-normal group-hover:bg-orange-700 transition-colors text-center inline-block">
+                    Explore Menu
+                  </span>
                 </div>
               </div>
-            </div>
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
-              <div className="h-96 overflow-hidden bg-gray-100">
-                <img src="/menus/images/SUNDAY-spcls-dated-22-July2025_page-0001.jpg" alt="Sunday Specials" className="w-full h-full object-contain" loading="eager" />
+            </button>
+            <button 
+              onClick={() => setSelectedMenu({
+                title: 'Sunday Specials',
+                description: 'Weekend favorites and family-style dining',
+                images: ['/menus/images/SUNDAY-spcls-dated-22-July2025_page-0001.jpg']
+              })}
+              className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-all hover:scale-105 cursor-pointer group"
+            >
+              <div className="h-96 overflow-hidden bg-gray-100 relative">
+                <img src="/menus/images/SUNDAY-spcls-dated-22-July2025_page-0001.jpg" alt="Sunday Specials" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" loading="eager" />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                  <span className="bg-orange-600 text-white px-6 py-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity font-semibold">View Menu</span>
+                </div>
               </div>
               <div className="border-t border-gray-200 p-4 flex flex-col flex-grow">
                 <h3 className="text-lg font-semibold mb-1 text-black text-center">Sunday Specials</h3>
                 <p className="text-sm text-black text-center mb-3">Weekend favorites and family-style dining</p>
                 <div className="mt-auto">
-                  <Link 
-                    href="/menus/SUNDAY-spcls-dated-22-July2025.pdf"
-                    className="w-full bg-orange-600 text-white px-4 py-2 rounded-none font-normal hover:bg-orange-700 transition-colors text-center inline-block"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    View PDF Menu
-                  </Link>
+                  <span className="w-full bg-orange-600 text-white px-4 py-2 rounded-none font-normal group-hover:bg-orange-700 transition-colors text-center inline-block">
+                    Explore Menu
+                  </span>
                 </div>
               </div>
-            </div>
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col">
-              <div className="h-96 overflow-hidden bg-gray-100">
-                <img src="/menus/images/31.08.2025-Dessert-Menu-2025_page-0001.jpg" alt="Dessert Menu" className="w-full h-full object-contain" loading="eager" />
+            </button>
+            <button 
+              onClick={() => setSelectedMenu({
+                title: 'Dessert Menu',
+                description: 'Sweet endings and seasonal treats',
+                images: [
+                  '/menus/images/31.08.2025-Dessert-Menu-2025_page-0001.jpg',
+                  '/menus/images/31.08.2025-Dessert-Menu-2025_page-0002.jpg'
+                ]
+              })}
+              className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-all hover:scale-105 cursor-pointer group"
+            >
+              <div className="h-96 overflow-hidden bg-gray-100 relative">
+                <img src="/menus/images/31.08.2025-Dessert-Menu-2025_page-0001.jpg" alt="Dessert Menu" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" loading="eager" />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                  <span className="bg-orange-600 text-white px-6 py-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity font-semibold">View Menu</span>
+                </div>
               </div>
               <div className="border-t border-gray-200 p-4 flex flex-col flex-grow">
                 <h3 className="text-lg font-semibold mb-1 text-black text-center">Dessert</h3>
                 <p className="text-sm text-black text-center mb-3">Sweet endings and seasonal treats</p>
                 <div className="mt-auto">
-                  <Link 
-                    href="/menus/31.08.2025-Dessert-Menu-2025.pdf"
-                    className="w-full bg-orange-600 text-white px-4 py-2 rounded-none font-normal hover:bg-orange-700 transition-colors text-center inline-block"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    View PDF Menu
-                  </Link>
+                  <span className="w-full bg-orange-600 text-white px-4 py-2 rounded-none font-normal group-hover:bg-orange-700 transition-colors text-center inline-block">
+                    Explore Menu
+                  </span>
                 </div>
               </div>
-            </div>
+            </button>
           </div>
         </div>
         <div className="text-center px-4 sm:px-6 lg:px-8">
@@ -516,6 +554,16 @@ export default function Home() {
       </div>
 
       <AnimatedBookingFlow isOpen={isBookingFlowOpen} onClose={() => setIsBookingFlowOpen(false)} />
+      
+      {selectedMenu && (
+        <MenuModal
+          isOpen={true}
+          onClose={() => setSelectedMenu(null)}
+          menuTitle={selectedMenu.title}
+          menuDescription={selectedMenu.description}
+          images={selectedMenu.images}
+        />
+      )}
     </>
   );
 }
