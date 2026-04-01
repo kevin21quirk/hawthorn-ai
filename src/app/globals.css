@@ -118,13 +118,117 @@ body {
 }
 
 /* Menu animations */
-@keyframes fade-in {
+@keyframes fadeIn {
   from {
     opacity: 0;
   }
   to {
     opacity: 1;
   }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Ken Burns Effect - Slow Zoom and Pan */
+@keyframes kenBurns {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.1) translate(-2%, -1%);
+  }
+}
+
+.animate-kenBurns {
+  animation: kenBurns 20s ease-in-out infinite alternate;
+}
+
+/* Floating Mist Effect */
+@keyframes mistFloat {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(-10px) scale(1.02);
+  }
+}
+
+.animate-mistFloat {
+  animation: mistFloat 8s ease-in-out infinite;
+}
+
+/* Glowing Pulse Effect */
+@keyframes glowPulse {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.animate-glowPulse {
+  animation: glowPulse 6s ease-in-out infinite;
+}
+
+/* Floating Particle Animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.4;
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-40px) translateX(-10px);
+    opacity: 1;
+  }
+  75% {
+    transform: translateY(-20px) translateX(5px);
+    opacity: 0.6;
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Slide Down Animation */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.8s ease-out;
+}
+
+/* Slide Up Animation */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slideUp {
+  animation: slideUp 0.8s ease-out;
 }
 
 @keyframes fade-out {
