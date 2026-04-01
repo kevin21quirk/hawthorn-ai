@@ -87,20 +87,21 @@ export default function AnimatedBookingFlow({ isOpen, onClose }: AnimatedBooking
           <div className="animate-swooshFromRight">
             <div className="bg-white rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.12)] transform transition-all border border-gray-100 overflow-hidden max-h-[85vh] flex flex-col">
               {/* Chef Image Section */}
-              <div className="relative bg-gradient-to-br from-slate-50 to-gray-100 p-6 border-b border-gray-200 flex-shrink-0">
-                <div className="flex items-start gap-4">
-                  {/* Chef Image Placeholder */}
-                  <div className="w-24 h-24 bg-gradient-to-br from-slate-200 to-slate-300 rounded-2xl flex items-center justify-center shadow-lg flex-shrink-0 border-4 border-white">
-                    <div className="text-center">
-                      <div className="text-4xl mb-1">👨‍🍳</div>
-                      <div className="text-xs text-slate-600 font-medium">Chef</div>
-                    </div>
+              <div className="relative bg-gradient-to-br from-orange-50 to-orange-100 p-8 border-b border-orange-200 flex-shrink-0">
+                <div className="flex items-start gap-6">
+                  {/* Professional Chef Image */}
+                  <div className="w-32 h-32 rounded-2xl flex items-center justify-center shadow-2xl flex-shrink-0 border-4 border-white overflow-hidden">
+                    <img 
+                      src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=400&h=400&fit=crop&q=80" 
+                      alt="Chef Jonny" 
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   
                   {/* Welcome Text */}
-                  <div className="flex-1 pt-1">
-                    <h2 className="text-3xl font-bold tracking-tight text-gray-900 mb-1">Welcome!</h2>
-                    <p className="text-slate-600 text-base leading-relaxed">
+                  <div className="flex-1 pt-2">
+                    <h2 className="text-4xl font-bold tracking-tight text-gray-900 mb-2">Welcome!</h2>
+                    <p className="text-slate-700 text-lg leading-relaxed font-medium">
                       Before we can make a reservation for you, we just need a bit of information first.
                     </p>
                   </div>
@@ -108,40 +109,40 @@ export default function AnimatedBookingFlow({ isOpen, onClose }: AnimatedBooking
               </div>
 
               {/* Content Section */}
-              <div className="p-6 overflow-y-auto flex-1">
-                <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-4">
-                  <p className="text-blue-900 text-sm leading-relaxed">
-                    <span className="font-bold">Hi, I'm Chef Jonny!</span> I'm delighted to assist you with your reservation today. 
+              <div className="p-8 overflow-y-auto flex-1">
+                <div className="bg-orange-50 border-2 border-orange-300 rounded-2xl p-6 mb-6">
+                  <p className="text-gray-900 text-lg leading-relaxed">
+                    <span className="font-bold text-xl">Hi, I'm Chef Jonny!</span> I'm delighted to assist you with your reservation today. 
                     I'll guide you through a few simple questions to ensure we have everything we need for your perfect dining experience.
                   </p>
-                  <p className="text-blue-800 text-xs mt-2">
+                  <p className="text-gray-700 text-base mt-3 leading-relaxed">
                     As we go through each step, feel free to ask me any questions using the chat assistant that will appear alongside. 
                     I'm here to help make your booking process as smooth as possible!
                   </p>
                 </div>
 
-                <p className="text-slate-700 mb-3 font-medium text-base">
+                <p className="text-slate-800 mb-4 font-semibold text-lg">
                   I'll need to collect:
                 </p>
 
-                <ul className="space-y-2 mb-6">
-                  <li className="flex items-center gap-3 bg-slate-50 rounded-xl p-3 border border-slate-200">
-                    <div className="w-2 h-2 bg-slate-400 rounded-full"></div>
-                    <span className="text-slate-700 text-sm">Your name and contact details</span>
+                <ul className="space-y-3 mb-8">
+                  <li className="flex items-center gap-4 bg-white rounded-xl p-4 border-2 border-slate-200 shadow-sm">
+                    <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+                    <span className="text-slate-800 text-base font-medium">Your name and contact details</span>
                   </li>
-                  <li className="flex items-center gap-3 bg-slate-50 rounded-xl p-3 border border-slate-200">
-                    <div className="w-2 h-2 bg-slate-400 rounded-full"></div>
-                    <span className="text-slate-700 text-sm">When you'd like to dine with us</span>
+                  <li className="flex items-center gap-4 bg-white rounded-xl p-4 border-2 border-slate-200 shadow-sm">
+                    <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+                    <span className="text-slate-800 text-base font-medium">When you'd like to dine with us</span>
                   </li>
-                  <li className="flex items-center gap-3 bg-slate-50 rounded-xl p-3 border border-slate-200">
-                    <div className="w-2 h-2 bg-slate-400 rounded-full"></div>
-                    <span className="text-slate-700 text-sm">How many guests will be joining you</span>
+                  <li className="flex items-center gap-4 bg-white rounded-xl p-4 border-2 border-slate-200 shadow-sm">
+                    <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+                    <span className="text-slate-800 text-base font-medium">How many guests will be joining you</span>
                   </li>
                 </ul>
 
                 <button
                   onClick={nextStep}
-                  className="w-full bg-gradient-to-r from-slate-700 to-slate-600 text-white px-6 py-4 rounded-2xl hover:from-slate-800 hover:to-slate-700 hover:shadow-2xl transition-all font-bold text-lg shadow-xl transform hover:scale-[1.02]"
+                  className="w-full bg-gradient-to-r from-orange-600 to-orange-500 text-white px-8 py-5 rounded-2xl hover:from-orange-700 hover:to-orange-600 hover:shadow-2xl transition-all font-bold text-xl shadow-xl transform hover:scale-[1.02]"
                 >
                   Let's Get Started
                 </button>
@@ -160,7 +161,7 @@ export default function AnimatedBookingFlow({ isOpen, onClose }: AnimatedBooking
                 </div>
                 <div>
                   <h2 className="text-3xl font-bold text-gray-900 tracking-tight">Let's get started!</h2>
-                  <p className="text-gray-600 text-sm">What's your name?</p>
+                  <p className="text-gray-600 text-lg mt-1">What's your name?</p>
                 </div>
               </div>
               
@@ -196,7 +197,7 @@ export default function AnimatedBookingFlow({ isOpen, onClose }: AnimatedBooking
                 </div>
                 <div>
                   <h2 className="text-3xl font-bold text-gray-900 tracking-tight">Lovely to meet you, {bookingData.name}!</h2>
-                  <p className="text-gray-600 text-sm">What's the best email to send your confirmation to?</p>
+                  <p className="text-gray-600 text-lg mt-1">What's the best email to send your confirmation to?</p>
                 </div>
               </div>
               
@@ -232,7 +233,7 @@ export default function AnimatedBookingFlow({ isOpen, onClose }: AnimatedBooking
                 </div>
                 <div>
                   <h2 className="text-3xl font-bold text-gray-900 tracking-tight">Perfect!</h2>
-                  <p className="text-gray-600 text-sm">And just in case we need to reach you, what's your phone number?</p>
+                  <p className="text-gray-600 text-lg mt-1">And just in case we need to reach you, what's your phone number?</p>
                 </div>
               </div>
               
@@ -268,7 +269,7 @@ export default function AnimatedBookingFlow({ isOpen, onClose }: AnimatedBooking
                 </div>
                 <div>
                   <h2 className="text-3xl font-bold text-gray-900 tracking-tight">Wonderful!</h2>
-                  <p className="text-gray-600 text-sm">Now, when would you like to dine with us?</p>
+                  <p className="text-gray-600 text-lg mt-1">Now, when would you like to dine with us?</p>
                 </div>
               </div>
               
@@ -303,7 +304,7 @@ export default function AnimatedBookingFlow({ isOpen, onClose }: AnimatedBooking
                 </div>
                 <div>
                   <h2 className="text-3xl font-bold text-gray-900 tracking-tight">Great choice!</h2>
-                  <p className="text-gray-600 text-sm">What time works best for you?</p>
+                  <p className="text-gray-600 text-lg mt-1">What time works best for you?</p>
                 </div>
               </div>
               
@@ -345,7 +346,7 @@ export default function AnimatedBookingFlow({ isOpen, onClose }: AnimatedBooking
                 </div>
                 <div>
                   <h2 className="text-3xl font-bold text-gray-900 tracking-tight">Almost there!</h2>
-                  <p className="text-gray-600 text-sm">How many guests will be joining you?</p>
+                  <p className="text-gray-600 text-lg mt-1">How many guests will be joining you?</p>
                 </div>
               </div>
               
@@ -386,7 +387,7 @@ export default function AnimatedBookingFlow({ isOpen, onClose }: AnimatedBooking
                 </div>
                 <div>
                   <h2 className="text-3xl font-bold text-gray-900 tracking-tight">One last thing...</h2>
-                  <p className="text-gray-600 text-sm">Is there anything special we should know? (Dietary needs, celebrations, seating preferences...)</p>
+                  <p className="text-gray-600 text-lg mt-1">Is there anything special we should know? (Dietary needs, celebrations, seating preferences...)</p>
                 </div>
               </div>
               
