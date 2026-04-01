@@ -63,7 +63,7 @@ export async function createBooking(bookingData: BookingData) {
       await db
         .update(customers)
         .set({
-          visitCount: existingCustomer[0].visitCount + 1,
+          visitCount: (existingCustomer[0].visitCount ?? 0) + 1,
           lastVisit: new Date(),
           updatedAt: new Date(),
         })
