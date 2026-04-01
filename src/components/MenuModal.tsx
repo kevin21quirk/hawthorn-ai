@@ -13,14 +13,14 @@ interface MenuModalProps {
 
 export default function MenuModal({ isOpen, onClose, menuTitle, menuDescription, images }: MenuModalProps) {
   const [currentPage, setCurrentPage] = useState(0);
-  const [zoom, setZoom] = useState(1.25);
+  const [zoom, setZoom] = useState(1.1);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
       setCurrentPage(0);
-      setZoom(1.25);
+      setZoom(1.1);
     } else {
       document.body.style.overflow = 'unset';
     }
@@ -46,14 +46,14 @@ export default function MenuModal({ isOpen, onClose, menuTitle, menuDescription,
   const handlePrevPage = () => {
     if (currentPage > 0) {
       setCurrentPage(currentPage - 1);
-      setZoom(1.25);
+      setZoom(1.1);
     }
   };
 
   const handleNextPage = () => {
     if (currentPage < images.length - 1) {
       setCurrentPage(currentPage + 1);
-      setZoom(1.25);
+      setZoom(1.1);
     }
   };
 
@@ -67,7 +67,7 @@ export default function MenuModal({ isOpen, onClose, menuTitle, menuDescription,
 
   const toggleFullscreen = () => {
     setIsFullscreen(!isFullscreen);
-    setZoom(1.25);
+    setZoom(1.1);
   };
 
   const handleDownload = () => {
@@ -152,7 +152,7 @@ export default function MenuModal({ isOpen, onClose, menuTitle, menuDescription,
                 key={index}
                 onClick={() => {
                   setCurrentPage(index);
-                  setZoom(1.25);
+                  setZoom(1.1);
                 }}
                 className={`flex-shrink-0 transition-all ${
                   index === currentPage
