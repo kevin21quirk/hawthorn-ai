@@ -11,13 +11,9 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     const upcoming = searchParams.get('upcoming') === 'true';
 
-    let query = db.select().from(events);
-
-    if (upcoming) {
-      query = query.where(gte(events.eventDate, new Date()));
-    }
-
-    const results = await query;
+    const results = upcoming
+      ? await db.select().from(events).where(gte(events.eventDate, new Date()))
+      : await db.select().from(events);
 
     return NextResponse.json({ events: results });
   } catch (error) {
