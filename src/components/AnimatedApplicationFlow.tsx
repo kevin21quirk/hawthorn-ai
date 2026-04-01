@@ -112,9 +112,9 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
         {shouldRender(0) && (
           <div className={`absolute top-1/2 left-0 right-0 -translate-y-1/2 transition-all duration-700 ease-out ${getStepTransform(0)}`}>
             <div className="bg-white rounded-3xl shadow-2xl transform transition-all border border-gray-100 overflow-hidden max-h-[75vh] overflow-y-auto mx-auto">
-              <div className="relative bg-gradient-to-br from-orange-50 to-orange-100 p-8 border-b border-orange-200">
-                <div className="flex items-start gap-6">
-                  <div className="w-32 h-32 rounded-2xl flex items-center justify-center shadow-2xl flex-shrink-0 border-4 border-white overflow-hidden">
+              <div className="relative bg-gradient-to-br from-orange-50 to-orange-100 p-4 border-b border-orange-200">
+                <div className="flex items-start gap-4">
+                  <div className="w-20 h-20 rounded-2xl flex items-center justify-center shadow-2xl flex-shrink-0 border-4 border-white overflow-hidden">
                     <img 
                       src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=400&h=400&fit=crop&q=80" 
                       alt="Chef" 
@@ -122,9 +122,9 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
                     />
                   </div>
                   
-                  <div className="flex-1 pt-2">
-                    <h2 className="text-4xl font-bold tracking-tight text-gray-900 mb-2">Join Our Team!</h2>
-                    <p className="text-slate-700 text-lg leading-relaxed font-medium">
+                  <div className="flex-1">
+                    <h2 className="text-2xl font-bold tracking-tight text-gray-900 mb-1">Join Our Team!</h2>
+                    <p className="text-slate-700 text-sm leading-relaxed font-medium">
                       Let's get you started on your culinary journey with us.
                     </p>
                   </div>
@@ -132,31 +132,31 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
               </div>
 
               <div className="p-6">
-                <div className="bg-orange-50 border-2 border-orange-300 rounded-2xl p-4 mb-4">
-                  <p className="text-gray-900 text-lg leading-relaxed">
-                    <span className="font-bold text-xl">Welcome!</span> We're excited that you're interested in joining the Hawthorn family. 
+                <div className="bg-orange-50 border-2 border-orange-300 rounded-2xl p-3 mb-3">
+                  <p className="text-gray-900 text-sm leading-relaxed">
+                    <span className="font-bold text-base">Welcome!</span> We're excited that you're interested in joining the Hawthorn family. 
                     This quick application will only take a few minutes.
                   </p>
                 </div>
 
-                <ul className="space-y-2 mb-6">
-                  <li className="flex items-center gap-3 bg-white rounded-xl p-3 border-2 border-slate-200 shadow-sm">
-                    <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
-                    <span className="text-slate-800 text-base font-medium">Position and contact details</span>
+                <ul className="space-y-1.5 mb-4">
+                  <li className="flex items-center gap-2 bg-white rounded-lg p-2 border-2 border-slate-200 shadow-sm">
+                    <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                    <span className="text-slate-800 text-sm font-medium">Position and contact details</span>
                   </li>
-                  <li className="flex items-center gap-3 bg-white rounded-xl p-3 border-2 border-slate-200 shadow-sm">
-                    <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
-                    <span className="text-slate-800 text-base font-medium">Your experience and availability</span>
+                  <li className="flex items-center gap-2 bg-white rounded-lg p-2 border-2 border-slate-200 shadow-sm">
+                    <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                    <span className="text-slate-800 text-sm font-medium">Your experience and availability</span>
                   </li>
-                  <li className="flex items-center gap-3 bg-white rounded-xl p-3 border-2 border-slate-200 shadow-sm">
-                    <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
-                    <span className="text-slate-800 text-base font-medium">A brief cover letter</span>
+                  <li className="flex items-center gap-2 bg-white rounded-lg p-2 border-2 border-slate-200 shadow-sm">
+                    <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                    <span className="text-slate-800 text-sm font-medium">A brief cover letter</span>
                   </li>
                 </ul>
 
                 <button
                   onClick={nextStep}
-                  className="w-full bg-gradient-to-r from-orange-600 to-orange-500 text-white px-8 py-5 rounded-2xl hover:from-orange-700 hover:to-orange-600 hover:shadow-2xl transition-all font-bold text-xl shadow-xl transform hover:scale-[1.02]"
+                  className="w-full bg-gradient-to-r from-orange-600 to-orange-500 text-white px-6 py-3 rounded-2xl hover:from-orange-700 hover:to-orange-600 hover:shadow-2xl transition-all font-bold text-lg shadow-xl transform hover:scale-[1.02]"
                 >
                   Let's Get Started
                 </button>
