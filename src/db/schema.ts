@@ -97,6 +97,22 @@ export const vouchers = pgTable('vouchers', {
   createdAt: timestamp('created_at').defaultNow().notNull(),
 });
 
+export const applications = pgTable('applications', {
+  id: serial('id').primaryKey(),
+  position: varchar('position', { length: 100 }).notNull(),
+  firstName: varchar('first_name', { length: 100 }).notNull(),
+  lastName: varchar('last_name', { length: 100 }).notNull(),
+  email: varchar('email', { length: 255 }).notNull(),
+  phone: varchar('phone', { length: 50 }).notNull(),
+  experience: varchar('experience', { length: 50 }).notNull(),
+  availability: varchar('availability', { length: 50 }).notNull(),
+  coverLetter: text('cover_letter'),
+  referenceSource: varchar('reference_source', { length: 100 }),
+  cvPath: varchar('cv_path', { length: 500 }),
+  status: varchar('status', { length: 50 }).default('pending').notNull(),
+  createdAt: timestamp('created_at').defaultNow().notNull(),
+});
+
 export const events = pgTable('events', {
   id: serial('id').primaryKey(),
   title: varchar('title', { length: 255 }).notNull(),

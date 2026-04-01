@@ -1,14 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import { X, Sparkles, Check, ArrowRight, Briefcase, Mail, Phone, Award, Calendar, FileText } from 'lucide-react';
+import { X, Sparkles, Check, ArrowRight, Briefcase, Mail, Phone, Award, Calendar, FileText, Upload } from 'lucide-react';
 
 interface AnimatedApplicationFlowProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-type Step = 'welcome' | 'position' | 'name' | 'email' | 'phone' | 'experience' | 'availability' | 'cover-letter' | 'reference' | 'success';
+type Step = 'welcome' | 'position' | 'name' | 'email' | 'phone' | 'experience' | 'availability' | 'cover-letter' | 'reference' | 'cv-upload' | 'success';
 
 export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApplicationFlowProps) {
   const [step, setStep] = useState<Step>('welcome');
@@ -22,6 +22,7 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
     availability: '',
     coverLetter: '',
     reference: '',
+    cvFile: null as File | null,
   });
 
   const positions = [
@@ -34,7 +35,7 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
     'Other'
   ];
 
-  const steps: Step[] = ['welcome', 'position', 'name', 'email', 'phone', 'experience', 'availability', 'cover-letter', 'reference', 'success'];
+  const steps: Step[] = ['welcome', 'position', 'name', 'email', 'phone', 'experience', 'availability', 'cover-letter', 'reference', 'cv-upload', 'success'];
   const currentStepIndex = steps.indexOf(step);
 
   if (!isOpen) return null;
@@ -54,7 +55,31 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
     nextStep();
     
     try {
-      console.log('Application submitted:', applicationData);
+      const formData = new FormData();
+      formData.append('position', applicationData.position);
+      formData.append('firstName', applicationData.firstName);
+      formData.append('lastName', applicationData.lastName);
+      formData.append('email', applicationData.email);
+      formData.append('phone', applicationData.phone);
+      formData.append('experience', applicationData.experience);
+      formData.append('availability', applicationData.availability);
+      formData.append('coverLetter', applicationData.coverLetter);
+      formData.append('reference', applicationData.reference);
+      
+      if (applicationData.cvFile) {
+        formData.append('cv', applicationData.cvFile);
+      }
+
+      const response = await fetch('/api/applications', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit application');
+      }
+
+      console.log('Application submitted successfully');
     } catch (error) {
       console.error('Application error:', error);
     }
@@ -82,7 +107,7 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
         <X className="w-6 h-6" />
       </button>
 
-      <div className="relative w-full max-w-2xl">
+      <div className="relative w-full max-w-2xl min-h-[500px] flex items-center">
         {/* Welcome - Step 0 */}
         {shouldRender(0) && (
           <div className={`absolute inset-0 transition-all duration-700 ease-out ${getStepTransform(0)}`}>
@@ -447,9 +472,71 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
               </div>
 
               <button
-                onClick={handleSubmit}
+                onClick={nextStep}
                 disabled={!applicationData.reference}
-                className="w-full mt-8 bg-gradient-to-r from-green-600 to-green-500 text-white px-8 py-5 rounded-2xl hover:from-green-700 hover:to-green-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-bold text-xl flex items-center justify-center gap-3 shadow-xl hover:shadow-2xl transform hover:scale-[1.02] flex-shrink-0"
+                className="w-full mt-8 bg-gradient-to-r from-orange-600 to-orange-500 text-white px-8 py-5 rounded-2xl hover:from-orange-700 hover:to-orange-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-bold text-xl flex items-center justify-center gap-3 shadow-xl hover:shadow-2xl transform hover:scale-[1.02] flex-shrink-0"
+              >
+                Continue
+                <ArrowRight className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* CV Upload - Step 9 */}
+        {shouldRender(9) && (
+          <div className={`absolute inset-0 transition-all duration-700 ease-out ${getStepTransform(9)}`}>
+            <div className="bg-white rounded-3xl shadow-2xl p-10 transform transition-all border border-gray-100">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-14 h-14 bg-gradient-to-br from-orange-600 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg">
+                  <Upload className="w-7 h-7 text-white" />
+                </div>
+                <div>
+                  <h2 className="text-3xl font-bold text-gray-900 tracking-tight">Upload your CV</h2>
+                  <p className="text-gray-600 text-lg mt-1">Add your resume/CV (Optional)</p>
+                </div>
+              </div>
+              
+              <div className="mb-6">
+                <label className="block w-full">
+                  <div className={`border-2 border-dashed rounded-2xl p-8 text-center transition-all cursor-pointer ${
+                    applicationData.cvFile 
+                      ? 'border-green-500 bg-green-50' 
+                      : 'border-gray-300 hover:border-orange-500 bg-gray-50 hover:bg-orange-50'
+                  }`}>
+                    <Upload className="w-12 h-12 mx-auto mb-4 text-gray-400" />
+                    {applicationData.cvFile ? (
+                      <div>
+                        <p className="text-green-700 font-semibold text-lg mb-1">✓ File uploaded</p>
+                        <p className="text-gray-600">{applicationData.cvFile.name}</p>
+                        <p className="text-sm text-gray-500 mt-2">Click to change file</p>
+                      </div>
+                    ) : (
+                      <div>
+                        <p className="text-gray-700 font-semibold text-lg mb-1">Click to upload or drag and drop</p>
+                        <p className="text-gray-500">PDF, DOC, DOCX (Max 5MB)</p>
+                      </div>
+                    )}
+                  </div>
+                  <input
+                    type="file"
+                    accept=".pdf,.doc,.docx"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file && file.size <= 5 * 1024 * 1024) {
+                        updateData('cvFile', file);
+                      } else if (file) {
+                        alert('File size must be less than 5MB');
+                      }
+                    }}
+                    className="hidden"
+                  />
+                </label>
+              </div>
+
+              <button
+                onClick={handleSubmit}
+                className="w-full mt-2 bg-gradient-to-r from-green-600 to-green-500 text-white px-8 py-5 rounded-2xl hover:from-green-700 hover:to-green-600 transition-all font-bold text-xl flex items-center justify-center gap-3 shadow-xl hover:shadow-2xl transform hover:scale-[1.02]"
               >
                 <Check className="w-5 h-5" />
                 Submit Application
@@ -458,9 +545,9 @@ export default function AnimatedApplicationFlow({ isOpen, onClose }: AnimatedApp
           </div>
         )}
 
-        {/* Success - Step 9 */}
-        {shouldRender(9) && (
-          <div className={`absolute inset-0 transition-all duration-700 ease-out ${getStepTransform(9)}`}>
+        {/* Success - Step 10 */}
+        {shouldRender(10) && (
+          <div className={`absolute inset-0 transition-all duration-700 ease-out ${getStepTransform(10)}`}>
             <div className="bg-white rounded-3xl shadow-2xl transform transition-all border border-gray-100 overflow-hidden h-full flex flex-col">
               <div className="relative bg-gradient-to-br from-emerald-50 to-teal-50 p-8 border-b border-emerald-100 flex-shrink-0">
                 <div className="flex flex-col items-center text-center">
