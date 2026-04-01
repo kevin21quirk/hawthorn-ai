@@ -2,70 +2,10 @@
 
 import { useState } from 'react';
 import { Sparkles, TrendingUp, Heart, Award, Users, Coffee, ChefHat, Star } from 'lucide-react';
+import AnimatedApplicationFlow from '@/components/AnimatedApplicationFlow';
 
 export default function CareersPage() {
-  const [applicationForm, setApplicationForm] = useState({
-    position: '',
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    experience: '',
-    availability: '',
-    coverLetter: '',
-    reference: ''
-  });
-
-  const positions = [
-    {
-      title: "Line Cook",
-      type: "Full-Time",
-      department: "Kitchen",
-      salary: "£14-17/hour + tips",
-      shift: "Evenings & Weekends",
-      description: "We're seeking experienced line cooks to join our kitchen team. Must have at least 2 years of fine dining experience and be able to work in a fast-paced environment."
-    },
-    {
-      title: "Sous Chef",
-      type: "Full-Time",
-      department: "Kitchen",
-      salary: "£42,000-50,000/year",
-      shift: "Full-Time",
-      description: "Looking for a creative sous chef to assist our executive chef. Must have culinary degree and 5+ years of experience in fine dining establishments."
-    },
-    {
-      title: "Server",
-      type: "Full-Time/Part-Time",
-      department: "Front of House",
-      salary: "£12/hour + tips",
-      shift: "Flexible",
-      description: "Join our front-of-house team as a server. Previous fine dining experience required. Must have excellent communication skills and wine knowledge."
-    },
-    {
-      title: "Bartender",
-      type: "Part-Time",
-      department: "Bar",
-      salary: "£13/hour + tips",
-      shift: "Evenings & Weekends",
-      description: "Seeking an experienced bartender with extensive knowledge of craft cocktails and fine wines. Must be 21+ and have bartending certification."
-    },
-    {
-      title: "Host/Hostess",
-      type: "Part-Time",
-      department: "Front of House",
-      salary: "£11/hour + tips",
-      shift: "Evenings & Weekends",
-      description: "Looking for friendly hosts to manage reservations and greet guests. Excellent customer service skills and professional appearance required."
-    },
-    {
-      title: "Dishwasher",
-      type: "Full-Time",
-      department: "Kitchen",
-      salary: "£12/hour",
-      shift: "Evenings & Weekends",
-      description: "Join our kitchen team as a dishwasher. No experience necessary - we'll train you. Must be reliable and able to work in a fast-paced environment."
-    }
-  ];
+  const [isApplicationFlowOpen, setIsApplicationFlowOpen] = useState(false);
 
   const benefits = [
     {
@@ -93,19 +33,6 @@ export default function CareersPage() {
       description: "Generous dining discounts for you and your family at our restaurant"
     }
   ];
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setApplicationForm({
-      ...applicationForm,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Application submitted:', applicationForm);
-    // Handle application submission
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-orange-50 to-slate-50">
@@ -263,180 +190,39 @@ export default function CareersPage() {
                 <p className="text-gray-600 mb-8">
                   Submit your application below and we'll keep it on file for future opportunities. We review applications regularly and will reach out when a position matches your skills.
                 </p>
-                <a 
-                  href="#apply" 
+                <button 
+                  onClick={() => setIsApplicationFlowOpen(true)}
                   className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-600 to-orange-500 text-white px-8 py-4 rounded-full hover:from-orange-700 hover:to-orange-600 transition-all font-bold text-lg shadow-xl hover:shadow-2xl hover:scale-105 transform"
                 >
                   <Heart className="w-5 h-5" />
                   Apply Now
-                </a>
+                </button>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Application Form */}
+      {/* Application CTA */}
       <section id="apply" className="py-20 bg-gradient-to-br from-slate-50 via-white to-orange-50">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Start Your Journey</h2>
-            <p className="text-xl text-gray-600">Take the first step towards an exciting culinary career</p>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gradient-to-br from-orange-500 to-orange-600 rounded-3xl shadow-2xl p-12 text-center relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent" />
+            <div className="relative">
+              <Sparkles className="w-16 h-16 text-white mx-auto mb-6" />
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">Ready to Apply?</h2>
+              <p className="text-xl text-orange-100 mb-8 max-w-2xl mx-auto">
+                Start your interactive application journey - it only takes a few minutes!
+              </p>
+              <button
+                onClick={() => setIsApplicationFlowOpen(true)}
+                className="inline-flex items-center gap-2 bg-white text-orange-600 px-10 py-5 rounded-full hover:bg-orange-50 transition-all font-bold text-xl shadow-2xl hover:shadow-orange-900/50 hover:scale-105 transform"
+              >
+                <Heart className="w-6 h-6" />
+                Start Application
+              </button>
+            </div>
           </div>
-          
-          <form onSubmit={handleSubmit} className="bg-white rounded-3xl shadow-2xl p-10 border border-gray-100">
-            <div className="mb-6">
-              <label htmlFor="position" className="block text-sm font-medium text-gray-700 mb-2">Position Applying For</label>
-              <select
-                id="position"
-                name="position"
-                value={applicationForm.position}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500"
-              >
-                <option value="">Select a position</option>
-                {positions.map((pos) => (
-                  <option key={pos.title} value={pos.title.toLowerCase().replace(/\s+/g, '-')}>
-                    {pos.title}
-                  </option>
-                ))}
-                <option value="other">Other</option>
-              </select>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <div>
-                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">First Name</label>
-                <input
-                  type="text"
-                  id="firstName"
-                  name="firstName"
-                  value={applicationForm.firstName}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500"
-                />
-              </div>
-              <div>
-                <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
-                <input
-                  type="text"
-                  id="lastName"
-                  name="lastName"
-                  value={applicationForm.lastName}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={applicationForm.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500"
-                />
-              </div>
-              <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={applicationForm.phone}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <div>
-                <label htmlFor="experience" className="block text-sm font-medium text-gray-700 mb-2">Years of Experience</label>
-                <select
-                  id="experience"
-                  name="experience"
-                  value={applicationForm.experience}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500"
-                >
-                  <option value="">Select experience level</option>
-                  <option value="0-1">Less than 1 year</option>
-                  <option value="1-2">1-2 years</option>
-                  <option value="2-5">2-5 years</option>
-                  <option value="5-10">5-10 years</option>
-                  <option value="10+">More than 10 years</option>
-                </select>
-              </div>
-              <div>
-                <label htmlFor="availability" className="block text-sm font-medium text-gray-700 mb-2">Availability</label>
-                <select
-                  id="availability"
-                  name="availability"
-                  value={applicationForm.availability}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500"
-                >
-                  <option value="">Select availability</option>
-                  <option value="full-time">Full-Time</option>
-                  <option value="part-time">Part-Time</option>
-                  <option value="seasonal">Seasonal</option>
-                  <option value="flexible">Flexible</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="mb-6">
-              <label htmlFor="coverLetter" className="block text-sm font-medium text-gray-700 mb-2">Cover Letter</label>
-              <textarea
-                id="coverLetter"
-                name="coverLetter"
-                value={applicationForm.coverLetter}
-                onChange={handleChange}
-                rows={4}
-                placeholder="Tell us why you'd be a great fit for Hawthorn..."
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500"
-              ></textarea>
-            </div>
-
-            <div className="mb-6">
-              <label htmlFor="reference" className="block text-sm font-medium text-gray-700 mb-2">How did you hear about us?</label>
-              <select
-                id="reference"
-                name="reference"
-                value={applicationForm.reference}
-                onChange={handleChange}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500"
-              >
-                <option value="">Select an option</option>
-                <option value="indeed">Indeed</option>
-                <option value="restaurant">Restaurant Website</option>
-                <option value="employee">Current Employee</option>
-                <option value="social">Social Media</option>
-                <option value="walk-in">Walk-in</option>
-                <option value="other">Other</option>
-              </select>
-            </div>
-
-            <button
-              type="submit"
-              className="w-full bg-gradient-to-r from-orange-600 to-orange-500 text-white py-4 px-8 rounded-2xl hover:from-orange-700 hover:to-orange-600 transition-all font-bold text-lg shadow-xl hover:shadow-2xl hover:scale-105 transform flex items-center justify-center gap-2"
-            >
-              <Sparkles className="w-5 h-5" />
-              Submit Application
-            </button>
-          </form>
         </div>
       </section>
 
@@ -480,16 +266,21 @@ export default function CareersPage() {
               <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
                 Whether you're starting your culinary journey or you're an experienced professional, you'll find a home at Hawthorn.
               </p>
-              <a 
-                href="#apply" 
+              <button 
+                onClick={() => setIsApplicationFlowOpen(true)}
                 className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-600 to-orange-500 text-white px-8 py-4 rounded-full hover:from-orange-700 hover:to-orange-600 transition-all font-bold text-lg shadow-xl hover:shadow-2xl hover:scale-105 transform"
               >
                 Apply Today
-              </a>
+              </button>
             </div>
           </div>
         </div>
       </section>
+
+      <AnimatedApplicationFlow 
+        isOpen={isApplicationFlowOpen} 
+        onClose={() => setIsApplicationFlowOpen(false)} 
+      />
     </div>
   );
 }
