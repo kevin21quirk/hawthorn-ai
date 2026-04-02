@@ -263,7 +263,7 @@ export default function Home() {
               }`}
             >
               <div className="aspect-[3/4] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 relative">
-                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=800&h=1200&fit=crop&q=80" alt="Main Menu" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="eager" />
+                <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=1200&fit=crop&q=80" alt="Main Menu" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="eager" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
               <div className="p-6 flex flex-col flex-grow bg-white">
@@ -288,7 +288,7 @@ export default function Home() {
               }`}
             >
               <div className="aspect-[3/4] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 relative">
-                <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&h=1200&fit=crop&q=80" alt="Daytime Menu" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="eager" />
+                <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&h=1200&fit=crop&q=80" alt="Daytime Menu" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="eager" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
               <div className="p-6 flex flex-col flex-grow bg-white">
@@ -313,7 +313,7 @@ export default function Home() {
               }`}
             >
               <div className="aspect-[3/4] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 relative">
-                <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&h=1200&fit=crop&q=80" alt="Children's Menu" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="eager" />
+                <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=800&h=1200&fit=crop&q=80" alt="Children's Menu" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="eager" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
               <div className="p-6 flex flex-col flex-grow bg-white">
@@ -338,7 +338,7 @@ export default function Home() {
               }`}
             >
               <div className="aspect-[3/4] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 relative">
-                <img src="https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=800&h=1200&fit=crop&q=80" alt="Sunday Specials" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="eager" />
+                <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=1200&fit=crop&q=80" alt="Sunday Specials" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="eager" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
               <div className="p-6 flex flex-col flex-grow bg-white">
@@ -366,7 +366,7 @@ export default function Home() {
               }`}
             >
               <div className="aspect-[3/4] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 relative">
-                <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=800&h=1200&fit=crop&q=80" alt="Dessert Menu" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="eager" />
+                <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=800&h=1200&fit=crop&q=80" alt="Dessert Menu" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="eager" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
               <div className="p-6 flex flex-col flex-grow bg-white">
