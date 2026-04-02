@@ -1,32 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import AnimatedBookingFlow from '@/components/AnimatedBookingFlow';
 
 export default function ReservationsPage() {
-  const [formData, setFormData] = useState({
-    date: '',
-    time: '',
-    guests: '',
-    occasion: '',
-    name: '',
-    email: '',
-    phone: '',
-    requests: ''
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Reservation submitted:', formData);
-    // Handle reservation submission
-    alert('Booking request submitted! We will contact you with a confirmation.');
-  };
+  const [isBookingFlowOpen, setIsBookingFlowOpen] = useState(true);
 
   return (
     <div className="min-h-screen bg-gray-50">

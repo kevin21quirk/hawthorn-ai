@@ -85,12 +85,12 @@ export default function AnimatedBookingFlow({ isOpen, onClose }: AnimatedBooking
         {/* Welcome */}
         {step === 'welcome' && (
           <div className="animate-swooshFromRight">
-            <div className="bg-white rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.12)] transform transition-all border border-gray-100 overflow-hidden max-h-[85vh] flex flex-col">
+            <div className="bg-white rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.12)] transform transition-all border border-gray-100 overflow-hidden max-h-[80vh] flex flex-col">
               {/* Chef Image Section */}
-              <div className="relative bg-gradient-to-br from-orange-50 to-orange-100 p-8 border-b border-orange-200 flex-shrink-0">
-                <div className="flex items-start gap-6">
+              <div className="relative bg-gradient-to-br from-orange-50 to-orange-100 p-4 border-b border-orange-200 flex-shrink-0">
+                <div className="flex items-start gap-4">
                   {/* Professional Chef Image */}
-                  <div className="w-32 h-32 rounded-2xl flex items-center justify-center shadow-2xl flex-shrink-0 border-4 border-white overflow-hidden">
+                  <div className="w-20 h-20 rounded-2xl flex items-center justify-center shadow-2xl flex-shrink-0 border-4 border-white overflow-hidden">
                     <img 
                       src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=400&h=400&fit=crop&q=80" 
                       alt="Chef Jonny" 
@@ -99,9 +99,9 @@ export default function AnimatedBookingFlow({ isOpen, onClose }: AnimatedBooking
                   </div>
                   
                   {/* Welcome Text */}
-                  <div className="flex-1 pt-2">
-                    <h2 className="text-4xl font-bold tracking-tight text-gray-900 mb-2">Welcome!</h2>
-                    <p className="text-slate-700 text-lg leading-relaxed font-medium">
+                  <div className="flex-1">
+                    <h2 className="text-2xl font-bold tracking-tight text-gray-900 mb-1">Welcome!</h2>
+                    <p className="text-slate-700 text-sm leading-relaxed font-medium">
                       Before we can make a reservation for you, we just need a bit of information first.
                     </p>
                   </div>
@@ -109,40 +109,40 @@ export default function AnimatedBookingFlow({ isOpen, onClose }: AnimatedBooking
               </div>
 
               {/* Content Section */}
-              <div className="p-8 overflow-y-auto flex-1">
-                <div className="bg-orange-50 border-2 border-orange-300 rounded-2xl p-6 mb-6">
-                  <p className="text-gray-900 text-lg leading-relaxed">
-                    <span className="font-bold text-xl">Hi, I'm Chef Jonny!</span> I'm delighted to assist you with your reservation today. 
+              <div className="p-6 overflow-y-auto flex-1">
+                <div className="bg-orange-50 border-2 border-orange-300 rounded-2xl p-4 mb-4">
+                  <p className="text-gray-900 text-sm leading-relaxed">
+                    <span className="font-bold text-base">Hi, I'm Chef Jonny!</span> I'm delighted to assist you with your reservation today. 
                     I'll guide you through a few simple questions to ensure we have everything we need for your perfect dining experience.
                   </p>
-                  <p className="text-gray-700 text-base mt-3 leading-relaxed">
+                  <p className="text-gray-700 text-xs mt-2 leading-relaxed">
                     As we go through each step, feel free to ask me any questions using the chat assistant that will appear alongside. 
                     I'm here to help make your booking process as smooth as possible!
                   </p>
                 </div>
 
-                <p className="text-slate-800 mb-4 font-semibold text-lg">
+                <p className="text-slate-800 mb-3 font-semibold text-base">
                   I'll need to collect:
                 </p>
 
-                <ul className="space-y-3 mb-8">
-                  <li className="flex items-center gap-4 bg-white rounded-xl p-4 border-2 border-slate-200 shadow-sm">
-                    <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
-                    <span className="text-slate-800 text-base font-medium">Your name and contact details</span>
+                <ul className="space-y-2 mb-6">
+                  <li className="flex items-center gap-3 bg-white rounded-lg p-3 border-2 border-slate-200 shadow-sm">
+                    <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                    <span className="text-slate-800 text-sm font-medium">Your name and contact details</span>
                   </li>
-                  <li className="flex items-center gap-4 bg-white rounded-xl p-4 border-2 border-slate-200 shadow-sm">
-                    <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
-                    <span className="text-slate-800 text-base font-medium">When you'd like to dine with us</span>
+                  <li className="flex items-center gap-3 bg-white rounded-lg p-3 border-2 border-slate-200 shadow-sm">
+                    <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                    <span className="text-slate-800 text-sm font-medium">When you'd like to dine with us</span>
                   </li>
-                  <li className="flex items-center gap-4 bg-white rounded-xl p-4 border-2 border-slate-200 shadow-sm">
-                    <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
-                    <span className="text-slate-800 text-base font-medium">How many guests will be joining you</span>
+                  <li className="flex items-center gap-3 bg-white rounded-lg p-3 border-2 border-slate-200 shadow-sm">
+                    <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
+                    <span className="text-slate-800 text-sm font-medium">How many guests will be joining you</span>
                   </li>
                 </ul>
 
                 <button
                   onClick={nextStep}
-                  className="w-full bg-gradient-to-r from-orange-600 to-orange-500 text-white px-8 py-5 rounded-2xl hover:from-orange-700 hover:to-orange-600 hover:shadow-2xl transition-all font-bold text-xl shadow-xl transform hover:scale-[1.02]"
+                  className="w-full bg-gradient-to-r from-orange-600 to-orange-500 text-white px-6 py-3 rounded-2xl hover:from-orange-700 hover:to-orange-600 hover:shadow-2xl transition-all font-bold text-lg shadow-xl transform hover:scale-[1.02]"
                 >
                   Let's Get Started
                 </button>
