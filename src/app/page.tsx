@@ -15,6 +15,7 @@ export default function Home() {
     description: string;
     images: string[];
   } | null>(null);
+  const [activeMenuCard, setActiveMenuCard] = useState<string | null>(null);
 
   const slides = [
     {
@@ -245,16 +246,21 @@ export default function Home() {
         <div className="px-4 sm:px-6 lg:px-8 mb-12">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4 lg:gap-6">
             <button 
-              onClick={() => setSelectedMenu({
-                title: 'Main Menu',
-                description: 'Signature dishes and chef\'s specialties',
-                images: [
-                  '/menus/images/06.02.0206-Main-Menu_page-0001.jpg',
-                  '/menus/images/06.02.0206-Main-Menu_page-0002.jpg',
-                  '/menus/images/06.02.0206-Main-Menu_page-0003.jpg'
-                ]
-              })}
-              className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-all hover:scale-105 cursor-pointer group"
+              onClick={() => {
+                setActiveMenuCard('main');
+                setSelectedMenu({
+                  title: 'Main Menu',
+                  description: 'Signature dishes and chef\'s specialties',
+                  images: [
+                    '/menus/images/06.02.0206-Main-Menu_page-0001.jpg',
+                    '/menus/images/06.02.0206-Main-Menu_page-0002.jpg',
+                    '/menus/images/06.02.0206-Main-Menu_page-0003.jpg'
+                  ]
+                });
+              }}
+              className={`bg-white rounded-lg shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-all hover:scale-105 cursor-pointer group ${
+                activeMenuCard === 'main' ? 'ring-4 ring-orange-600' : ''
+              }`}
             >
               <div className="h-96 overflow-hidden bg-gray-100 relative">
                 <img src="/menus/images/06.02.0206-Main-Menu_page-0001.jpg" alt="Main Menu" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" loading="eager" />
@@ -273,12 +279,17 @@ export default function Home() {
               </div>
             </button>
             <button 
-              onClick={() => setSelectedMenu({
-                title: 'Daytime Menu',
-                description: 'Light options perfect for lunch and early dining',
-                images: ['/menus/images/06.02.0206-Daytime-Menu_page-0001.jpg']
-              })}
-              className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-all hover:scale-105 cursor-pointer group"
+              onClick={() => {
+                setActiveMenuCard('daytime');
+                setSelectedMenu({
+                  title: 'Daytime Menu',
+                  description: 'Light options perfect for lunch and early dining',
+                  images: ['/menus/images/06.02.0206-Daytime-Menu_page-0001.jpg']
+                });
+              }}
+              className={`bg-white rounded-lg shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-all hover:scale-105 cursor-pointer group ${
+                activeMenuCard === 'daytime' ? 'ring-4 ring-orange-600' : ''
+              }`}
             >
               <div className="h-96 overflow-hidden bg-gray-100 relative">
                 <img src="/menus/images/06.02.0206-Daytime-Menu_page-0001.jpg" alt="Daytime Menu" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" loading="eager" />
@@ -297,12 +308,17 @@ export default function Home() {
               </div>
             </button>
             <button 
-              onClick={() => setSelectedMenu({
-                title: 'Children\'s Menu',
-                description: 'Kid-friendly meals with healthy options',
-                images: ['/menus/images/06.02.0206-Children-Menu_page-0001.jpg']
-              })}
-              className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-all hover:scale-105 cursor-pointer group"
+              onClick={() => {
+                setActiveMenuCard('children');
+                setSelectedMenu({
+                  title: 'Children\'s Menu',
+                  description: 'Kid-friendly meals with healthy options',
+                  images: ['/menus/images/06.02.0206-Children-Menu_page-0001.jpg']
+                });
+              }}
+              className={`bg-white rounded-lg shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-all hover:scale-105 cursor-pointer group ${
+                activeMenuCard === 'children' ? 'ring-4 ring-orange-600' : ''
+              }`}
             >
               <div className="h-96 overflow-hidden bg-gray-100 relative">
                 <img src="/menus/images/06.02.0206-Children-Menu_page-0001.jpg" alt="Children's Menu" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" loading="eager" />
@@ -321,12 +337,17 @@ export default function Home() {
               </div>
             </button>
             <button 
-              onClick={() => setSelectedMenu({
-                title: 'Sunday Specials',
-                description: 'Weekend favorites and family-style dining',
-                images: ['/menus/images/SUNDAY-spcls-dated-22-July2025_page-0001.jpg']
-              })}
-              className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-all hover:scale-105 cursor-pointer group"
+              onClick={() => {
+                setActiveMenuCard('sunday');
+                setSelectedMenu({
+                  title: 'Sunday Specials',
+                  description: 'Weekend favorites and family-style dining',
+                  images: ['/menus/images/SUNDAY-spcls-dated-22-July2025_page-0001.jpg']
+                });
+              }}
+              className={`bg-white rounded-lg shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-all hover:scale-105 cursor-pointer group ${
+                activeMenuCard === 'sunday' ? 'ring-4 ring-orange-600' : ''
+              }`}
             >
               <div className="h-96 overflow-hidden bg-gray-100 relative">
                 <img src="/menus/images/SUNDAY-spcls-dated-22-July2025_page-0001.jpg" alt="Sunday Specials" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" loading="eager" />
@@ -345,15 +366,20 @@ export default function Home() {
               </div>
             </button>
             <button 
-              onClick={() => setSelectedMenu({
-                title: 'Dessert Menu',
-                description: 'Sweet endings and seasonal treats',
-                images: [
-                  '/menus/images/31.08.2025-Dessert-Menu-2025_page-0001.jpg',
-                  '/menus/images/31.08.2025-Dessert-Menu-2025_page-0002.jpg'
-                ]
-              })}
-              className="bg-white rounded-lg shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-all hover:scale-105 cursor-pointer group"
+              onClick={() => {
+                setActiveMenuCard('dessert');
+                setSelectedMenu({
+                  title: 'Dessert Menu',
+                  description: 'Sweet endings and seasonal treats',
+                  images: [
+                    '/menus/images/31.08.2025-Dessert-Menu-2025_page-0001.jpg',
+                    '/menus/images/31.08.2025-Dessert-Menu-2025_page-0002.jpg'
+                  ]
+                });
+              }}
+              className={`bg-white rounded-lg shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-all hover:scale-105 cursor-pointer group ${
+                activeMenuCard === 'dessert' ? 'ring-4 ring-orange-600' : ''
+              }`}
             >
               <div className="h-96 overflow-hidden bg-gray-100 relative">
                 <img src="/menus/images/31.08.2025-Dessert-Menu-2025_page-0001.jpg" alt="Dessert Menu" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" loading="eager" />
@@ -568,7 +594,10 @@ export default function Home() {
       {selectedMenu && (
         <MenuModal
           isOpen={true}
-          onClose={() => setSelectedMenu(null)}
+          onClose={() => {
+            setSelectedMenu(null);
+            setActiveMenuCard(null);
+          }}
           menuTitle={selectedMenu.title}
           menuDescription={selectedMenu.description}
           images={selectedMenu.images}

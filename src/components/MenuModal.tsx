@@ -114,7 +114,7 @@ export default function MenuModal({ isOpen, onClose, menuTitle, menuDescription,
             <img
               src={images[currentPage]}
               alt={`${menuTitle} - Page ${currentPage + 1}`}
-              className="w-full h-auto object-contain rounded-lg shadow-2xl"
+              className="w-full h-auto object-contain rounded-lg shadow-2xl ring-4 ring-orange-600"
               style={{ maxHeight: '80vh', maxWidth: '100%' }}
             />
           </div>
@@ -145,30 +145,6 @@ export default function MenuModal({ isOpen, onClose, menuTitle, menuDescription,
       {/* Bottom Controls */}
       <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 z-10">
         <div className="max-w-7xl mx-auto">
-          {/* Page Thumbnails */}
-          <div className="flex justify-center gap-2 mb-4 overflow-x-auto pb-2">
-            {images.map((image, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  setCurrentPage(index);
-                  setZoom(1.1);
-                }}
-                className={`flex-shrink-0 transition-all ${
-                  index === currentPage
-                    ? 'ring-2 ring-orange-500 scale-110'
-                    : 'opacity-50 hover:opacity-100'
-                }`}
-              >
-                <img
-                  src={image}
-                  alt={`Page ${index + 1}`}
-                  className="w-16 h-20 object-cover rounded shadow-lg"
-                />
-              </button>
-            ))}
-          </div>
-
           {/* Controls Bar */}
           <div className="flex items-center justify-between">
             <div className="text-white text-sm md:text-base">
