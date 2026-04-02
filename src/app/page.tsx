@@ -281,7 +281,11 @@ export default function Home() {
             <button 
               onClick={() => {
                 setActiveMenuCard('daytime');
-                setSelectedMenu(daytimeMenuData);
+                setSelectedFlipbookMenu({
+                  title: 'Daytime Menu',
+                  description: 'Light options perfect for lunch and early dining',
+                  images: ['/menus/images/06.02.0206-Daytime-Menu_page-0001.jpg']
+                });
               }}
               className={`bg-white rounded-xl shadow-xl overflow-hidden flex flex-col hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group ${
                 activeMenuCard === 'daytime' ? 'ring-4 ring-orange-600 shadow-orange-600/20' : ''
@@ -302,7 +306,11 @@ export default function Home() {
             <button 
               onClick={() => {
                 setActiveMenuCard('children');
-                setSelectedMenu(childrenMenuData);
+                setSelectedFlipbookMenu({
+                  title: 'Children\'s Menu',
+                  description: 'Kid-friendly meals with healthy options',
+                  images: ['/menus/images/06.02.0206-Children-Menu_page-0001.jpg']
+                });
               }}
               className={`bg-white rounded-xl shadow-xl overflow-hidden flex flex-col hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group ${
                 activeMenuCard === 'children' ? 'ring-4 ring-orange-600 shadow-orange-600/20' : ''
@@ -323,7 +331,11 @@ export default function Home() {
             <button 
               onClick={() => {
                 setActiveMenuCard('sunday');
-                setSelectedMenu(sundayMenuData);
+                setSelectedFlipbookMenu({
+                  title: 'Sunday Specials',
+                  description: 'Weekend favorites and family-style dining',
+                  images: ['/menus/images/SUNDAY-spcls-dated-22-July2025_page-0001.jpg']
+                });
               }}
               className={`bg-white rounded-xl shadow-xl overflow-hidden flex flex-col hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group ${
                 activeMenuCard === 'sunday' ? 'ring-4 ring-orange-600 shadow-orange-600/20' : ''
