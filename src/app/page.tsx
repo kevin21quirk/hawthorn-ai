@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import AnimatedBookingFlow from '@/components/AnimatedBookingFlow';
 import MenuDisplay from '@/components/MenuDisplay';
-import { mainMenuData, daytimeMenuData, childrenMenuData, sundayMenuData, dessertMenuData } from '@/data/menus';
+import FlipbookMenu from '@/components/FlipbookMenu';
+import { mainMenuData, daytimeMenuData, childrenMenuData, sundayMenuData } from '@/data/menus';
 import { MenuData } from '@/types/menu';
 
 export default function Home() {
@@ -14,6 +15,11 @@ export default function Home() {
   const [isBookingFlowOpen, setIsBookingFlowOpen] = useState(false);
   const [selectedMenu, setSelectedMenu] = useState<MenuData | null>(null);
   const [activeMenuCard, setActiveMenuCard] = useState<string | null>(null);
+  const [selectedFlipbookMenu, setSelectedFlipbookMenu] = useState<{
+    title: string;
+    description: string;
+    images: string[];
+  } | null>(null);
 
   const slides = [
     {
@@ -246,7 +252,15 @@ export default function Home() {
             <button 
               onClick={() => {
                 setActiveMenuCard('main');
-                setSelectedMenu(mainMenuData);
+                setSelectedFlipbookMenu({
+                  title: 'Main Menu',
+                  description: 'Signature dishes and chef\'s specialties',
+                  images: [
+                    '/menus/images/06.02.0206-Main-Menu_page-0001.jpg',
+                    '/menus/images/06.02.0206-Main-Menu_page-0002.jpg',
+                    '/menus/images/06.02.0206-Main-Menu_page-0003.jpg'
+                  ]
+                });
               }}
               className={`bg-white rounded-xl shadow-xl overflow-hidden flex flex-col hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group ${
                 activeMenuCard === 'main' ? 'ring-4 ring-orange-600 shadow-orange-600/20' : ''
@@ -330,7 +344,14 @@ export default function Home() {
             <button 
               onClick={() => {
                 setActiveMenuCard('dessert');
-                setSelectedMenu(dessertMenuData);
+                setSelectedFlipbookMenu({
+                  title: 'Dessert Menu',
+                  description: 'Sweet endings and seasonal treats',
+                  images: [
+                    '/menus/images/31.08.2025-Dessert-Menu-2025_page-0001.jpg',
+                    '/menus/images/31.08.2025-Dessert-Menu-2025_page-0002.jpg'
+                  ]
+                });
               }}
               className={`bg-white rounded-xl shadow-xl overflow-hidden flex flex-col hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group ${
                 activeMenuCard === 'dessert' ? 'ring-4 ring-orange-600 shadow-orange-600/20' : ''
@@ -550,6 +571,19 @@ export default function Home() {
             setActiveMenuCard(null);
           }}
           menuData={selectedMenu}
+        />
+      )}
+
+      {selectedFlipbookMenu && (
+        <FlipbookMenu
+          isOpen={true}
+          onClose={() => {
+            setSelectedFlipbookMenu(null);
+            setActiveMenuCard(null);
+          }}
+          menuTitle={selectedFlipbookMenu.title}
+          menuDescription={selectedFlipbookMenu.description}
+          images={selectedFlipbookMenu.images}
         />
       )}
     </>

@@ -86,16 +86,17 @@ export const sundayMenuData: MenuData = {
   ]
 };
 
-export const dessertMenuData: MenuData = {
-  title: 'Dessert Menu',
-  description: 'Sweet endings and seasonal treats',
-  pdfUrl: '/menus/images/31.08.2025-Dessert-Menu-2025_page-0001.jpg',
-  sections: [
-    {
-      title: 'Sweet Treats',
-      items: [
-        // Add items here
-      ]
-    }
-  ]
-};
+// Dessert menu uses flipbook (multi-page), not structured display
+// export const dessertMenuData: MenuData = {
+//   title: 'Dessert Menu',
+//   description: 'Sweet endings and seasonal treats',
+//   pdfUrl: '/menus/images/31.08.2025-Dessert-Menu-2025_page-0001.jpg',
+//   sections: [
+//     {
+//       title: 'Sweet Treats',
+//       items: [
+//         // Add items here
+//       ]
+//     }
+//   ]
+// };
