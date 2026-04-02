@@ -244,7 +244,7 @@ export default function Home() {
           <p className="text-xl text-white">Seasonal dishes crafted with passion</p>
         </div>
         <div className="px-4 sm:px-6 lg:px-8 mb-12">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 lg:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 lg:gap-8">
             <button 
               onClick={() => {
                 setActiveMenuCard('main');
@@ -258,24 +258,20 @@ export default function Home() {
                   ]
                 });
               }}
-              className={`bg-white rounded-lg shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-all hover:scale-105 cursor-pointer group ${
-                activeMenuCard === 'main' ? 'ring-4 ring-orange-600' : ''
+              className={`bg-white rounded-xl shadow-xl overflow-hidden flex flex-col hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group ${
+                activeMenuCard === 'main' ? 'ring-4 ring-orange-600 shadow-orange-600/20' : ''
               }`}
             >
-              <div className="h-96 overflow-hidden bg-gray-100 relative">
-                <img src="/menus/images/06.02.0206-Main-Menu_page-0001.jpg" alt="Main Menu" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" loading="eager" />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                  <span className="bg-orange-600 text-white px-6 py-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity font-semibold">View Menu</span>
-                </div>
+              <div className="aspect-[3/4] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 relative">
+                <img src="/menus/images/06.02.0206-Main-Menu_page-0001.jpg" alt="Main Menu" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="eager" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
-              <div className="border-t border-gray-200 p-4 flex flex-col flex-grow">
-                <h3 className="text-lg font-semibold mb-1 text-black text-center">Main</h3>
-                <p className="text-sm text-black text-center mb-3">Signature dishes and chef's specialties</p>
-                <div className="mt-auto">
-                  <span className="w-full bg-orange-600 text-white px-4 py-2 rounded-none font-normal group-hover:bg-orange-700 transition-colors text-center inline-block">
-                    Explore Menu
-                  </span>
-                </div>
+              <div className="p-6 flex flex-col flex-grow bg-white">
+                <h3 className="text-xl font-bold mb-2 text-gray-900 text-center">Main Menu</h3>
+                <p className="text-sm text-gray-600 text-center mb-4 flex-grow">Signature dishes and chef's specialties</p>
+                <button className="w-full bg-orange-600 text-white py-3 px-4 rounded-lg font-semibold group-hover:bg-orange-700 transition-colors duration-300 shadow-md hover:shadow-lg">
+                  View Menu
+                </button>
               </div>
             </button>
             <button 
@@ -287,24 +283,20 @@ export default function Home() {
                   images: ['/menus/images/06.02.0206-Daytime-Menu_page-0001.jpg']
                 });
               }}
-              className={`bg-white rounded-lg shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-all hover:scale-105 cursor-pointer group ${
-                activeMenuCard === 'daytime' ? 'ring-4 ring-orange-600' : ''
+              className={`bg-white rounded-xl shadow-xl overflow-hidden flex flex-col hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group ${
+                activeMenuCard === 'daytime' ? 'ring-4 ring-orange-600 shadow-orange-600/20' : ''
               }`}
             >
-              <div className="h-96 overflow-hidden bg-gray-100 relative">
-                <img src="/menus/images/06.02.0206-Daytime-Menu_page-0001.jpg" alt="Daytime Menu" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" loading="eager" />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                  <span className="bg-orange-600 text-white px-6 py-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity font-semibold">View Menu</span>
-                </div>
+              <div className="aspect-[3/4] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 relative">
+                <img src="/menus/images/06.02.0206-Daytime-Menu_page-0001.jpg" alt="Daytime Menu" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="eager" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
-              <div className="border-t border-gray-200 p-4 flex flex-col flex-grow">
-                <h3 className="text-lg font-semibold mb-1 text-black text-center">Daytime</h3>
-                <p className="text-sm text-black text-center mb-3">Light options perfect for lunch and early dining</p>
-                <div className="mt-auto">
-                  <span className="w-full bg-orange-600 text-white px-4 py-2 rounded-none font-normal group-hover:bg-orange-700 transition-colors text-center inline-block">
-                    Explore Menu
-                  </span>
-                </div>
+              <div className="p-6 flex flex-col flex-grow bg-white">
+                <h3 className="text-xl font-bold mb-2 text-gray-900 text-center">Daytime Menu</h3>
+                <p className="text-sm text-gray-600 text-center mb-4 flex-grow">Light options perfect for lunch and early dining</p>
+                <button className="w-full bg-orange-600 text-white py-3 px-4 rounded-lg font-semibold group-hover:bg-orange-700 transition-colors duration-300 shadow-md hover:shadow-lg">
+                  View Menu
+                </button>
               </div>
             </button>
             <button 
@@ -316,24 +308,20 @@ export default function Home() {
                   images: ['/menus/images/06.02.0206-Children-Menu_page-0001.jpg']
                 });
               }}
-              className={`bg-white rounded-lg shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-all hover:scale-105 cursor-pointer group ${
-                activeMenuCard === 'children' ? 'ring-4 ring-orange-600' : ''
+              className={`bg-white rounded-xl shadow-xl overflow-hidden flex flex-col hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group ${
+                activeMenuCard === 'children' ? 'ring-4 ring-orange-600 shadow-orange-600/20' : ''
               }`}
             >
-              <div className="h-96 overflow-hidden bg-gray-100 relative">
-                <img src="/menus/images/06.02.0206-Children-Menu_page-0001.jpg" alt="Children's Menu" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" loading="eager" />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                  <span className="bg-orange-600 text-white px-6 py-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity font-semibold">View Menu</span>
-                </div>
+              <div className="aspect-[3/4] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 relative">
+                <img src="/menus/images/06.02.0206-Children-Menu_page-0001.jpg" alt="Children's Menu" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="eager" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
-              <div className="border-t border-gray-200 p-4 flex flex-col flex-grow">
-                <h3 className="text-lg font-semibold mb-1 text-black text-center">Children's</h3>
-                <p className="text-sm text-black text-center mb-3">Kid-friendly meals with healthy options</p>
-                <div className="mt-auto">
-                  <span className="w-full bg-orange-600 text-white px-4 py-2 rounded-none font-normal group-hover:bg-orange-700 transition-colors text-center inline-block">
-                    Explore Menu
-                  </span>
-                </div>
+              <div className="p-6 flex flex-col flex-grow bg-white">
+                <h3 className="text-xl font-bold mb-2 text-gray-900 text-center">Children's Menu</h3>
+                <p className="text-sm text-gray-600 text-center mb-4 flex-grow">Kid-friendly meals with healthy options</p>
+                <button className="w-full bg-orange-600 text-white py-3 px-4 rounded-lg font-semibold group-hover:bg-orange-700 transition-colors duration-300 shadow-md hover:shadow-lg">
+                  View Menu
+                </button>
               </div>
             </button>
             <button 
@@ -345,24 +333,20 @@ export default function Home() {
                   images: ['/menus/images/SUNDAY-spcls-dated-22-July2025_page-0001.jpg']
                 });
               }}
-              className={`bg-white rounded-lg shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-all hover:scale-105 cursor-pointer group ${
-                activeMenuCard === 'sunday' ? 'ring-4 ring-orange-600' : ''
+              className={`bg-white rounded-xl shadow-xl overflow-hidden flex flex-col hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group ${
+                activeMenuCard === 'sunday' ? 'ring-4 ring-orange-600 shadow-orange-600/20' : ''
               }`}
             >
-              <div className="h-96 overflow-hidden bg-gray-100 relative">
-                <img src="/menus/images/SUNDAY-spcls-dated-22-July2025_page-0001.jpg" alt="Sunday Specials" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" loading="eager" />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                  <span className="bg-orange-600 text-white px-6 py-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity font-semibold">View Menu</span>
-                </div>
+              <div className="aspect-[3/4] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 relative">
+                <img src="/menus/images/SUNDAY-spcls-dated-22-July2025_page-0001.jpg" alt="Sunday Specials" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="eager" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
-              <div className="border-t border-gray-200 p-4 flex flex-col flex-grow">
-                <h3 className="text-lg font-semibold mb-1 text-black text-center">Sunday Specials</h3>
-                <p className="text-sm text-black text-center mb-3">Weekend favorites and family-style dining</p>
-                <div className="mt-auto">
-                  <span className="w-full bg-orange-600 text-white px-4 py-2 rounded-none font-normal group-hover:bg-orange-700 transition-colors text-center inline-block">
-                    Explore Menu
-                  </span>
-                </div>
+              <div className="p-6 flex flex-col flex-grow bg-white">
+                <h3 className="text-xl font-bold mb-2 text-gray-900 text-center">Sunday Specials</h3>
+                <p className="text-sm text-gray-600 text-center mb-4 flex-grow">Weekend favorites and family-style dining</p>
+                <button className="w-full bg-orange-600 text-white py-3 px-4 rounded-lg font-semibold group-hover:bg-orange-700 transition-colors duration-300 shadow-md hover:shadow-lg">
+                  View Menu
+                </button>
               </div>
             </button>
             <button 
@@ -377,24 +361,20 @@ export default function Home() {
                   ]
                 });
               }}
-              className={`bg-white rounded-lg shadow-lg overflow-hidden flex flex-col hover:shadow-2xl transition-all hover:scale-105 cursor-pointer group ${
-                activeMenuCard === 'dessert' ? 'ring-4 ring-orange-600' : ''
+              className={`bg-white rounded-xl shadow-xl overflow-hidden flex flex-col hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group ${
+                activeMenuCard === 'dessert' ? 'ring-4 ring-orange-600 shadow-orange-600/20' : ''
               }`}
             >
-              <div className="h-96 overflow-hidden bg-gray-100 relative">
-                <img src="/menus/images/31.08.2025-Dessert-Menu-2025_page-0001.jpg" alt="Dessert Menu" className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300" loading="eager" />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
-                  <span className="bg-orange-600 text-white px-6 py-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity font-semibold">View Menu</span>
-                </div>
+              <div className="aspect-[3/4] overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 relative">
+                <img src="/menus/images/31.08.2025-Dessert-Menu-2025_page-0001.jpg" alt="Dessert Menu" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="eager" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
-              <div className="border-t border-gray-200 p-4 flex flex-col flex-grow">
-                <h3 className="text-lg font-semibold mb-1 text-black text-center">Dessert</h3>
-                <p className="text-sm text-black text-center mb-3">Sweet endings and seasonal treats</p>
-                <div className="mt-auto">
-                  <span className="w-full bg-orange-600 text-white px-4 py-2 rounded-none font-normal group-hover:bg-orange-700 transition-colors text-center inline-block">
-                    Explore Menu
-                  </span>
-                </div>
+              <div className="p-6 flex flex-col flex-grow bg-white">
+                <h3 className="text-xl font-bold mb-2 text-gray-900 text-center">Dessert Menu</h3>
+                <p className="text-sm text-gray-600 text-center mb-4 flex-grow">Sweet endings and seasonal treats</p>
+                <button className="w-full bg-orange-600 text-white py-3 px-4 rounded-lg font-semibold group-hover:bg-orange-700 transition-colors duration-300 shadow-md hover:shadow-lg">
+                  View Menu
+                </button>
               </div>
             </button>
           </div>
