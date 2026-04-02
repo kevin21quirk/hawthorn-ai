@@ -96,12 +96,12 @@ const Navigation = () => {
             
             {/* Menu Items */}
             <div className="flex-1 flex items-start justify-start">
-              <div className="text-left space-y-4">
+              <div className="text-left space-y-2">
                 {navItems.map((item, index) => (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`block text-3xl md:text-4xl font-light text-white hover:text-orange-400 transition-all duration-300 hover:translate-x-2 group relative ${
+                    className={`block text-2xl md:text-3xl font-light text-white hover:text-orange-400 transition-all duration-300 hover:translate-x-2 group relative ${
                       pathname === item.href ? 'text-orange-400' : ''
                     }`}
                     style={{
@@ -121,7 +121,7 @@ const Navigation = () => {
             </div>
             
             {/* Bottom - Logo */}
-            <div className="text-left mt-8 pt-8 border-t border-white/20">
+            <div className="text-left mt-6 pt-6 border-t border-white/20">
               <Link href="/" className="text-white leading-none hover:text-orange-400 transition-colors duration-300" onClick={handleCloseMenu}>
                 <div className="text-2xl md:text-3xl font-bold">The Hawthorn</div>
                 <div className="text-base md:text-lg font-light -mt-1">bar and bistro</div>
