@@ -67,56 +67,64 @@ const Navigation = () => {
       {/* Full Screen Menu Overlay */}
       {(isMenuOpen || isClosing) && (
         <div 
-          className={`fixed inset-0 z-50 flex flex-col p-[100px] ${
+          className={`fixed inset-0 z-50 flex flex-col px-8 py-12 md:px-16 md:py-16 lg:px-20 lg:py-20 ${
             isClosing ? 'animate-fade-out' : 'animate-fade-in'
           }`}
           style={{
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/homepage-slider/slide-01.jpg')`,
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('/homepage-slider/slide-01.jpg')`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat'
           }}
         >          
           {/* Content */}
-          <div className={`relative z-10 flex flex-col h-full ${
+          <div className={`relative z-10 flex flex-col h-full overflow-y-auto ${
             isClosing ? 'animate-slide-down' : 'animate-slide-up'
           }`}>
             {/* Close Button */}
-            <div className="flex justify-start">
+            <div className="flex justify-start mb-8">
               <button 
-                className="text-white hover:text-orange-100 transition-colors flex items-center space-x-2"
+                className="text-white hover:text-orange-400 transition-all duration-300 flex items-center space-x-3 group"
                 onClick={handleCloseMenu}
               >
-                <svg className="h-8 w-8" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="h-7 w-7 group-hover:rotate-90 transition-transform duration-300" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
                   <path d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
-                <span className="text-[20px] font-light">Close Menu</span>
+                <span className="text-lg font-light tracking-wide">Close Menu</span>
               </button>
             </div>
             
             {/* Menu Items */}
-            <div className="flex-1 flex items-start justify-start mt-20">
-              <div className="text-left space-y-8">
-                {navItems.map((item) => (
+            <div className="flex-1 flex items-start justify-start">
+              <div className="text-left space-y-4">
+                {navItems.map((item, index) => (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`block text-[20px] font-light text-white hover:text-orange-100 transition-colors ${
-                      pathname === item.href ? 'text-orange-100 font-semibold' : ''
+                    className={`block text-3xl md:text-4xl font-light text-white hover:text-orange-400 transition-all duration-300 hover:translate-x-2 group relative ${
+                      pathname === item.href ? 'text-orange-400' : ''
                     }`}
+                    style={{
+                      animation: isClosing ? 'none' : `slideInLeft 0.5s ease-out ${index * 0.1}s both`
+                    }}
                     onClick={handleCloseMenu}
                   >
-                    {item.label}
+                    <span className="relative">
+                      {item.label}
+                      <span className={`absolute -left-6 top-1/2 -translate-y-1/2 w-4 h-0.5 bg-orange-400 transition-all duration-300 ${
+                        pathname === item.href ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                      }`}></span>
+                    </span>
                   </Link>
                 ))}
               </div>
             </div>
             
             {/* Bottom - Logo */}
-            <div className="text-left">
-              <Link href="/" className="text-white leading-none" onClick={handleCloseMenu}>
-                <div className="text-3xl md:text-4xl font-bold">The Hawthorn</div>
-                <div className="text-lg md:text-xl font-light -mt-1">bar and bistro</div>
+            <div className="text-left mt-8 pt-8 border-t border-white/20">
+              <Link href="/" className="text-white leading-none hover:text-orange-400 transition-colors duration-300" onClick={handleCloseMenu}>
+                <div className="text-2xl md:text-3xl font-bold">The Hawthorn</div>
+                <div className="text-base md:text-lg font-light -mt-1">bar and bistro</div>
               </Link>
             </div>
           </div>
